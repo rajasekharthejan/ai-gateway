@@ -1,0 +1,17 @@
+[project]
+name = "ai-gateway"
+version = "1.0.0"
+description = "Centralized AI/LLM API Gateway with multi-provider routing, cost tracking, and policy enforcement"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
