@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Gateway Platform — Learning Guide & Interview Prep</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --border: #334155;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #3b82f6;
+    --accent-dim: #1e40af;
+    --green: #22c55e;
+    --yellow: #eab308;
+    --red: #ef4444;
+    --code-bg: #0d1117;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+  h2 { font-size: 1.6rem; margin: 2.5rem 0 1rem; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+  h3 { font-size: 1.2rem; margin: 1.5rem 0 0.5rem; color: var(--text); }
+  h4 { font-size: 1rem; margin: 1rem 0 0.3rem; color: var(--muted); }
+  p { margin-bottom: 1rem; color: var(--muted); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    background: var(--code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+    color: var(--green);
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    font-family: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+    color: #c9d1d9;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+  }
+  .tag {
+    display: inline-block;
+    padding: 0.15em 0.6em;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-right: 0.3rem;
+  }
+  .tag-blue { background: #1e3a5f; color: #93c5fd; }
+  .tag-green { background: #14532d; color: #86efac; }
+  .tag-yellow { background: #422006; color: #fde047; }
+  .tag-red { background: #450a0a; color: #fca5a5; }
+  .tag-purple { background: #3b0764; color: #d8b4fe; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  th { color: var(--muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .qa {
+    background: var(--card);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+  }
+  .qa-q {
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+  }
+  .qa-a { color: var(--muted); }
+  .qa-a strong { color: var(--text); }
+  .diagram {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    font-family: monospace;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    overflow-x: auto;
+    white-space: pre;
+    color: var(--muted);
+  }
+  .toc {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .toc ul { list-style: none; padding-left: 0; }
+  .toc li { padding: 0.2rem 0; }
+  .toc a { color: var(--muted); font-size: 0.95rem; }
+  .toc a:hover { color: var(--accent); }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; color: var(--muted); }
+  li { margin-bottom: 0.3rem; }
+  li strong { color: var(--text); }
+  .subtitle { color: var(--muted); font-size: 1.1rem; margin-bottom: 2rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .highlight { background: var(--accent-dim); color: white; padding: 0.1em 0.4em; border-radius: 3px; font-weight: 600; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } body { padding: 1rem; } }
+</style>
+</head>
+<body>
+
+<h1>AI Gateway Platform</h1>
+<p class="subtitle">Complete Learning Guide &amp; Interview Preparation</p>
+
+<div class="toc">
+<strong>Table of Contents</strong>
+<ul>
+<li><a href="#overview">1. Project Overview &amp; Motivation</a></li>
+<li><a href="#architecture">2. System Architecture</a></li>
+<li><a href="#pipeline">3. Request Pipeline (Deep Dive)</a></li>
+<li><a href="#providers">4. Multi-Provider Routing</a></li>
+<li><a href="#cost">5. Cost Tracking &amp; Token Pricing</a></li>
+<li><a href="#policy">6. Policy Engine</a></li>
+<li><a href="#ratelimit">7. Rate Limiting</a></li>
+<li><a href="#cache">8. Response Caching</a></li>
+<li><a href="#database">9. Database Design</a></li>
+<li><a href="#auth">10. Authentication &amp; Team Isolation</a></li>
+<li><a href="#dashboard">11. React Dashboard</a></li>
+<li><a href="#testing">12. Testing Strategy</a></li>
+<li><a href="#deployment">13. Deployment &amp; Infrastructure</a></li>
+<li><a href="#decisions">14. Key Design Decisions</a></li>
+<li><a href="#interview">15. Interview Questions &amp; Answers</a></li>
+</ul>
+</div>
+
+<!-- ============================================================= -->
+<h2 id="overview">1. Project Overview &amp; Motivation</h2>
+
+<h3>The Problem</h3>
+<p>When an organization has 10+ teams using LLMs (OpenAI, Claude, etc.) independently:</p>
+<ul>
+<li><strong>No cost visibility</strong> — A $50K/month bill with no per-team breakdown</li>
+<li><strong>No access control</strong> — Any developer can call GPT-4 Turbo ($30/1M output tokens) for a task that GPT-4o-mini ($0.60/1M) could handle</li>
+<li><strong>No rate protection</strong> — One runaway loop can exhaust the org's API quota</li>
+<li><strong>Vendor lock-in</strong> — Every team imports <code>openai</code> directly; switching to Claude requires touching every codebase</li>
+<li><strong>No audit trail</strong> — No record of what was sent or received</li>
+</ul>
+
+<h3>The Solution</h3>
+<p>A centralized API gateway that sits between your teams and the LLM providers. Teams send requests to the gateway using the standard OpenAI-compatible API format, and the gateway handles routing, cost tracking, access control, caching, and auditing — <strong>without changing how teams write code</strong>.</p>
+
+<h3>Tech Stack</h3>
+<div class="grid-2">
+<div class="card">
+<h4>Backend</h4>
+<span class="tag tag-blue">Python 3.11</span>
+<span class="tag tag-blue">FastAPI</span>
+<span class="tag tag-blue">SQLAlchemy (async)</span>
+<span class="tag tag-blue">Pydantic v2</span>
+<span class="tag tag-green">PostgreSQL 16</span>
+<span class="tag tag-red">Redis 7</span>
+</div>
+<div class="card">
+<h4>Dashboard</h4>
+<span class="tag tag-yellow">Next.js 15</span>
+<span class="tag tag-yellow">React 19</span>
+<span class="tag tag-yellow">Recharts</span>
+<span class="tag tag-yellow">Tailwind CSS</span>
+</div>
+</div>
+
+<!-- ============================================================= -->
+<h2 id="architecture">2. System Architecture</h2>
+
+<div class="diagram">
+┌─────────────────┐
+│   Client App    │  POST /v1/chat/completions
+│  (any language) │  Authorization: Bearer gw-xxx
+└────────┬────────┘
+         │
+         ▼
+┌────────────────────────────────────────────────────┐
+│                   AI GATEWAY (FastAPI)              │
+│                                                    │
+│  ┌─────────┐  ┌───────────┐  ┌────────┐  ┌─────┐ │
+│  │  Auth   │→ │Rate Limit │→ │ Policy │→ │Cache│ │
+│  │(API Key)│  │ (Redis)   │  │ Engine │  │Check│ │
+│  └─────────┘  └───────────┘  └────────┘  └──┬──┘ │
+│                                              │    │
+│       ┌──────────────────────────────────────┘    │
+│       │ cache miss                                │
+│       ▼                                           │
+│  ┌──────────────────────────────────┐             │
+│  │       Provider Router            │             │
+│  │  ┌─────────┐ ┌──────┐ ┌──────┐  │             │
+│  │  │ OpenAI  │ │Azure │ │Bedrock│  │             │
+│  │  │  API    │ │OpenAI│ │(AWS) │  │             │
+│  │  └─────────┘ └──────┘ └──────┘  │             │
+│  │     failover ────────────→       │             │
+│  └──────────────────────────────────┘             │
+│       │                                           │
+│       ▼                                           │
+│  ┌───────────┐  ┌───────────┐  ┌──────────────┐  │
+│  │   Cost    │  │  Audit    │  │    Usage      │  │
+│  │  Tracker  │  │   Log     │  │  Aggregation  │  │
+│  └───────────┘  └───────────┘  └──────────────┘  │
+│       │              │               │            │
+└───────┼──────────────┼───────────────┼────────────┘
+        │              │               │
+        ▼              ▼               ▼
+   ┌─────────────────────────────────────┐
+   │         PostgreSQL Database          │
+   │  teams | api_keys | audit_logs      │
+   │  policies | usage_summaries         │
+   └─────────────────────────────────────┘
+   ┌─────────────────────────────────────┐
+   │              Redis                   │
+   │  rate_limit:* | cache:chat:*        │
+   └─────────────────────────────────────┘
+</div>
+
+<!-- ============================================================= -->
+<h2 id="pipeline">3. Request Pipeline (Deep Dive)</h2>
+
+<p>Every request to <code>/v1/chat/completions</code> passes through this exact pipeline in <code>app/routers/gateway.py</code>:</p>
+
+<div class="card">
+<h3>Step 1: Authentication</h3>
+<p>Extract the <code>Authorization: Bearer gw-xxx</code> header. Hash the key with SHA256 and look it up in the <code>api_keys</code> table. If found, join with the <code>teams</code> table to get the team's config (budget, rate limit). Update <code>last_used_at</code> timestamp.</p>
+<pre>key_hash = hashlib.sha256(bearer_token.encode()).hexdigest()
+api_key = await db.execute(
+    select(ApiKey).where(ApiKey.key_hash == key_hash, ApiKey.is_active == True)
+)</pre>
+<p><strong>Why SHA256?</strong> We never store the raw API key. If the database is breached, the attacker gets hashes, not usable keys. SHA256 is fast enough for lookup but irreversible.</p>
+</div>
+
+<div class="card">
+<h3>Step 2: Rate Limiting</h3>
+<p>Redis sorted set with timestamps as scores. Each request adds a member. Before adding, we remove entries older than 60 seconds (sliding window). If the set size exceeds <code>rate_limit_rpm</code>, deny the request.</p>
+<pre># Redis sorted set: key="rate_limit:{team_id}"
+ZREMRANGEBYSCORE key -inf (now - 60)    # Remove old entries
+ZCARD key                                # Count current
+ZADD key {timestamp} {request_id}        # Add new entry
+EXPIRE key 120                           # Auto-cleanup</pre>
+<p><strong>Why sorted sets?</strong> They naturally handle time-based windows. <code>ZREMRANGEBYSCORE</code> prunes old entries in O(log(N) + M). The 120s TTL is a safety net so abandoned keys don't consume memory forever.</p>
+<p><strong>Fail-open design:</strong> If Redis is unavailable, allow the request. Better to serve without rate limiting than block everyone because Redis is down.</p>
+</div>
+
+<div class="card">
+<h3>Step 3: Policy Evaluation</h3>
+<p>Fetch all active policies for the team + global policies (<code>team_id IS NULL</code>). Filter to policies whose <code>resource</code> pattern matches the requested model using <code>fnmatch</code> (glob-style: <code>gpt-4*</code>, <code>claude-*</code>). Sort by priority descending. First match wins.</p>
+<pre># Example: Block GPT-4 for intern team
+Policy(
+    team_id="intern-team",
+    policy_type="deny",
+    resource="gpt-4*",        # Matches gpt-4o, gpt-4-turbo, etc.
+    priority=100,
+    conditions={"max_tokens": 4096}  # Optional: only deny large requests
+)</pre>
+<p><strong>Default: ALLOW.</strong> If no policy matches, the request proceeds. This is the principle of least surprise — if you haven't configured policies, everything works.</p>
+</div>
+
+<div class="card">
+<h3>Step 4: Cache Check</h3>
+<p>Build a deterministic cache key by hashing <code>model + messages + temperature + top_p + max_tokens</code> with SHA256. Only check cache for <code>temperature=0</code> requests (deterministic output).</p>
+<pre>key_parts = {model, messages, temperature, top_p, max_tokens, n}
+key = "cache:chat:" + SHA256(json.dumps(key_parts, sort_keys=True))</pre>
+<p><strong>Why only temperature=0?</strong> With temperature > 0, the same prompt can produce different responses. Caching would return stale results. At temperature=0, the output is deterministic — caching is safe and saves money.</p>
+</div>
+
+<div class="card">
+<h3>Step 5: Provider Routing</h3>
+<p>Find all providers that support the requested model. Sort by preference (Claude models prefer Bedrock, OpenAI models prefer OpenAI). Try the preferred provider; if it fails, try the next one (failover).</p>
+<pre># Provider preference ordering:
+# OpenAI models:  openai → azure → bedrock
+# Claude models:  bedrock → openai → azure
+
+for provider in providers:
+    try:
+        response = await provider.chat_completion(request)
+        return response      # Success! Return immediately
+    except Exception:
+        continue              # Try next provider</pre>
+</div>
+
+<div class="card">
+<h3>Step 6: Cost Calculation</h3>
+<p>Look up the model in the pricing table. Multiply input tokens by input price and output tokens by output price. Both are per-1M-token prices.</p>
+<pre>MODEL_PRICING = {
+    "gpt-4o":       (2.50, 10.00),    # $2.50/1M input, $10/1M output
+    "gpt-4o-mini":  (0.15, 0.60),     # $0.15/1M input, $0.60/1M output
+    "claude-3-5-sonnet": (3.00, 15.00),
+    ...
+}
+
+cost = (prompt_tokens * input_price / 1M) + (completion_tokens * output_price / 1M)</pre>
+<p><strong>Prefix matching fallback:</strong> If the exact model isn't in the table (e.g., <code>gpt-4o-2024-08-06</code>), we try prefix matching against <code>gpt-4o</code>. If nothing matches, default to conservative pricing ($10/$30 per 1M).</p>
+</div>
+
+<div class="card">
+<h3>Step 7: Audit + Usage</h3>
+<p>Log the request to <code>audit_logs</code> (request_id, team, model, tokens, cost, latency, status, truncated bodies). Upsert a daily row in <code>usage_summaries</code> aggregating by team + model + provider + date.</p>
+</div>
+
+<!-- ============================================================= -->
+<h2 id="providers">4. Multi-Provider Routing</h2>
+
+<h3>Provider Adapters</h3>
+<p>Each provider implements the <code>BaseProvider</code> interface:</p>
+
+<table>
+<tr><th>Provider</th><th>Models Supported</th><th>Auth Method</th><th>Key Implementation Detail</th></tr>
+<tr><td><strong>OpenAI</strong></td><td>gpt-4o, gpt-4o-mini, o1, o3-mini, gpt-3.5-turbo</td><td>Bearer token</td><td>Direct httpx calls to <code>api.openai.com</code></td></tr>
+<tr><td><strong>Azure OpenAI</strong></td><td>Same as OpenAI (deployment-mapped)</td><td>api-key header</td><td>Deployment name mapping (<code>gpt-3.5-turbo</code> → <code>gpt-35-turbo</code>)</td></tr>
+<tr><td><strong>AWS Bedrock</strong></td><td>Claude 3.5 Sonnet, Claude 3 Opus/Haiku</td><td>IAM (SigV4)</td><td>Converts OpenAI messages to Bedrock Converse format, runs boto3 in executor</td></tr>
+</table>
+
+<h3>Failover Flow</h3>
+<pre>Request for "gpt-4o"
+  → Try OpenAI (preferred for GPT models)
+    → OpenAI returns 500? → Try Azure OpenAI
+      → Azure also down? → RuntimeError("All providers failed")
+
+Request for "claude-3-5-sonnet"
+  → Try Bedrock (preferred for Claude models)
+    → Bedrock IAM error? → Try OpenAI (if it supports Claude through some integration)
+      → All failed? → RuntimeError</pre>
+
+<h3>Why an Adapter Pattern?</h3>
+<p>Each LLM provider has a different API format. OpenAI uses <code>messages</code>, Bedrock uses <code>Converse</code> format. The adapter pattern (abstract <code>BaseProvider</code> → concrete implementations) means the gateway core never knows which provider it's talking to. Adding a new provider (Google Vertex, Cohere, etc.) is just one new class.</p>
+
+<!-- ============================================================= -->
+<h2 id="cost">5. Cost Tracking &amp; Token Pricing</h2>
+
+<h3>How Token Pricing Works</h3>
+<p>LLM APIs charge per token (roughly 0.75 words per token). Input tokens (your prompt) and output tokens (the response) have different prices. Output is always more expensive because it requires more compute (autoregressive generation).</p>
+
+<table>
+<tr><th>Model</th><th>Input ($/1M tokens)</th><th>Output ($/1M tokens)</th><th>Example: 1K in + 500 out</th></tr>
+<tr><td>gpt-4o-mini</td><td>$0.15</td><td>$0.60</td><td>$0.00045</td></tr>
+<tr><td>gpt-4o</td><td>$2.50</td><td>$10.00</td><td>$0.0075</td></tr>
+<tr><td>gpt-4</td><td>$30.00</td><td>$60.00</td><td>$0.06</td></tr>
+<tr><td>claude-3-5-sonnet</td><td>$3.00</td><td>$15.00</td><td>$0.0105</td></tr>
+<tr><td>claude-3-opus</td><td>$15.00</td><td>$75.00</td><td>$0.0525</td></tr>
+</table>
+
+<p><strong>Key insight:</strong> GPT-4o is 16x cheaper than GPT-4 for the same quality. The gateway helps enforce cost-efficient model choices through policies.</p>
+
+<h3>Usage Aggregation</h3>
+<p>Instead of querying millions of audit log rows for cost reports, we maintain a <code>usage_summaries</code> table with pre-aggregated daily totals per team/model/provider. Each request upserts (increment) the matching row. This makes cost dashboards O(days) instead of O(requests).</p>
+
+<!-- ============================================================= -->
+<h2 id="policy">6. Policy Engine</h2>
+
+<h3>Policy Model</h3>
+<pre>{
+  "name": "Block expensive models for interns",
+  "team_id": "intern-team-uuid",      // null = global policy
+  "policy_type": "deny",               // "allow" or "deny"
+  "resource": "gpt-4*",                // glob pattern matching model name
+  "priority": 100,                     // higher priority wins
+  "conditions": {                      // optional additional checks
+    "max_tokens": 4096,                // deny if request asks for more
+    "time_window": {"start_hour": 0, "end_hour": 8},  // UTC hours
+    "denied_models": ["gpt-4-turbo"]   // explicit blocklist
+  }
+}</pre>
+
+<h3>Evaluation Algorithm</h3>
+<ol>
+<li>Fetch all <strong>active</strong> policies for this team + global policies</li>
+<li>Filter to policies whose <code>resource</code> glob-matches the model name</li>
+<li>Sort by <code>priority</code> descending</li>
+<li>First matching policy wins (allow or deny)</li>
+<li>If no match → <strong>default ALLOW</strong></li>
+</ol>
+
+<p><strong>Why glob patterns?</strong> <code>fnmatch</code> gives us flexible matching. <code>gpt-4*</code> matches gpt-4o, gpt-4o-mini, gpt-4-turbo. <code>claude-3-5*</code> matches claude-3-5-sonnet, claude-3-5-haiku. This avoids maintaining explicit model lists that break when new versions are released.</p>
+
+<!-- ============================================================= -->
+<h2 id="ratelimit">7. Rate Limiting</h2>
+
+<h3>Sliding Window Algorithm</h3>
+<p>The fixed window approach (count per minute boundary) has a burst problem: 59 requests at 0:59 + 59 requests at 1:01 = 118 requests in 2 seconds but both windows say "under limit." The <strong>sliding window</strong> fixes this by looking at the last 60 seconds from <em>now</em>, not from a fixed boundary.</p>
+
+<h3>Redis Implementation</h3>
+<pre>Key:   "rate_limit:{team_id}"
+Type:  Sorted Set
+Score: Unix timestamp (float)
+Member: "{timestamp}:{request_id}"
+
+Operations per request:
+1. ZREMRANGEBYSCORE key -inf (now - 60)   # Prune old entries
+2. ZCARD key                               # Count entries in window
+3. If count >= limit: DENY (remove the entry we're about to add)
+4. If count < limit:  ZADD key now member  # Record this request
+5. EXPIRE key 120                          # Safety TTL</pre>
+
+<p><strong>Why 120s TTL?</strong> The window is 60s, so entries naturally age out. The 120s TTL is a safety net — if no new requests come, the key auto-deletes after 2 minutes instead of living forever.</p>
+
+<h3>Fail-Open Design</h3>
+<p>If Redis is down, the rate limiter returns <code>allowed=True</code>. This is a deliberate choice: it's better to allow some extra traffic than to block all traffic because the rate limiter's backing store is unavailable.</p>
+
+<!-- ============================================================= -->
+<h2 id="cache">8. Response Caching</h2>
+
+<h3>Cache Key Generation</h3>
+<pre>Input:  {model, messages, temperature, top_p, max_tokens, n}
+        ↓ JSON serialize (sort_keys=True, compact separators)
+        ↓ SHA256 hash
+Output: "cache:chat:a1b2c3d4...64 hex chars"</pre>
+
+<h3>Why Only temperature=0?</h3>
+<p>At temperature=0, the model is deterministic — the same prompt always produces the same output. Caching is safe. At temperature > 0, the model samples randomly, so the same prompt can produce different outputs. Returning a cached response would deny the user the randomness they asked for.</p>
+
+<h3>Cache Invalidation</h3>
+<p>The admin API supports pattern-based invalidation via <code>SCAN</code> + <code>DELETE</code>. Example: invalidate all cache entries for GPT-4o with <code>cache:chat:*</code> (or a more specific pattern if we encoded the model in the key prefix — a potential improvement).</p>
+
+<!-- ============================================================= -->
+<h2 id="database">9. Database Design</h2>
+
+<h3>Entity-Relationship Diagram</h3>
+<div class="diagram">
+┌────────────┐     ┌──────────────┐     ┌──────────────┐
+│   teams    │────&lt;│   api_keys   │     │   policies   │
+│            │     │              │     │              │
+│ id (UUID)  │     │ id (UUID)    │     │ id (UUID)    │
+│ name       │     │ team_id (FK) │     │ team_id (FK) │ nullable
+│ description│     │ key_hash     │     │ name         │
+│ is_active  │     │ key_prefix   │     │ policy_type  │ allow/deny
+│ token_budget     │ name         │     │ resource     │ glob pattern
+│ rate_limit_rpm   │ is_active    │     │ conditions   │ JSONB
+│ created_at │     │ last_used_at │     │ priority     │
+│ updated_at │     │ created_at   │     │ is_active    │
+└────────────┘     └──────────────┘     └──────────────┘
+      │
+      │ 1:N
+      ▼
+┌──────────────┐     ┌────────────────────┐
+│  audit_logs  │     │  usage_summaries   │
+│              │     │                    │
+│ id (UUID)    │     │ id (UUID)          │
+│ request_id   │     │ team_id (FK)       │
+│ team_id (FK) │     │ model              │
+│ api_key_id   │     │ provider           │
+│ model        │     │ date               │
+│ provider     │     │ total_requests     │ daily aggregate
+│ prompt_tokens│     │ total_tokens       │
+│ completion_t │     │ total_cost_usd     │
+│ total_tokens │     │ cache_hits         │
+│ cost_usd     │     │ updated_at         │
+│ latency_ms   │     │                    │
+│ status       │     │ UNIQUE(team, model,│
+│ cache_hit    │     │  provider, date)   │
+│ request_body │     └────────────────────┘
+│ response_body│
+│ created_at   │
+└──────────────┘
+</div>
+
+<h3>Key Design Choices</h3>
+<ul>
+<li><strong>UUID primary keys</strong> — No sequential IDs that reveal record counts or creation order</li>
+<li><strong>key_hash not key</strong> — API keys stored as SHA256 hashes; raw key shown only on creation</li>
+<li><strong>key_prefix</strong> — First 11 chars (e.g., <code>gw-abc1234</code>) for identification in UI without exposing the full key</li>
+<li><strong>JSONB conditions</strong> — Flexible policy conditions without schema migration for each new condition type</li>
+<li><strong>Unique constraint on usage_summaries</strong> — <code>(team_id, model, provider, date)</code> enables safe upsert for aggregation</li>
+<li><strong>request_body/response_body truncated</strong> — Stored for debugging but truncated to 500 chars to avoid bloating the audit table</li>
+</ul>
+
+<!-- ============================================================= -->
+<h2 id="auth">10. Authentication &amp; Team Isolation</h2>
+
+<h3>API Key Flow</h3>
+<pre>1. Admin creates a team:
+   POST /v1/teams {"name": "engineering"}
+   → Returns team_id
+
+2. Admin generates a key:
+   POST /v1/teams/{team_id}/keys {"name": "prod-key"}
+   → Returns: {"key": "gw-abc123...full64chars"}
+   → Stored in DB: key_hash = SHA256("gw-abc123..."), key_prefix = "gw-abc1234"
+   → The full key is shown ONCE. Never stored. Cannot be retrieved.
+
+3. Client uses the key:
+   Authorization: Bearer gw-abc123...full64chars
+   → Gateway: SHA256 → look up in api_keys → join team → proceed</pre>
+
+<h3>Why This Design?</h3>
+<ul>
+<li><strong>Prefix <code>gw-</code></strong> — Makes it easy to identify gateway keys in codebases (like <code>sk-</code> for OpenAI). Also enables automated secret scanning.</li>
+<li><strong>SHA256 storage</strong> — Industry standard. Even if the database leaks, the attacker can't use the hashed keys.</li>
+<li><strong>Show once</strong> — Like AWS or Stripe keys. Forces teams to store keys securely. If lost, revoke and generate a new one.</li>
+</ul>
+
+<!-- ============================================================= -->
+<h2 id="dashboard">11. React Dashboard</h2>
+
+<h3>Pages</h3>
+<table>
+<tr><th>Page</th><th>Shows</th><th>Data Source</th></tr>
+<tr><td><strong>Overview</strong></td><td>Stats cards (total spend, teams, avg utilization), budget progress bars, top models list, cost trend chart</td><td><code>/v1/usage/budget-status</code>, <code>/v1/usage/top-models</code></td></tr>
+<tr><td><strong>Usage &amp; Costs</strong></td><td>Detailed cost breakdown table by team and model</td><td><code>/v1/usage/costs</code></td></tr>
+<tr><td><strong>Teams</strong></td><td>Team cards with budget, rate limit, and status</td><td><code>/v1/teams</code></td></tr>
+<tr><td><strong>Policies</strong></td><td>Policy documentation and curl examples</td><td>Static content</td></tr>
+</table>
+
+<h3>Architecture</h3>
+<p>The dashboard is a separate Next.js app in <code>dashboard/</code> that proxies API calls to the gateway via <code>next.config.ts</code> rewrites (<code>/api/*</code> → <code>localhost:8000/*</code>). This avoids CORS issues in development and makes deployment flexible.</p>
+
+<!-- ============================================================= -->
+<h2 id="testing">12. Testing Strategy</h2>
+
+<h3>Test Pyramid</h3>
+<table>
+<tr><th>Layer</th><th>What</th><th>Files</th><th>Key Technique</th></tr>
+<tr><td><strong>Unit</strong></td><td>Cost calculation, cache keys, policy matching, schemas</td><td><code>test_cost_tracker.py</code>, <code>test_cache.py</code>, <code>test_policy_engine.py</code>, <code>test_schemas.py</code></td><td>Pure functions, no mocks needed</td></tr>
+<tr><td><strong>Component</strong></td><td>Provider router with mock providers</td><td><code>test_router.py</code></td><td>AsyncMock for provider.chat_completion()</td></tr>
+<tr><td><strong>Integration</strong></td><td>Admin API, health endpoints</td><td><code>test_admin.py</code>, <code>test_health.py</code></td><td>SQLite in-memory, FastAPI test client</td></tr>
+</table>
+
+<h3>Test Infrastructure</h3>
+<pre># conftest.py key decisions:
+- SQLite in-memory for tests (fast, no Docker needed)
+- Redis mocked as None (services fail-open)
+- Dependency overrides for get_db, get_redis, get_settings
+- pytest-asyncio with auto mode</pre>
+
+<!-- ============================================================= -->
+<h2 id="deployment">13. Deployment &amp; Infrastructure</h2>
+
+<h3>Docker Compose</h3>
+<pre>services:
+  gateway:     # FastAPI app (port 8000)
+    depends_on: [postgres, redis]
+  postgres:    # PostgreSQL 16 (port 5432)
+    healthcheck: pg_isready
+  redis:       # Redis 7 (port 6379)
+    healthcheck: redis-cli ping</pre>
+
+<h3>Why PostgreSQL Over MySQL?</h3>
+<ul>
+<li><strong>JSONB support</strong> — Policy conditions stored as JSONB with native querying</li>
+<li><strong>Better async support</strong> — asyncpg is the fastest Python Postgres driver</li>
+<li><strong>UUID type</strong> — Native UUID columns instead of CHAR(36)</li>
+</ul>
+
+<h3>Why Redis Over In-Memory?</h3>
+<ul>
+<li><strong>Horizontal scaling</strong> — Multiple gateway instances share one Redis. In-memory rate limits are per-process.</li>
+<li><strong>Persistence</strong> — Cache survives gateway restarts</li>
+<li><strong>Atomic operations</strong> — Sorted set operations are atomic; no race conditions in rate limiting</li>
+</ul>
+
+<!-- ============================================================= -->
+<h2 id="decisions">14. Key Design Decisions</h2>
+
+<div class="card">
+<h3>OpenAI-Compatible API</h3>
+<p><strong>Decision:</strong> The gateway exposes <code>/v1/chat/completions</code> with the exact same request/response format as OpenAI's API.</p>
+<p><strong>Why:</strong> Teams can switch to the gateway by changing only the base URL and API key. No code changes. The <code>openai</code> Python library, LangChain, and other tools work out of the box by pointing <code>base_url</code> at the gateway.</p>
+</div>
+
+<div class="card">
+<h3>Async Everything</h3>
+<p><strong>Decision:</strong> All I/O (database, Redis, HTTP to providers) uses async/await.</p>
+<p><strong>Why:</strong> The gateway is I/O-bound (waiting on LLM responses). Async lets a single process handle hundreds of concurrent requests without threading overhead. FastAPI + asyncpg + httpx + redis.asyncio makes this natural.</p>
+</div>
+
+<div class="card">
+<h3>Fail-Open for Rate Limiting and Caching</h3>
+<p><strong>Decision:</strong> If Redis is down, rate limiting and caching are silently disabled.</p>
+<p><strong>Why:</strong> The gateway's primary job is routing LLM requests. Rate limiting and caching are enhancements. If Redis fails, the core functionality (routing + cost tracking + audit) should continue. The alternative (fail-closed) would block all traffic during a Redis outage.</p>
+</div>
+
+<div class="card">
+<h3>Service Layer Separation</h3>
+<p><strong>Decision:</strong> Business logic lives in <code>app/services/</code>, not in routes.</p>
+<p><strong>Why:</strong> Routes handle HTTP concerns (parse request, return response). Services handle business logic (calculate cost, evaluate policy). This makes services unit-testable without HTTP context and routes thin and readable.</p>
+</div>
+
+<div class="card">
+<h3>Pre-Aggregated Usage Summaries</h3>
+<p><strong>Decision:</strong> Maintain <code>usage_summaries</code> with daily aggregates instead of only querying <code>audit_logs</code>.</p>
+<p><strong>Why:</strong> After a month of use, <code>audit_logs</code> could have millions of rows. "Show me cost by team for March" would be a full table scan. <code>usage_summaries</code> has at most (teams × models × providers × days) rows — typically under 1,000 for a month. O(1,000) vs O(1,000,000).</p>
+</div>
+
+<!-- ============================================================= -->
+<h2 id="interview">15. Interview Questions &amp; Answers</h2>
+
+<h3>Architecture &amp; Design</h3>
+
+<div class="qa">
+<div class="qa-q">Q: Walk me through what happens when a request hits /v1/chat/completions.</div>
+<div class="qa-a">
+<strong>A:</strong> The request goes through an 8-step pipeline: (1) <strong>Auth</strong> — extract Bearer token, SHA256 hash it, look up in api_keys table, join with teams to get the team's config. (2) <strong>Rate limit</strong> — check a Redis sorted set with a 60-second sliding window; if the team has exceeded their RPM, return 429. (3) <strong>Policy evaluation</strong> — fetch active policies for this team + global policies, filter by resource pattern matching the model using fnmatch glob, first match by priority wins, default allow. (4) <strong>Cache check</strong> — for temperature=0 requests, hash the request into a cache key and check Redis. (5) <strong>Provider routing</strong> — find providers supporting this model, ordered by preference, try each with failover. (6) <strong>Cost calculation</strong> — look up per-model pricing, multiply tokens by rates. (7) <strong>Audit log</strong> — insert a row with all metadata. (8) <strong>Usage aggregation</strong> — upsert a daily summary row. The response includes the LLM output plus a <code>gateway_metadata</code> block with cost, latency, provider, and request ID.
+</div>
+</div>
+
+<div class="qa">
+<div class="qa-q">Q: Why did you choose FastAPI over Flask or Django?</div>
+<div class="qa-a">
+<strong>A:</strong> Three reasons. (1) <strong>Async native</strong> — the gateway is I/O bound waiting on LLM API responses. FastAPI's built-in async support with uvicorn lets us handle hundreds of concurrent requests in a single process. Flask would need gevent or threading. (2) <strong>Pydantic integration</strong> — request validation, response serialization, and settings management all use Pydantic models. FastAPI auto-generates OpenAPI docs from these. (3) <strong>Performance</strong> — FastAPI with uvicorn is one of the fastest Python web frameworks, important for a proxy that adds latency to every LLM call.
+</div>
+</div>
+
+<div class="qa">
+<div class="qa-q">Q: How would you scale this to handle 10,000 requests per second?</div>
+<div class="qa-a">
+<strong>A:</strong> The current architecture handles this well because (1) the gateway is I/O bound and async, so horizontal scaling with multiple instances behind a load balancer works. (2) Redis is the shared state for rate limiting and caching — Redis handles 100K+ ops/sec easily, and we can add read replicas. (3) PostgreSQL handles the audit writes — at 10K RPS, that's 10K inserts/sec which PostgreSQL can handle, but I'd add a write buffer (queue audit logs in Redis or Kafka, batch-insert every second) to reduce DB pressure. (4) The usage aggregation upsert would need optimistic locking or a separate aggregation worker. For the provider routing, I'd add connection pooling with httpx and potentially a circuit breaker pattern to avoid cascading failures.
+</div>
+</div>
+
+<div class="qa">
+<div class="qa-q">Q: Why did you use SHA256 for API key hashing instead of bcrypt?</div>
+<div class="qa-a">
+<strong>A:</strong> API keys are different from passwords. Passwords are short (8-20 chars) and chosen by humans, making them vulnerable to dictionary attacks — bcrypt's intentional slowness protects against this. API keys are long (64+ chars), randomly generated, and have high entropy — a brute-force attack is computationally infeasible regardless of hash speed. SHA256 gives us fast lookup (important since we hash on every request) while being irreversible. This is the same approach used by Stripe, GitHub, and AWS for API key storage.
+</div>
+</div>
+
+<div class="qa">
+<div class="qa-q">Q: Explain your rate limiting approach. Why sliding window over fixed window?</div>
+<div class="qa-a">
+<strong>A:</strong> A <strong>fixed window</strong> resets at minute boundaries (e.g., 0:00, 1:00). This has a burst problem: 59 requests at 0:59 + 59 requests at 1:01 = 118 requests in 2 seconds, but both windows say "under 60." A <strong>sliding window</strong> looks at the last 60 seconds from <em>now</em>, which accurately represents the actual request rate. I implemented it with a Redis sorted set where each entry's score is its timestamp. <code>ZREMRANGEBYSCORE</code> prunes old entries, <code>ZCARD</code> counts current ones. All operations are O(log N). The sorted set naturally handles the time math — I don't need to track window boundaries or handle boundary-crossing logic.
+</div>
+</div>
+
+<div class="qa">
+<div class="qa-q">Q: How does the policy engine handle conflicting policies?</div>
+<div class="qa-a">
+<strong>A:</strong> Policies have a <code>priority</code> field (integer). When evaluating, I fetch all active policies for the team + global policies, filter to those whose resource pattern matches the model, sort by priority descending, and the first match wins. So if a team has a "deny gpt-4*" policy at priority 100 and a global "allow *" policy at priority 50, the deny wins. If no policy matches at all, the default is ALLOW. This is explicit over implicit — an empty policy set means "everything is allowed" which is the principle of least surprise for initial setup.
+</div>
+</div>
+
+<h3>Code &amp; Implementation</h3>
+
+<div class="qa">
+<div class="qa-q">Q: Why are you using SQLAlchemy's async engine instead of sync?</div>
+<div class="qa-a">
+<strong>A:</strong> Because the gateway is async end-to-end (FastAPI + uvicorn + httpx + redis.asyncio). If we used synchronous SQLAlchemy, every database query would block the event loop, defeating the purpose of async. With <code>create_async_engine</code> and <code>AsyncSession</code>, database I/O is non-blocking. We use <code>asyncpg</code> as the driver, which is purpose-built for async PostgreSQL access and is significantly faster than psycopg2 in async contexts.
+</div>
+</div>
+
+<div class="qa">
+<div class="qa-q">Q: How do you handle the Bedrock provider differently from OpenAI?</div>
+<div class="qa-a">
+<strong>A:</strong> Bedrock has three key differences: (1) <strong>Auth</strong> — it uses AWS IAM SigV4 signing instead of Bearer tokens, handled by boto3. (2) <strong>Message format</strong> — Bedrock uses a "Converse" API with a different message structure. The adapter translates OpenAI's <code>[{"role": "user", "content": "..."}]</code> format to Bedrock's format. (3) <strong>Sync client</strong> — boto3 is synchronous, so I run it in a thread executor (<code>asyncio.to_thread</code>) to avoid blocking the event loop. The model mapping converts our internal names (like <code>claude-3-5-sonnet</code>) to Bedrock's model IDs (like <code>anthropic.claude-3-5-sonnet-20241022-v2:0</code>).
+</div>
+</div>
+
+<div class="qa">
+<div class="qa-q">Q: How would you implement token budget enforcement?</div>
+<div class="qa-a">
+<strong>A:</strong> Currently, the gateway tracks usage against budgets but doesn't hard-block when a budget is exceeded — it's a monitoring feature. To enforce it, I'd add a check in the gateway pipeline between auth and rate limiting: query the <code>usage_summaries</code> for the current month, sum <code>total_tokens</code> for the team, and compare against <code>token_budget_monthly</code>. For performance, I'd cache this sum in Redis with a short TTL (e.g., 60 seconds) so we're not hitting Postgres on every request. The trade-off is that a team could slightly exceed their budget during the cache window, but the accuracy is sufficient for budget management.
+</div>
+</div>
+
+<div class="qa">
+<div class="qa-q">Q: What happens if the gateway crashes mid-request after calling the LLM but before writing the audit log?</div>
+<div class="qa-a">
+<strong>A:</strong> The user gets their response (it was already sent back before audit), but we lose that audit entry. The cost still appears in the provider's invoice but not in our tracking. To fix this at scale, I'd add a "request started" entry at the beginning (with status="pending"), then update it to "completed" or "failed" at the end. Pending entries older than the LLM timeout indicate lost requests. Alternatively, I could use a write-ahead log pattern — write the intent to Redis first (fast), then drain to Postgres asynchronously. This is a pragmatic trade-off: for an internal tool, occasional missed audit entries are acceptable; for billing, you'd want the WAL approach.
+</div>
+</div>
+
+<h3>Database &amp; Performance</h3>
+
+<div class="qa">
+<div class="qa-q">Q: Why pre-aggregate usage into daily summaries instead of just querying audit_logs?</div>
+<div class="qa-a">
+<strong>A:</strong> At 1,000 requests/day, after 3 months you have 90,000 audit rows. "Show cost by team for March" scans all 30,000 March rows. With <code>usage_summaries</code>, that same query reads maybe 50 rows (teams × models × providers × 30 days). The aggregation happens on write (upsert in the request pipeline) so reads are instant. The trade-off is write amplification — each request does an upsert on usage_summaries in addition to the audit insert — but that's a simple UPDATE of counters which PostgreSQL handles efficiently with the unique constraint.
+</div>
+</div>
+
+<div class="qa">
+<div class="qa-q">Q: How would you partition the audit_logs table for long-term retention?</div>
+<div class="qa-a">
+<strong>A:</strong> PostgreSQL native partitioning by <code>created_at</code> using monthly range partitions. Each month's data is in its own partition, so queries with date filters only scan relevant partitions. Old partitions can be detached and archived (moved to cold storage) without impacting active queries. I'd create partitions ahead of time with a cron job. This is a standard pattern for append-heavy tables with time-based access patterns.
+</div>
+</div>
+
+<h3>Security</h3>
+
+<div class="qa">
+<div class="qa-q">Q: What security measures are in place?</div>
+<div class="qa-a">
+<strong>A:</strong> Several layers: (1) <strong>API key hashing</strong> — keys stored as SHA256, shown once on creation. (2) <strong>Admin isolation</strong> — team/policy management requires a separate admin API key, not the same key used for LLM requests. (3) <strong>Team isolation</strong> — each API key belongs to one team; there's no cross-team access. (4) <strong>Body truncation</strong> — audit logs truncate request/response bodies to 500 chars, reducing PII exposure. (5) <strong>CORS configured</strong> — the dashboard proxy prevents direct browser-to-gateway calls. (6) <strong>Environment variables</strong> — no secrets in code; all credentials via .env. (7) <strong>Docker network isolation</strong> — Postgres and Redis are only accessible within the Docker network.
+</div>
+</div>
+
+<div class="qa">
+<div class="qa-q">Q: How would you prevent prompt injection through the gateway?</div>
+<div class="qa-a">
+<strong>A:</strong> The gateway is a <em>routing</em> layer, not a content layer — it passes messages through without modification. Prompt injection prevention belongs in the application layer (before sending to the gateway) or as a dedicated middleware. However, the gateway could add value here: (1) Add a <strong>content filter service</strong> in the pipeline that scans messages for known injection patterns before routing. (2) Log and flag requests with suspicious patterns in audit logs. (3) Allow policies with content conditions (e.g., deny requests containing "ignore previous instructions"). This would be a separate service call in the pipeline, similar to how the policy engine works.
+</div>
+</div>
+
+<h3>Trade-offs &amp; Improvements</h3>
+
+<div class="qa">
+<div class="qa-q">Q: What would you improve if you had more time?</div>
+<div class="qa-a">
+<strong>A:</strong> Five things: (1) <strong>Streaming support</strong> — currently the gateway waits for the full response before returning. Real apps need SSE streaming for long completions. This requires buffering token counts for cost calculation while forwarding chunks. (2) <strong>Circuit breaker</strong> — if a provider has failed 5 times in 10 seconds, stop trying it for 30 seconds. Currently failover retries immediately. (3) <strong>Async audit</strong> — queue audit writes to Redis and batch-insert to Postgres every second, reducing DB pressure at high throughput. (4) <strong>Token budget enforcement</strong> — hard-block teams over budget, not just track. (5) <strong>Webhook notifications</strong> — alert when teams hit 80% budget or when error rates spike.
+</div>
+</div>
+
+<div class="qa">
+<div class="qa-q">Q: If you needed to add streaming support, how would you approach it?</div>
+<div class="qa-a">
+<strong>A:</strong> Three changes: (1) The gateway endpoint would check if <code>stream=true</code> in the request and return a <code>StreamingResponse</code> (SSE). (2) The provider adapter would request streaming from the LLM API and yield chunks. (3) The tricky part is <strong>cost tracking</strong> — in streaming mode, token counts come in the final chunk (or need to be counted client-side). I'd buffer the stream, forward each chunk to the client immediately, and collect the final usage stats from the last chunk for audit and cost. The cache becomes harder — you'd need to buffer the entire response before caching, which adds latency for cache-miss requests.
+</div>
+</div>
+
+<div class="qa">
+<div class="qa-q">Q: How does this project demonstrate your engineering skills?</div>
+<div class="qa-a">
+<strong>A:</strong> It covers several dimensions: (1) <strong>System design</strong> — multi-service architecture with clear separation of concerns. (2) <strong>API design</strong> — OpenAI-compatible interface, RESTful admin API, proper error codes. (3) <strong>Data modeling</strong> — normalized schema with performance considerations (pre-aggregation, indexes, UUID keys). (4) <strong>Distributed systems</strong> — Redis for shared state across instances, fail-open design, idempotent upserts. (5) <strong>Security</strong> — hashed keys, team isolation, admin separation. (6) <strong>Testing</strong> — unit tests for pure logic, integration tests with test client, dependency injection for testability. (7) <strong>DevOps</strong> — Docker Compose, Alembic migrations, environment-based configuration. (8) <strong>Full-stack</strong> — React dashboard with real-time data visualization.
+</div>
+</div>
+
+<hr>
+<p style="text-align: center; color: var(--muted); margin-top: 2rem;">
+Built by Rajasekhar Narapareddy &mdash; AI Gateway Platform Learning Guide
+</p>
+
+</body>
+</html>
