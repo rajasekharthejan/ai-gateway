@@ -27,7 +27,7 @@
     color: var(--text);
     line-height: 1.7;
     padding: 2rem;
-    max-width: 1000px;
+    max-width: 1020px;
     margin: 0 auto;
   }
   h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
@@ -41,7 +41,7 @@
     background: var(--code-bg);
     padding: 0.15em 0.4em;
     border-radius: 4px;
-    font-size: 0.9em;
+    font-size: 0.88em;
     font-family: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
     color: var(--green);
   }
@@ -49,11 +49,11 @@
     background: var(--code-bg);
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 1rem;
+    padding: 1rem 1.2rem;
     overflow-x: auto;
     margin: 1rem 0;
-    font-size: 0.82rem;
-    line-height: 1.6;
+    font-size: 0.8rem;
+    line-height: 1.65;
     font-family: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
     color: #c9d1d9;
   }
@@ -80,6 +80,24 @@
     padding: 1.5rem;
     margin: 1rem 0;
   }
+  .card-example {
+    background: #0c1222;
+    border: 1px solid #1e3a5f;
+    border-left: 4px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 1.5rem;
+    margin: 1rem 0;
+  }
+  .card-example h4 { color: var(--accent); margin-top: 0; }
+  .card-analogy {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border: 1px solid var(--purple);
+    border-left: 4px solid var(--purple);
+    border-radius: 0 10px 10px 0;
+    padding: 1.5rem;
+    margin: 1rem 0;
+  }
+  .card-analogy h4 { color: var(--purple); margin-top: 0; }
   .tag {
     display: inline-block;
     padding: 0.15em 0.6em;
@@ -99,7 +117,7 @@
     width: 100%;
     border-collapse: collapse;
     margin: 1rem 0;
-    font-size: 0.88rem;
+    font-size: 0.86rem;
   }
   th, td {
     text-align: left;
@@ -114,18 +132,8 @@
     padding: 1rem 1.5rem;
     margin: 1rem 0;
   }
-  .qa-q {
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 0.5rem;
-    font-size: 1.02rem;
-  }
-  .qa-deeper {
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 1px dashed var(--border);
-    font-size: 0.92rem;
-  }
+  .qa-q { font-weight: 700; color: var(--text); margin-bottom: 0.5rem; font-size: 1.02rem; }
+  .qa-deeper { margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed var(--border); font-size: 0.92rem; }
   .qa-deeper strong { color: var(--yellow); }
   .qa-a { color: var(--muted); }
   .qa-a strong { color: var(--text); }
@@ -134,12 +142,21 @@
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 1.5rem;
-    font-family: monospace;
-    font-size: 0.78rem;
+    font-family: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+    font-size: 0.74rem;
     line-height: 1.5;
     overflow-x: auto;
     white-space: pre;
     color: var(--muted);
+    margin: 1rem 0;
+  }
+  .diagram-label {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
   }
   .toc {
     background: var(--card);
@@ -161,15 +178,14 @@
   hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
-  .failure-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; }
-  .failure-row > div { padding: 0.5rem; border-radius: 6px; font-size: 0.88rem; }
-  .failure-what { background: #1e293b; }
-  .failure-problem { background: #431407; }
-  .failure-fix { background: #14532d; }
+  .vs { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0.5rem; align-items: start; margin: 1rem 0; }
+  .vs-label { padding-top: 1.5rem; text-align: center; font-weight: 700; color: var(--accent); font-size: 1.2rem; }
   .elevator { background: linear-gradient(135deg, #1e3a5f, #1e293b); border: 1px solid var(--accent); border-radius: 10px; padding: 1.5rem; margin: 1rem 0; }
+  .step-num { display: inline-flex; width: 28px; height: 28px; border-radius: 50%; background: var(--accent-dim); color: var(--accent); font-size: 0.8rem; font-weight: 700; align-items: center; justify-content: center; margin-right: 0.5rem; flex-shrink: 0; }
   @media (max-width: 768px) {
     .grid-2, .grid-3 { grid-template-columns: 1fr; }
-    .failure-row { grid-template-columns: 1fr; }
+    .vs { grid-template-columns: 1fr; }
+    .vs-label { display: none; }
     .toc { columns: 1; }
     body { padding: 1rem; }
   }
@@ -178,55 +194,882 @@
 <body>
 
 <h1>AI Gateway Platform</h1>
-<p class="subtitle">Complete Learning Guide, System Design Deep Dive &amp; Interview Preparation</p>
+<p class="subtitle">Complete Learning Guide with Diagrams, Examples, System Design Deep Dive &amp; Interview Preparation<br><em>Written for beginners &mdash; no prior AI/LLM knowledge needed</em></p>
 
 <div class="toc">
 <ul>
-<li><strong style="color:var(--text)">Foundations</strong></li>
-<li><a href="#overview">1. Project Overview &amp; Motivation</a></li>
-<li><a href="#architecture">2. System Architecture</a></li>
-<li><a href="#pipeline">3. Request Pipeline Deep Dive</a></li>
-<li><a href="#providers">4. Multi-Provider Routing</a></li>
-<li><a href="#cost">5. Cost Tracking &amp; Pricing</a></li>
-<li><a href="#policy">6. Policy Engine</a></li>
-<li><a href="#ratelimit">7. Rate Limiting</a></li>
-<li><a href="#cache">8. Response Caching</a></li>
-<li><a href="#database">9. Database Design</a></li>
-<li><a href="#auth">10. Auth &amp; Team Isolation</a></li>
-<li><a href="#dashboard">11. Dashboard &amp; Analytics</a></li>
-<li><a href="#testing">12. Testing Strategy</a></li>
+<li><strong style="color:var(--text)">Foundations (Start Here)</strong></li>
+<li><a href="#overview">1. What is an AI Gateway?</a></li>
+<li><a href="#before-after">2. Before vs After (Visual Walkthrough)</a></li>
+<li><a href="#architecture">3. System Architecture</a></li>
+<li><a href="#pipeline">4. Request Pipeline (8-Step Illustrated)</a></li>
+<li><a href="#providers">5. Multi-Provider Routing</a></li>
+<li><a href="#cost">6. Cost Tracking &amp; Pricing</a></li>
+<li><a href="#policy">7. Policy Engine</a></li>
+<li><a href="#ratelimit">8. Rate Limiting</a></li>
+<li><a href="#cache">9. Response Caching</a></li>
+<li><a href="#database">10. Database Design</a></li>
+<li><a href="#auth">11. Auth &amp; Team Isolation</a></li>
 </ul>
 <ul>
 <li><strong style="color:var(--text)">Production &amp; Depth</strong></li>
-<li><a href="#observability">13. Observability &amp; Production</a></li>
-<li><a href="#failures">14. Failure Scenarios &amp; Edge Cases</a></li>
-<li><a href="#scalability">15. Scalability Deep Dive</a></li>
-<li><a href="#security">16. Security Deep Dive</a></li>
-<li><a href="#advanced">17. Advanced Features</a></li>
-<li><a href="#decisions">18. Design Decisions &amp; Tradeoffs</a></li>
-<li><a href="#deployment">19. Deployment &amp; Infrastructure</a></li>
+<li><a href="#dashboard">12. Dashboard &amp; Analytics</a></li>
+<li><a href="#testing">13. Testing Strategy</a></li>
+<li><a href="#observability">14. Observability &amp; Production</a></li>
+<li><a href="#failures">15. Failure Scenarios</a></li>
+<li><a href="#scalability">16. Scalability Deep Dive</a></li>
+<li><a href="#security">17. Security Deep Dive</a></li>
+<li><a href="#advanced">18. Advanced Features</a></li>
+<li><a href="#decisions">19. Design Decisions &amp; Tradeoffs</a></li>
 <li><a href="#elevator">20. Elevator Pitches</a></li>
-<li><a href="#interview">21. Interview Q&amp;A (25+ Questions)</a></li>
+<li><a href="#interview">21. Interview Q&amp;A (25+)</a></li>
 </ul>
 </div>
 
 <!-- ============================================================= -->
-<h2 id="overview">1. Project Overview &amp; Motivation</h2>
+<h2 id="overview">1. What is an AI Gateway? (Start Here)</h2>
 
-<h3>The Problem</h3>
-<p>When an organization has 10+ teams using LLMs independently:</p>
+<div class="card-analogy">
+<h4>Real-World Analogy: The Hotel Front Desk</h4>
+<p style="color:var(--text)">Imagine a hotel with 10 departments (housekeeping, restaurant, spa, etc.). Each department needs to order supplies from different vendors (Amazon, Walmart, Costco). <strong>Without a gateway:</strong> each department orders directly &mdash; nobody tracks total spending, each has their own account, and there's no bulk discount. <strong>With a gateway:</strong> ALL orders go through the front desk. The front desk tracks every order, enforces budgets ("housekeeping can only spend $500/month"), gets bulk pricing, and produces monthly reports. That front desk is your AI Gateway.</p>
+</div>
+
+<h3>First, What is an LLM?</h3>
+<p>An LLM (Large Language Model) is an AI that reads text and writes text back. Think of it as a very smart auto-complete. Companies like OpenAI (GPT-4), Anthropic (Claude), and AWS (Bedrock) run these models on massive servers and let you use them via the internet. <strong>You pay per "token"</strong> &mdash; a token is roughly 3/4 of a word.</p>
+
+<div class="diagram">
+  What is a Token?
+  ═══════════════
+
+  "Hello, how are you today?"
+   ──┬── ──┬─ ──┬─ ──┬─ ──┬──
+     1     2    3    4    5      = 5 tokens (roughly)
+
+  Rule of thumb:
+  ┌──────────────────────────────────────┐
+  │  1 token  ≈  4 characters  ≈  0.75 words  │
+  │  100 tokens ≈ 75 words ≈ 1 paragraph       │
+  │  1,000 tokens ≈ 750 words ≈ 1.5 pages      │
+  └──────────────────────────────────────┘
+
+  You pay SEPARATELY for:
+  ┌─────────────┐         ┌──────────────┐
+  │ INPUT tokens │   and   │ OUTPUT tokens │
+  │ (your prompt)│         │ (AI's reply)  │
+  │   CHEAPER    │         │   EXPENSIVE   │
+  └─────────────┘         └──────────────┘
+</div>
+<p class="diagram-label">Diagram 1: Understanding Tokens</p>
+
+<h3>How Does Calling an LLM Work?</h3>
+<p>It's just an HTTP request (like loading a web page). You send your question, the AI thinks, and sends back an answer. Here's exactly what that looks like:</p>
+
+<div class="diagram">
+  YOUR APP                              OPENAI SERVERS
+  ────────                              ──────────────
+     │                                       │
+     │  POST /v1/chat/completions            │
+     │  "What is Kubernetes?"                │
+     │ ─────────────────────────────────────►│
+     │                                       │  AI processes
+     │                                       │  your question...
+     │                                       │  (takes 500ms-5s)
+     │          Response:                    │
+     │   "Kubernetes is an open-source..."   │
+     │ ◄─────────────────────────────────────│
+     │                                       │
+     │  YOU PAY: $0.001 for this request     │
+     │  (25 input tokens + 87 output tokens) │
+</div>
+<p class="diagram-label">Diagram 2: How an LLM API Call Works</p>
+
+<div class="card-example">
+<h4>Example: Calling OpenAI Directly (the actual code)</h4>
+<pre># Your app calls OpenAI directly
+curl https://api.openai.com/v1/chat/completions \
+  -H "Authorization: Bearer sk-your-openai-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-4o",
+    "messages": [
+      {"role": "system", "content": "You are a helpful assistant."},
+      {"role": "user", "content": "What is Kubernetes?"}
+    ],
+    "temperature": 0.7,
+    "max_tokens": 200
+  }'
+
+# Response:
+{
+  "id": "chatcmpl-abc123",
+  "model": "gpt-4o",
+  "choices": [{
+    "message": {
+      "role": "assistant",
+      "content": "Kubernetes is an open-source container orchestration platform..."
+    },
+    "finish_reason": "stop"
+  }],
+  "usage": {
+    "prompt_tokens": 25,       &larr; what you sent IN
+    "completion_tokens": 87,   &larr; what the AI sent BACK
+    "total_tokens": 112        &larr; total (you pay for this)
+  }
+}</pre>
+<p>That's it. You sent 25 tokens in, got 87 tokens out. At GPT-4o pricing ($2.50/1M input, $10/1M output), that cost: <code>(25 &times; $2.50 + 87 &times; $10) / 1,000,000 = $0.000933</code> &mdash; less than a penny.</p>
+</div>
+
+<h3>The Problem: 10 Teams, Zero Visibility</h3>
+
+<div class="card-analogy">
+<h4>Analogy: 10 Kids with 10 Credit Cards</h4>
+<p style="color:var(--text)">Imagine giving 10 kids each their own credit card and sending them to a mall. At the end of the month, you get one giant bill. Who bought what? No idea. Did someone buy a $500 gaming console? You wouldn't know until the bill arrives. <strong>That's exactly what happens when 10 engineering teams each have their own OpenAI API key.</strong></p>
+</div>
+
+<div class="diagram">
+  THE PROBLEM: Every team calls AI providers directly
+  ════════════════════════════════════════════════════
+
+  Team: Mobile App      ──► OpenAI (sk-key-1)     Cost: ???
+  Team: Backend API     ──► OpenAI (sk-key-2)     Cost: ???
+  Team: Data Science    ──► OpenAI (sk-key-3)     Cost: ???
+  Team: Chatbot         ──► OpenAI (sk-key-4)     Cost: ???
+  Team: Internal Tools  ──► Azure OpenAI (key-5)  Cost: ???
+  Team: ML Research     ──► AWS Bedrock (iam-6)   Cost: ???
+  Team: QA Automation   ──► OpenAI (sk-key-7)     Cost: ???
+  Team: HR Bot          ──► OpenAI (sk-key-8)     Cost: ???
+  Team: Search          ──► OpenAI (sk-key-9)     Cost: ???
+  Team: Interns         ──► OpenAI (sk-key-10)    Cost: ???
+                                                   ─────────
+                                       Monthly Bill: $47,000
+                                       Who spent what? NO IDEA
+                                       Who's wasting money? NO IDEA
+                                       Can we stop the intern? NOPE
+</div>
+<p class="diagram-label">Diagram 3: The Problem &mdash; No Visibility, No Control</p>
+
+<p><strong>Real problems that happen:</strong></p>
 <ul>
-<li><strong>No cost visibility</strong> &mdash; $50K/month bill with no per-team breakdown</li>
-<li><strong>No access control</strong> &mdash; Interns calling GPT-4 Turbo ($30/1M output) for tasks GPT-4o-mini ($0.60/1M) handles</li>
-<li><strong>No rate protection</strong> &mdash; One runaway script exhausts the org's API quota</li>
-<li><strong>Vendor lock-in</strong> &mdash; Every team imports <code>openai</code> directly; switching to Claude touches every codebase</li>
-<li><strong>No audit trail</strong> &mdash; No record of what was sent, by whom, or what it cost</li>
+<li>Finance asks "who spent $47K on AI last month?" &mdash; <strong>Nobody knows.</strong></li>
+<li>An intern runs a test loop calling GPT-4 Turbo 10,000 times &mdash; <strong>$300 wasted overnight.</strong></li>
+<li>The chatbot team uses GPT-4 for simple FAQ answers that GPT-4o-mini could handle at 16x lower cost.</li>
+<li>The backend team hardcoded <code>import openai</code> everywhere. Now the company wants to try Claude &mdash; <strong>every codebase needs changes.</strong></li>
+<li>An API key leaks in a Git commit &mdash; <strong>no way to track or limit damage.</strong></li>
 </ul>
 
-<h3>The Solution</h3>
-<p>A centralized API gateway that sits between teams and LLM providers. Teams send requests using the standard OpenAI-compatible API format. The gateway handles routing, cost tracking, access control, caching, and auditing &mdash; <strong>without changing how teams write code</strong>. Just change <code>base_url</code> and the API key.</p>
+<h3>The Solution: Put a Gateway in the Middle</h3>
 
-<h3>Tech Stack</h3>
+<div class="diagram">
+  THE SOLUTION: All teams go through ONE gateway
+  ═══════════════════════════════════════════════
+
+  Team: Mobile App   ─┐
+  Team: Backend API  ─┤                                  ┌──► OpenAI API
+  Team: Data Science ─┤                                  │
+  Team: Chatbot      ─┤    ┌────────────────────────┐    ├──► Azure OpenAI
+  Team: Internal     ─┼───►│      AI GATEWAY        │────┤
+  Team: ML Research  ─┤    │                        │    └──► AWS Bedrock
+  Team: QA Auto      ─┤    │  ✓ Who's calling?      │
+  Team: HR Bot       ─┤    │  ✓ Are they allowed?   │    ┌──► PostgreSQL
+  Team: Search       ─┤    │  ✓ Under budget?       │────┤    (audit logs,
+  Team: Interns      ─┘    │  ✓ Already cached?     │    │     usage data)
+                           │  ✓ How much did it cost?│    │
+                           └────────────────────────┘    └──► Redis
+                                    │                         (rate limits,
+                               Dashboard:                      cache)
+                          "Chatbot spent $45 on gpt-4o-mini"
+                          "Interns hit rate limit 12 times"
+                          "ML Research used 9.2M tokens"
+</div>
+<p class="diagram-label">Diagram 4: The Solution &mdash; One Gateway, Full Visibility</p>
+
+<div class="card-analogy">
+<h4>Analogy: The Airport Security Checkpoint</h4>
+<p style="color:var(--text)">Every passenger (request) goes through security (the gateway). Security checks your ID (authentication), checks if you're on the no-fly list (policy engine), limits how fast people can go through (rate limiting), and logs everything (audit). After security, you board your plane (the AI provider). The gateway is your security checkpoint for AI requests.</p>
+</div>
+
+<h3>The Magic: ONE Line of Code Changes</h3>
+<p>The gateway speaks the <em>exact same language</em> as OpenAI. Teams don't rewrite their code. They change ONE line:</p>
+
+<div class="vs">
+<div class="card" style="border-color: var(--red);">
+<h4 style="color: var(--red);">BEFORE (direct to OpenAI)</h4>
+<pre>from openai import OpenAI
+
+client = OpenAI(
+    api_key="sk-your-openai-key"
+)
+response = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[{"role": "user", "content": "Hi"}]
+)</pre>
+</div>
+<div class="vs-label">&rarr;</div>
+<div class="card" style="border-color: var(--green);">
+<h4 style="color: var(--green);">AFTER (through gateway)</h4>
+<pre>from openai import OpenAI
+
+client = OpenAI(
+    api_key="gw-team-api-key-here",
+    base_url="http://gateway:8000/v1"  # ONLY CHANGE!
+)
+response = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[{"role": "user", "content": "Hi"}]
+)</pre>
+</div>
+</div>
+<p><strong>Same library, same code, same everything.</strong> Just a different <code>base_url</code> and a gateway-issued API key.</p>
+
+<div class="diagram">
+  What changed? Only the "address" where requests go:
+  ════════════════════════════════════════════════════
+
+  BEFORE:  Your Code ───────────────────────────────► OpenAI
+                      api.openai.com/v1
+                      sk-real-openai-key
+
+  AFTER:   Your Code ──► AI Gateway ──────────────► OpenAI
+                      gateway:8000/v1               (gateway uses its
+                      gw-your-team-key               own OpenAI key)
+</div>
+<p class="diagram-label">Diagram 5: What Changes for Developers</p>
+
+
+<!-- ============================================================= -->
+<h2 id="before-after">2. Before vs After: A Complete Request Walkthrough</h2>
+
+<div class="card-analogy">
+<h4>Analogy: Ordering Food at a Restaurant</h4>
+<p style="color:var(--text)"><strong>Without a gateway</strong> = every customer walks into the kitchen and talks to the chef directly. Chaos! <strong>With a gateway</strong> = customers tell the waiter (gateway), who checks the menu (policy), manages the queue (rate limit), remembers repeat orders (cache), sends the order to the right kitchen (routing), calculates the bill (cost), and keeps a receipt (audit).</p>
+</div>
+
+<h3>Scenario: Engineer on the "Chatbot" team sends a request</h3>
+
+<div class="card-example">
+<h4>The request the engineer's code sends:</h4>
+<pre>curl http://gateway:8000/v1/chat/completions \
+  -H "Authorization: Bearer gw-chatbot-prod-abc123def456..." \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-4o-mini",
+    "messages": [
+      {"role": "system", "content": "You are a customer support bot for Acme Corp."},
+      {"role": "user", "content": "How do I reset my password?"}
+    ],
+    "temperature": 0,
+    "max_tokens": 500
+  }'</pre>
+</div>
+
+<h3>The 8-Step Pipeline: What Happens Inside</h3>
+
+<div class="diagram">
+  REQUEST ENTERS THE GATEWAY &mdash; 8-Step Pipeline
+  ═══════════════════════════════════════════════════
+
+  Request arrives
+      │
+      ▼
+  ┌─────────────────────┐
+  │  STEP 1: AUTH (2ms) │  "Who are you?"
+  │  Hash the API key   │  Bearer token ──► SHA256 ──► DB lookup
+  │  Look up team       │  Found? ──► Team: "Chatbot", RPM: 60
+  └─────────┬───────────┘  Not found? ──► 401 STOP
+            │
+            ▼
+  ┌─────────────────────────┐
+  │  STEP 2: RATE LIMIT (1ms)│  "Are you going too fast?"
+  │  Check Redis counter      │  23 requests in last 60s
+  │  Limit: 60 RPM            │  23 &lt; 60 ──► ALLOWED
+  └─────────┬─────────────────┘  23 &ge; 60 ──► 429 STOP
+            │
+            ▼
+  ┌─────────────────────────┐
+  │  STEP 3: POLICY (3ms)    │  "Are you allowed to use this model?"
+  │  Check rules for team    │  Chatbot + gpt-4o-mini
+  │  Match by glob pattern   │  Rule: "Allow gpt-4o-mini globally"
+  └─────────┬─────────────────┘  ALLOWED ──► continue
+            │                    DENIED  ──► 403 STOP
+            ▼
+  ┌─────────────────────────┐
+  │  STEP 4: CACHE (1ms)    │  "Have we seen this exact question before?"
+  │  Hash the request params │  SHA256(model + messages + temp)
+  │  Check Redis             │  cache:chat:e4f2a8... ──► MISS
+  └─────────┬─────────────────┘  HIT? ──► skip to response (FREE!)
+            │                    MISS? ──► call the AI
+            ▼
+  ┌─────────────────────────┐
+  │  STEP 5: ROUTE (850ms)  │  "Which AI provider should we use?"
+  │  Find provider for model │  gpt-4o-mini ──► OpenAI (primary)
+  │  Send request            │                ──► Azure (fallback)
+  │  Get response            │  OpenAI responded in 850ms!
+  └─────────┬─────────────────┘  All fail? ──► 503 STOP
+            │
+            ▼
+  ┌─────────────────────────┐
+  │  STEP 6: COST (0.1ms)   │  "How much did that cost?"
+  │  Look up pricing         │  gpt-4o-mini: $0.15/1M in, $0.60/1M out
+  │  Calculate               │  32 in + 78 out = $0.0000516
+  └─────────┬─────────────────┘
+            │
+            ▼
+  ┌─────────────────────────┐
+  │  STEP 7: AUDIT (5ms)    │  "Write it down for the records"
+  │  INSERT INTO audit_logs  │  Who, what model, how many tokens,
+  │                          │  how much it cost, how long it took
+  └─────────┬─────────────────┘
+            │
+            ▼
+  ┌──────────────────────────────┐
+  │  STEP 8: USAGE SUMMARY (3ms) │  "Update the daily totals"
+  │  UPSERT usage_summaries       │  Chatbot + gpt-4o-mini + today
+  │  Increment counters           │  requests: 147 ──► 148
+  └─────────┬──────────────────────┘  tokens: 16,280 ──► 16,390
+            │
+            ▼
+  ┌──────────────────────────────┐
+  │  RETURN RESPONSE TO CLIENT   │  Same format as OpenAI
+  │  + gateway_metadata           │  (cost, latency, cache_hit, provider)
+  └──────────────────────────────┘
+
+  Total gateway overhead:  ~12ms
+  LLM response time:      ~850ms
+  Gateway added only 1.4% extra time!
+</div>
+<p class="diagram-label">Diagram 6: The Complete 8-Step Request Pipeline</p>
+
+<h3>Let's Walk Through Each Step in Detail</h3>
+
+<div class="card">
+<h4><span class="step-num">1</span> Authentication &mdash; "Who are you?"</h4>
+
+<div class="card-analogy">
+<h4>Analogy: Hotel Key Card</h4>
+<p style="color:var(--text)">When you swipe your hotel card, the system doesn't compare it to every card ever made. It reads the code, looks it up in the database, and knows your room number, checkout date, and which doors you can open. Our API key works the same way.</p>
+</div>
+
+<div class="diagram">
+  How API Key Authentication Works
+  ═════════════════════════════════
+
+  Engineer's code sends:
+  "Authorization: Bearer gw-chatbot-prod-abc123def456..."
+                                  │
+                                  ▼
+                         ┌────────────────┐
+                         │    SHA256()    │   One-way hash
+                         │    function    │   (can't reverse)
+                         └───────┬────────┘
+                                 │
+                                 ▼
+                         "a7f3b2c1d4e5..."  (64 hex characters)
+                                 │
+                                 ▼
+                   ┌─────────────────────────────┐
+                   │  SELECT * FROM api_keys      │
+                   │  WHERE key_hash = 'a7f3b2...'│
+                   │  AND is_active = true         │
+                   └──────────────┬────────────────┘
+                                  │
+                    ┌─────────────┴──────────────┐
+                    ▼                            ▼
+              Found in DB!                  NOT found!
+              ┌──────────────┐              ┌──────────────┐
+              │ team: Chatbot │              │ Return 401   │
+              │ RPM: 60       │              │ "Invalid key"│
+              │ budget: 5M    │              │ STOP HERE    │
+              └──────────────┘              └──────────────┘
+</div>
+<p class="diagram-label">Diagram 7: API Key Authentication Flow</p>
+
+<pre># Python code in our gateway:
+import hashlib
+
+bearer_token = "gw-chatbot-prod-abc123def456..."
+key_hash = hashlib.sha256(bearer_token.encode()).hexdigest()
+# Result: "a7f3b2c1d4e5..."  (64 hex chars)
+
+# SQL query:
+SELECT api_keys.*, teams.*
+FROM api_keys
+JOIN teams ON teams.id = api_keys.team_id
+WHERE api_keys.key_hash = 'a7f3b2c1d4e5...'
+  AND api_keys.is_active = true
+
+# Result:
+# api_key.name = "chatbot-prod"
+# team.name = "Chatbot"
+# team.rate_limit_rpm = 60
+# team.token_budget_monthly = 5,000,000</pre>
+</div>
+
+<div class="card">
+<h4><span class="step-num">2</span> Rate Limiting &mdash; "Are you going too fast?"</h4>
+
+<div class="card-analogy">
+<h4>Analogy: Theme Park Ride</h4>
+<p style="color:var(--text)">A roller coaster can only take 60 people per hour. If 61st person arrives, they wait. But unlike a fixed "per hour" rule, we use a <strong>sliding window</strong> &mdash; we always look at the last 60 seconds, not fixed minute boundaries. More on this in <a href="#ratelimit">Section 8</a>.</p>
+</div>
+
+<div class="diagram">
+  Sliding Window Rate Limiting (limit = 5 per minute)
+  ════════════════════════════════════════════════════
+
+  Timeline (each ■ = one request):
+
+  10:00:00    10:00:15    10:00:30    10:00:45    10:01:00
+  ─────┬─────────┬──────────┬──────────┬──────────┬──────►
+       ■         ■          ■          ■■         │
+       1st       2nd        3rd       4th,5th     │
+                                                  │
+  At 10:00:58 ──► "Can I make a 6th request?"
+                                                  │
+  Window looks back 60 seconds from NOW:          │
+  ◄──────────── 60 seconds ────────────────────── NOW
+  [10:00:01] [10:00:15] [10:00:30] [10:00:45] [10:00:55]
+     ■          ■          ■          ■          ■
+                                          Count = 5/5
+                                          DENIED! At limit.
+
+  At 10:01:02 ──► Window slides forward...
+  ◄──────────── 60 seconds ──────────────────── NOW
+       [10:00:15] [10:00:30] [10:00:45] [10:00:55]
+          ■          ■          ■          ■
+     10:00:01 fell out!          Count = 4/5
+                                 ALLOWED! Space freed up.
+</div>
+<p class="diagram-label">Diagram 8: Sliding Window Rate Limiting</p>
+
+<pre># Redis commands (all in one pipeline = 1 network round-trip):
+ZREMRANGEBYSCORE rate_limit:chatbot-team-uuid -inf 1711900740.0   # Remove entries &gt; 60s old
+ZCARD rate_limit:chatbot-team-uuid                                 # Count: 23 in window
+ZADD rate_limit:chatbot-team-uuid 1711900800.0 "req_abc123"       # Add this request
+EXPIRE rate_limit:chatbot-team-uuid 120                            # Safety TTL
+
+# 23 &lt; 60 (limit) &rarr; ALLOWED, 37 remaining</pre>
+</div>
+
+<div class="card">
+<h4><span class="step-num">3</span> Policy Evaluation &mdash; "Are you allowed to do this?"</h4>
+
+<div class="card-analogy">
+<h4>Analogy: Parental Controls on Netflix</h4>
+<p style="color:var(--text)">Kids' profiles can only see PG movies. Adult profiles can see everything. The "intern" team can only use cheap models (PG). The "ML Research" team can use expensive models (R-rated). Policies are your parental controls for AI models.</p>
+</div>
+
+<div class="diagram">
+  Policy Evaluation Flow
+  ═══════════════════════
+
+  Request: Chatbot team wants to use "gpt-4o-mini"
+                        │
+                        ▼
+            ┌───────────────────────────────┐
+            │ Fetch ALL policies that COULD │
+            │ apply to this team:           │
+            │                               │
+            │ 1. Team-specific policies     │
+            │ 2. Global policies (team=null)│
+            └───────────────┬───────────────┘
+                            │
+                            ▼
+            ┌───────────────────────────────┐
+            │ Filter: which match the model? │
+            │                               │
+            │ fnmatch("gpt-4o-mini", "gpt-4*")     ──► YES │
+            │ fnmatch("gpt-4o-mini", "gpt-4o-mini") ──► YES │
+            │ fnmatch("gpt-4o-mini", "claude-*")    ──► NO  │
+            └───────────────┬───────────────┘
+                            │
+                            ▼
+            ┌───────────────────────────────┐
+            │ Sort by priority (highest first)│
+            │                               │
+            │ Priority 200: ALLOW gpt-4o-mini │ ◄── FIRST MATCH WINS
+            │ Priority 50:  DENY  gpt-4*      │
+            │ Priority 10:  ALLOW *            │
+            └───────────────┬───────────────┘
+                            │
+                            ▼
+                     Result: ALLOWED
+                (by "Allow gpt-4o-mini globally")
+</div>
+<p class="diagram-label">Diagram 9: Policy Evaluation &mdash; Highest Priority Wins</p>
+</div>
+
+<div class="card">
+<h4><span class="step-num">4</span> Cache Check &mdash; "Have we answered this before?"</h4>
+
+<div class="card-analogy">
+<h4>Analogy: Google's Cached Results</h4>
+<p style="color:var(--text)">If 100 people Google "weather today", Google doesn't recalculate from scratch each time. It caches the answer. Our gateway does the same: if 100 users ask "How do I reset my password?" with the same settings, we call OpenAI ONCE and serve the cached answer 99 times. <strong>But only when temperature=0</strong> (deterministic), because with temperature &gt; 0, the AI intentionally gives different answers each time.</p>
+</div>
+
+<div class="diagram">
+  Cache Decision Tree
+  ═══════════════════
+
+                  New Request Arrives
+                         │
+                         ▼
+              ┌──────────────────────┐
+              │  temperature == 0?    │
+              └────┬─────────┬───────┘
+                   │         │
+                  YES        NO
+                   │         │
+                   ▼         ▼
+          ┌─────────────┐  ┌─────────────────────┐
+          │ Build cache  │  │ SKIP cache entirely  │
+          │ key from:    │  │ (each response should│
+          │  - model     │  │  be unique/creative) │
+          │  - messages  │  │                      │
+          │  - temp      │  └─────────────────────┘
+          │  - max_tokens│
+          │  - top_p     │
+          └──────┬───────┘
+                 │
+                 ▼
+          SHA256(all params)
+          = "cache:chat:e4f2a8b1..."
+                 │
+                 ▼
+          ┌──────────────────┐
+          │ Check Redis:      │
+          │ GET cache:chat:...│
+          └────┬─────────┬───┘
+               │         │
+             FOUND     NOT FOUND
+           (cache hit) (cache miss)
+               │         │
+               ▼         ▼
+          ┌─────────┐  ┌───────────────┐
+          │ Return   │  │ Call the LLM  │
+          │ cached   │  │ (costs money!)│
+          │ response │  │ Then STORE    │
+          │ (FREE!)  │  │ result in     │
+          │ Cost: $0 │  │ cache for     │
+          │ Time: 1ms│  │ next time     │
+          └─────────┘  └───────────────┘
+</div>
+<p class="diagram-label">Diagram 10: Cache Decision Flow</p>
+</div>
+
+<div class="card">
+<h4><span class="step-num">5</span> Provider Routing &mdash; "Which AI provider should handle this?"</h4>
+
+<div class="card-analogy">
+<h4>Analogy: Travel Booking Site</h4>
+<p style="color:var(--text)">When you search for a flight, Kayak checks United, Delta, Southwest, etc. If United's website is down, it still shows you Delta's flights. Our gateway does the same: it knows which AI providers support which models, and if one is down, it automatically tries the next one.</p>
+</div>
+
+<div class="diagram">
+  Provider Routing with Failover
+  ═══════════════════════════════
+
+  Request for "gpt-4o-mini"
+         │
+         ▼
+  ┌──────────────────────────────────────────────────┐
+  │ Which providers support "gpt-4o-mini"?            │
+  │                                                   │
+  │  ✓ OpenAI      ──► supports gpt-4o, gpt-4o-mini  │
+  │  ✓ Azure       ──► supports gpt-4o, gpt-4o-mini  │
+  │  ✗ AWS Bedrock ──► only Claude models             │
+  └──────────────────────┬────────────────────────────┘
+                         │
+                         ▼
+              Try providers in order:
+
+    ┌─────────────────┐    FAIL     ┌─────────────────┐    FAIL
+    │ TRY 1: OpenAI   │──────────►  │ TRY 2: Azure    │──────────►  503 Error
+    │                  │            │                  │            "All providers
+    │ Send request...  │            │ Send request...  │             failed"
+    │                  │            │                  │
+    │ SUCCESS? ────────┤            │ SUCCESS? ────────┤
+    └────────┬─────────┘            └────────┬─────────┘
+             │                               │
+             ▼                               ▼
+        Use OpenAI's                   Use Azure's
+        response                       response (fallback!)
+
+  EXAMPLE FAILOVER:
+  ┌──────────────────────────────────────────────────────┐
+  │ 2:00 AM: OpenAI is having an outage                   │
+  │                                                       │
+  │ Request ──► OpenAI ──► TIMEOUT (30s) ──► FAIL        │
+  │         ──► Azure  ──► 200 OK (900ms) ──► SUCCESS    │
+  │                                                       │
+  │ The user never knew OpenAI was down!                  │
+  │ Their request was automatically handled by Azure.     │
+  └──────────────────────────────────────────────────────┘
+</div>
+<p class="diagram-label">Diagram 11: Provider Routing with Automatic Failover</p>
+
+<pre># The actual routing logic:
+providers_for_model = [p for p in all_providers if p.supports_model("gpt-4o-mini")]
+# Result: [OpenAIProvider, AzureProvider]
+
+for provider in providers_for_model:
+    try:
+        response = await provider.chat_completion(request)
+        return response  # First success wins!
+    except Exception as e:
+        logger.warning(f"{provider.name} failed: {e}")
+        continue  # Try next provider
+
+raise RuntimeError("All providers failed")  # &rarr; 503 to client</pre>
+</div>
+
+<div class="card">
+<h4><span class="step-num">6</span> Cost Calculation &mdash; "How much did that cost?"</h4>
+
+<div class="diagram">
+  Cost Calculation Example
+  ════════════════════════
+
+  Model: gpt-4o-mini
+  Pricing: $0.15 per 1,000,000 INPUT tokens
+           $0.60 per 1,000,000 OUTPUT tokens
+
+  This request:
+  ┌──────────────────────────────────────────────┐
+  │  Input:  32 tokens  &times;  $0.15 / 1,000,000     │
+  │        = $0.0000048                           │
+  │                                               │
+  │  Output: 78 tokens  &times;  $0.60 / 1,000,000     │
+  │        = $0.0000468                           │
+  │                                    ───────── │
+  │  TOTAL = $0.0000516  (basically free!)        │
+  └──────────────────────────────────────────────┘
+
+  For comparison, same question with GPT-4 (old, expensive):
+  ┌──────────────────────────────────────────────┐
+  │  Input:  32  &times; $30.00 / 1M = $0.00096       │
+  │  Output: 78  &times; $60.00 / 1M = $0.00468       │
+  │                               ────────────── │
+  │  TOTAL = $0.00564                             │
+  │                                               │
+  │  That's 109x MORE EXPENSIVE for the same      │
+  │  answer! This is why model choice matters.    │
+  └──────────────────────────────────────────────┘
+</div>
+<p class="diagram-label">Diagram 12: Cost Calculation &mdash; Model Choice Matters!</p>
+</div>
+
+<div class="card">
+<h4><span class="step-num">7</span> Audit Log &mdash; "Write it down for the records"</h4>
+<p>Every single request gets permanently recorded. Think of it as a receipt for every AI call.</p>
+<pre># INSERT INTO audit_logs:
+{
+    "request_id": "req_a1b2c3d4",
+    "team_id": "chatbot-team-uuid",
+    "api_key_id": "key-uuid",
+    "model": "gpt-4o-mini",
+    "provider": "openai",
+    "prompt_tokens": 32,
+    "completion_tokens": 78,
+    "total_tokens": 110,
+    "cost_usd": 0.0000516,
+    "latency_ms": 850,
+    "status": "success",
+    "cache_hit": false,
+    "created_at": "2026-03-15T14:30:22Z"
+}</pre>
+</div>
+
+<div class="card">
+<h4><span class="step-num">8</span> Usage Aggregation &mdash; "Update the daily totals"</h4>
+
+<div class="card-analogy">
+<h4>Analogy: Cash Register vs. End-of-Day Report</h4>
+<p style="color:var(--text)">The <strong>audit log</strong> is like printing a receipt for every sale. The <strong>usage summary</strong> is like the end-of-day report that says "we sold 148 items today, total revenue $0.0090". You need both: receipts for details, daily totals for quick reports.</p>
+</div>
+
+<div class="diagram">
+  Two Tables, Two Purposes
+  ═════════════════════════
+
+  audit_logs (DETAILED &mdash; one row per request)
+  ┌──────────────────────────────────────────────┐
+  │ req_001 | chatbot | gpt-4o-mini | $0.00005   │
+  │ req_002 | chatbot | gpt-4o-mini | $0.00004   │
+  │ req_003 | interns | gpt-4o      | $0.00750   │
+  │ req_004 | chatbot | gpt-4o-mini | $0.00005   │
+  │ ... (millions of rows over time)             │
+  └──────────────────────────────────────────────┘
+
+  usage_summaries (AGGREGATED &mdash; one row per team+model+day)
+  ┌──────────────────────────────────────────────────────┐
+  │ chatbot | gpt-4o-mini | 2026-03-15 | 148 reqs | $0.009│
+  │ chatbot | gpt-4o      | 2026-03-15 |  12 reqs | $0.09 │
+  │ interns | gpt-4o      | 2026-03-15 |   5 reqs | $0.04 │
+  │ ... (~1000 rows per month &mdash; fast to query!)          │
+  └──────────────────────────────────────────────────────┘
+
+  Dashboard query:
+  "How much did Chatbot spend in March?"
+
+  BAD:  SELECT SUM(cost) FROM audit_logs WHERE ...  &larr; scans 30,000 rows, 200ms
+  GOOD: SELECT SUM(cost) FROM usage_summaries WHERE ...  &larr; reads 30 rows, 1ms
+</div>
+<p class="diagram-label">Diagram 13: Why We Need Both Tables</p>
+</div>
+
+<h3>What the Client Receives</h3>
+<div class="card-success">
+<pre># The response the engineer's code gets back:
+{
+  "id": "chatcmpl-abc123",
+  "model": "gpt-4o-mini",
+  "choices": [{
+    "message": {
+      "role": "assistant",
+      "content": "To reset your password, follow these steps:\n\n1. Go to acme.com/login..."
+    },
+    "finish_reason": "stop"
+  }],
+  "usage": {
+    "prompt_tokens": 32,
+    "completion_tokens": 78,
+    "total_tokens": 110
+  },
+  "gateway_metadata": {              &larr; EXTRA: only from our gateway!
+    "cost_usd": 0.0000516,
+    "cache_hit": false,
+    "provider": "openai",
+    "latency_ms": 862,
+    "request_id": "req_a1b2c3d4"
+  }
+}</pre>
+<p><strong>Total gateway overhead:</strong> ~12ms (auth 2ms + rate limit 1ms + policy 3ms + cache 1ms + audit 5ms). The LLM took 850ms. So the gateway added 1.4% latency &mdash; negligible.</p>
+</div>
+
+
+<!-- ============================================================= -->
+<h2 id="architecture">3. System Architecture</h2>
+
+<div class="card-analogy">
+<h4>Analogy: The Architecture of a Bank</h4>
+<p style="color:var(--text)">A bank has <strong>tellers</strong> (gateway instances) that handle customers, a <strong>vault</strong> (PostgreSQL) for permanent records, and a <strong>whiteboard</strong> (Redis) for quick notes like "how many withdrawals this hour?" Multiple tellers share the same vault and whiteboard. Add more tellers to handle more customers. That's our architecture.</p>
+</div>
+
+<div class="diagram">
+  FULL SYSTEM ARCHITECTURE
+  ═════════════════════════
+
+                             ┌──────────────────┐
+                             │   Load Balancer   │
+                             │  (nginx / ALB)    │
+                             └────────┬─────────┘
+                                      │
+                  ┌───────────────────┼───────────────────┐
+                  ▼                   ▼                   ▼
+       ┌──────────────────┐ ┌──────────────────┐ ┌──────────────────┐
+       │ Gateway Instance 1│ │ Gateway Instance 2│ │ Gateway Instance N│
+       │   (FastAPI app)   │ │   (FastAPI app)   │ │   (FastAPI app)   │
+       │                   │ │                   │ │                   │
+       │ 1. Auth           │ │  (same code,      │ │  (add more for   │
+       │ 2. Rate Limit     │ │   different box)   │ │   more traffic)  │
+       │ 3. Policy Engine  │ │                   │ │                   │
+       │ 4. Cache Check    │ │                   │ │                   │
+       │ 5. Provider Route │ │                   │ │                   │
+       │ 6. Cost Tracker   │ │                   │ │                   │
+       │ 7. Audit Logger   │ │                   │ │                   │
+       │ 8. Usage Agg      │ │                   │ │                   │
+       └──┬──────┬──────┬──┘ └───────────────────┘ └───────────────────┘
+          │      │      │
+          │      │      └───────────────────────────────┐
+          │      │                                       │
+          │      ▼                                       ▼
+          │   ┌──────────────────────┐     ┌──────────────────────┐
+          │   │      Redis 7         │     │   PostgreSQL 16      │
+          │   │                      │     │                      │
+          │   │  Rate limit counters │     │  teams               │
+          │   │  (sorted sets)       │     │  api_keys            │
+          │   │                      │     │  policies            │
+          │   │  Response cache      │     │  audit_logs          │
+          │   │  (key-value)         │     │  usage_summaries     │
+          │   │                      │     │                      │
+          │   │  Speed: &lt;1ms         │     │  Speed: 1-5ms        │
+          │   │  Data: temporary     │     │  Data: permanent     │
+          │   └──────────────────────┘     └──────────────────────┘
+          │
+          ▼
+  ┌────────────────────────────────────────────────┐
+  │               LLM PROVIDERS                     │
+  │                                                 │
+  │  ┌──────────┐  ┌──────────────┐  ┌───────────┐│
+  │  │  OpenAI   │  │ Azure OpenAI │  │    AWS    ││
+  │  │           │  │              │  │  Bedrock  ││
+  │  │ GPT-4o    │  │ GPT-4o       │  │           ││
+  │  │ GPT-4o-   │  │ GPT-4o-      │  │ Claude    ││
+  │  │  mini     │  │  mini        │  │ 3.5 Sonnet││
+  │  │ o1, o3    │  │              │  │ Opus      ││
+  │  └──────────┘  └──────────────┘  └───────────┘│
+  └────────────────────────────────────────────────┘
+</div>
+<p class="diagram-label">Diagram 14: Full System Architecture</p>
+
+<div class="diagram">
+  WHY is each piece needed?
+  ═════════════════════════
+
+  ┌─────────────────────────────────────────────────────────────────┐
+  │ COMPONENT       │ WHAT IT DOES      │ WHY WE NEED IT           │
+  ├─────────────────┼───────────────────┼──────────────────────────┤
+  │ FastAPI          │ HTTP framework     │ Async I/O = 100s of     │
+  │ (Python)         │ for the gateway    │ requests waiting on LLM │
+  │                  │                    │ responses simultaneously │
+  ├─────────────────┼───────────────────┼──────────────────────────┤
+  │ PostgreSQL       │ Permanent storage  │ Teams, keys, policies,  │
+  │ (database)       │ for important data │ audit logs, usage data  │
+  │                  │                    │ Survives restarts!      │
+  ├─────────────────┼───────────────────┼──────────────────────────┤
+  │ Redis            │ Super-fast temp    │ Rate limit counters:    │
+  │ (in-memory)      │ storage            │ check in 1ms, not 5ms  │
+  │                  │                    │ Shared across instances │
+  ├─────────────────┼───────────────────┼──────────────────────────┤
+  │ Load Balancer    │ Splits traffic     │ Gateway is stateless,   │
+  │ (nginx)          │ across instances   │ so 3 instances = 3x     │
+  │                  │                    │ throughput               │
+  └─────────────────┴───────────────────┴──────────────────────────┘
+</div>
+<p class="diagram-label">Diagram 15: Why Each Component Exists</p>
+
+<h3>Key Insight: The Gateway is STATELESS</h3>
+
+<div class="diagram">
+  What "stateless" means:
+  ═══════════════════════
+
+  Instance 1 handles Request A
+  Instance 2 handles Request B
+  Instance 3 handles Request C
+
+  Any instance can handle ANY request, because:
+  - Rate limit data lives in Redis (shared)
+  - Cache data lives in Redis (shared)
+  - Team/key data lives in PostgreSQL (shared)
+
+  This means:
+  ┌──────────────────────────────────────────┐
+  │ Need more capacity?                       │
+  │                                           │
+  │   Just add more gateway instances!        │
+  │                                           │
+  │   1 instance  = ~500 req/sec              │
+  │   3 instances = ~1,500 req/sec            │
+  │   10 instances = ~5,000 req/sec           │
+  │                                           │
+  │   No code changes. No config changes.     │
+  │   Just spin up more containers.           │
+  └──────────────────────────────────────────┘
+</div>
+<p class="diagram-label">Diagram 16: Stateless = Easy Scaling</p>
+
+<h3>Tech Stack with Reasoning</h3>
 <div class="grid-2">
 <div class="card">
 <h4>Backend</h4>
@@ -238,6 +1081,7 @@
 <span class="tag tag-red">Redis 7</span>
 <span class="tag tag-purple">httpx</span>
 <span class="tag tag-purple">boto3</span>
+<p style="margin-top: 0.5rem; font-size: 0.85rem;"><strong>Why Python?</strong> The gateway is I/O bound (waiting on LLM APIs, not doing CPU work). Python's async is perfect for this. Also, most AI/ML teams already use Python.</p>
 </div>
 <div class="card">
 <h4>Dashboard &amp; Infra</h4>
@@ -247,723 +1091,978 @@
 <span class="tag tag-yellow">Tailwind CSS</span>
 <span class="tag tag-orange">Docker Compose</span>
 <span class="tag tag-orange">Alembic</span>
+<p style="margin-top: 0.5rem; font-size: 0.85rem;"><strong>Why Next.js?</strong> Dashboard for cost monitoring. React for interactive charts. Proxies API calls to the gateway via rewrites.</p>
 </div>
 </div>
+
 
 <!-- ============================================================= -->
-<h2 id="architecture">2. System Architecture</h2>
+<h2 id="pipeline">4. Request Pipeline (Code Walkthrough)</h2>
 
-<div class="diagram">
-                         ┌──────────────────┐
-                         │   Load Balancer   │
-                         └────────┬─────────┘
-                                  │
-              ┌───────────────────┼───────────────────┐
-              ▼                   ▼                   ▼
-   ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
-   │  Gateway Inst 1  │ │  Gateway Inst 2  │ │  Gateway Inst N  │
-   │    (FastAPI)     │ │    (FastAPI)     │ │    (FastAPI)     │
-   │                  │ │                  │ │                  │
-   │ Auth             │ │ Auth             │ │ Auth             │
-   │ Rate Limit ─────────────┐            │ │                  │
-   │ Policy Engine    │ │    │             │ │                  │
-   │ Cache ───────────────────┤            │ │                  │
-   │ Provider Router  │ │    │             │ │                  │
-   │ Cost Tracker     │ │    │             │ │                  │
-   │ Audit Logger ────────────┤            │ │                  │
-   └────────┬─────────┘ └────┼─────┬──────┘ └─────────────────┘
-            │                │     │
-            │                │     │          ┌──────────────────┐
-            │                │     └─────────▶│    LLM Providers │
-            ▼                ▼                │  ┌────────────┐  │
-   ┌──────────────┐  ┌────────────┐          │  │  OpenAI    │  │
-   │  PostgreSQL   │  │   Redis    │          │  │  Azure     │  │
-   │              │  │            │          │  │  Bedrock   │  │
-   │ teams        │  │ rate_limit │          │  └────────────┘  │
-   │ api_keys     │  │ cache:chat │          └──────────────────┘
-   │ audit_logs   │  │            │
-   │ policies     │  └────────────┘   ┌──────────────────────┐
-   │ usage_summary│                   │    React Dashboard    │
-   └──────────────┘                   │  Overview / Costs /   │
-                                      │  Teams / Policies     │
-                                      └──────────────────────┘
-</div>
-<p><strong>Key:</strong> All gateway instances are stateless. Redis is the shared state (rate limits, cache). PostgreSQL stores durable data (teams, audit, usage). This means horizontal scaling = just add more instances behind the load balancer.</p>
+<p>Here is the actual Python code from <code>app/routers/gateway.py</code> with explanations. Don't worry if you don't understand every line &mdash; focus on the COMMENTS that explain what each section does.</p>
 
-<!-- ============================================================= -->
-<h2 id="pipeline">3. Request Pipeline Deep Dive</h2>
+<div class="card-example">
+<h4>The Full Pipeline (simplified from actual code)</h4>
+<pre>@router.post("/v1/chat/completions")
+async def chat_completions(
+    request: ChatCompletionRequest,           # Pydantic validates the JSON body
+    authorization: str = Header(...),          # Extract Authorization header
+    db: AsyncSession = Depends(get_db),        # Database session (injected)
+    redis: Redis = Depends(get_redis),         # Redis client (injected)
+):
+    request_id = str(uuid.uuid4())[:8]
+    start_time = time.time()
 
-<p>Every request to <code>/v1/chat/completions</code> passes through this 8-step pipeline:</p>
+    # ── STEP 1: AUTH ─────────────────────────────────────────────
+    # Extract "Bearer gw-xxx" &rarr; hash &rarr; look up in DB
+    token = authorization.replace("Bearer ", "")
+    key_hash = hashlib.sha256(token.encode()).hexdigest()
 
-<div class="card">
-<h3>Step 1: Authentication</h3>
-<p><strong>What:</strong> Extract <code>Authorization: Bearer gw-xxx</code>. SHA256 hash the token. Look up in <code>api_keys</code> table. Join with <code>teams</code> to get config.</p>
-<pre>key_hash = hashlib.sha256(bearer_token.encode()).hexdigest()
-api_key = await db.execute(
-    select(ApiKey).where(ApiKey.key_hash == key_hash, ApiKey.is_active == True)
-)
-team = api_key.team  # eager-loaded relationship</pre>
-<p><strong>Why SHA256?</strong> We never store raw keys. If the DB leaks, attacker gets hashes, not usable keys. SHA256 is fast enough for per-request lookup but irreversible. Same approach as Stripe, GitHub, AWS.</p>
-<p><strong>Tradeoff:</strong> SHA256 vs bcrypt &mdash; API keys are 64+ random chars (high entropy), so brute-force is infeasible regardless. bcrypt's intentional slowness would add ~100ms per request, unacceptable for a proxy.</p>
-</div>
+    api_key = await db.execute(
+        select(ApiKey)
+        .options(joinedload(ApiKey.team))
+        .where(ApiKey.key_hash == key_hash, ApiKey.is_active == True)
+    )
+    api_key = api_key.scalar_one_or_none()
+    if not api_key:
+        return JSONResponse(status_code=401, content={"error": "Invalid API key"})
 
-<div class="card">
-<h3>Step 2: Rate Limiting</h3>
-<p><strong>What:</strong> Redis sorted set sliding window (60s). Count requests in window. If count &ge; team's <code>rate_limit_rpm</code>, return 429.</p>
-<pre>ZREMRANGEBYSCORE rate_limit:{team_id} -inf (now-60)   # Prune old
-ZCARD rate_limit:{team_id}                              # Count current
-ZADD rate_limit:{team_id} {timestamp} {request_id}     # Record new
-EXPIRE rate_limit:{team_id} 120                         # Safety TTL</pre>
-<p><strong>Why sliding window?</strong> Fixed windows have a burst problem: 59 requests at 0:59 + 59 at 1:01 = 118 in 2s. Sliding window looks at last 60s from <em>now</em>, accurately tracking actual rate.</p>
-<p><strong>Fail-open:</strong> If Redis is down, rate limiter returns <code>allowed=True</code>. Better to serve without rate limiting than block all traffic.</p>
-</div>
+    team = api_key.team
 
-<div class="card">
-<h3>Step 3: Policy Evaluation</h3>
-<p><strong>What:</strong> Fetch active policies for team + global (<code>team_id IS NULL</code>). Filter by <code>fnmatch</code> glob pattern against model name. Sort by priority desc. First match wins. Default: ALLOW.</p>
-<pre># Example: Block GPT-4 for intern team
-Policy(team_id="intern-team", policy_type="deny", resource="gpt-4*", priority=100)</pre>
-<p><strong>Why glob?</strong> <code>gpt-4*</code> matches gpt-4o, gpt-4o-mini, gpt-4-turbo. No need to update policies when new model versions launch.</p>
-</div>
+    # ── STEP 2: RATE LIMIT ──────────────────────────────────────
+    rate_result = await check_rate_limit(redis, str(team.id), team.rate_limit_rpm)
+    if not rate_result.allowed:
+        return JSONResponse(
+            status_code=429,
+            content={"error": f"Rate limit exceeded. Retry in {rate_result.reset_at:.0f}s"},
+            headers={"Retry-After": str(int(rate_result.reset_at - time.time()))}
+        )
 
-<div class="card">
-<h3>Step 4: Cache Check</h3>
-<p><strong>What:</strong> Hash <code>model + messages + temperature + top_p + max_tokens</code> with SHA256. Check Redis. Only for <code>temperature=0</code>.</p>
-<p><strong>Why only temp=0?</strong> Deterministic output &mdash; same prompt always produces same response. At temp &gt; 0, output is random; caching would return stale/wrong results.</p>
-</div>
+    # ── STEP 3: POLICY ──────────────────────────────────────────
+    decision = await evaluate_policies(db, str(team.id), request)
+    if not decision.allowed:
+        return JSONResponse(
+            status_code=403,
+            content={"error": f"Blocked by policy: {decision.reason}"}
+        )
 
-<div class="card">
-<h3>Step 5: Provider Routing</h3>
-<p><strong>What:</strong> Find providers supporting the model, sorted by preference. Try each with failover.</p>
-<pre>OpenAI models:  openai &rarr; azure &rarr; (no bedrock)
-Claude models:  bedrock &rarr; (failover to next if down)</pre>
-</div>
+    # ── STEP 4: CACHE CHECK ─────────────────────────────────────
+    cached = await get_cached_response(redis, request)
+    if cached:
+        cached["gateway_metadata"] = {
+            "cost_usd": 0.0,           # No cost &mdash; it was cached!
+            "cache_hit": True,
+            "provider": "cache",
+            "latency_ms": int((time.time() - start_time) * 1000),
+            "request_id": request_id,
+        }
+        return JSONResponse(content=cached)
 
-<div class="card">
-<h3>Steps 6-8: Cost &rarr; Audit &rarr; Usage</h3>
-<p><strong>Cost:</strong> Look up model in pricing table, multiply tokens &times; rate per 1M. Prefix matching fallback for versioned names. <strong>Audit:</strong> Insert row with request_id, team, model, tokens, cost, latency, status, truncated bodies. <strong>Usage:</strong> Upsert daily aggregation row (team + model + provider + date).</p>
-</div>
-
-<!-- ============================================================= -->
-<h2 id="providers">4. Multi-Provider Routing</h2>
-
-<table>
-<tr><th>Provider</th><th>Models</th><th>Auth</th><th>Key Detail</th></tr>
-<tr><td><strong>OpenAI</strong></td><td>gpt-4o, gpt-4o-mini, o1, o3-mini, gpt-3.5-turbo</td><td>Bearer token</td><td>Direct httpx to <code>api.openai.com</code></td></tr>
-<tr><td><strong>Azure OpenAI</strong></td><td>Same (deployment-mapped)</td><td>api-key header</td><td><code>gpt-3.5-turbo</code> &rarr; <code>gpt-35-turbo</code> deployment</td></tr>
-<tr><td><strong>AWS Bedrock</strong></td><td>Claude 3.5 Sonnet, Opus, Haiku</td><td>IAM SigV4</td><td>Converse API format; boto3 in thread executor</td></tr>
-</table>
-
-<h3>Adapter Pattern</h3>
-<p>Each provider implements <code>BaseProvider</code> (abstract): <code>chat_completion()</code>, <code>is_available()</code>, <code>supports_model()</code>, <code>close()</code>. The gateway core never knows which provider it's talking to. Adding Google Vertex or Cohere = one new class, zero changes to routing logic.</p>
-
-<h3>Failover Flow</h3>
-<pre>for provider in sorted_providers:
+    # ── STEP 5: ROUTE TO PROVIDER ────────────────────────────────
     try:
-        return await provider.chat_completion(request)  # success
-    except Exception:
-        continue  # try next
-raise RuntimeError("All providers failed")</pre>
+        response = await provider_router.route_request(request)
+        provider_name = provider_router.get_provider_name_for_model(request.model)
+    except RuntimeError as e:
+        return JSONResponse(status_code=503, content={"error": str(e)})
 
-<!-- ============================================================= -->
-<h2 id="cost">5. Cost Tracking &amp; Token Pricing</h2>
+    # ── STEP 6: CALCULATE COST ───────────────────────────────────
+    cost = calculate_cost(
+        request.model,
+        response.usage.prompt_tokens,
+        response.usage.completion_tokens,
+    )
 
-<table>
-<tr><th>Model</th><th>Input ($/1M)</th><th>Output ($/1M)</th><th>1K in + 500 out</th></tr>
-<tr><td>gpt-4o-mini</td><td>$0.15</td><td>$0.60</td><td>$0.00045</td></tr>
-<tr><td>gpt-4o</td><td>$2.50</td><td>$10.00</td><td>$0.0075</td></tr>
-<tr><td>gpt-4</td><td>$30.00</td><td>$60.00</td><td>$0.06</td></tr>
-<tr><td>claude-3-5-sonnet</td><td>$3.00</td><td>$15.00</td><td>$0.0105</td></tr>
-<tr><td>claude-3-opus</td><td>$15.00</td><td>$75.00</td><td>$0.0525</td></tr>
-</table>
+    # ── STEP 7: AUDIT LOG ───────────────────────────────────────
+    await audit.log_request(
+        db, request_id, team.id, api_key.id,
+        model=request.model, provider=provider_name,
+        prompt_tokens=response.usage.prompt_tokens,
+        completion_tokens=response.usage.completion_tokens,
+        cost_usd=cost,
+        latency_ms=int((time.time() - start_time) * 1000),
+        status="success",
+    )
 
-<p><strong>Key insight:</strong> GPT-4o is 16x cheaper than GPT-4 for similar quality. The gateway enforces cost-efficient choices through policies (deny <code>gpt-4</code>, allow <code>gpt-4o*</code>).</p>
+    # ── STEP 8: USAGE AGGREGATION ────────────────────────────────
+    await update_usage_summary(
+        db, str(team.id), request.model, provider_name,
+        response.usage.prompt_tokens, response.usage.completion_tokens,
+        response.usage.total_tokens, cost,
+    )
 
-<h3>Pricing Resolution</h3>
-<pre>1. Exact match:   "gpt-4o" &rarr; found in MODEL_PRICING
-2. Prefix match:   "gpt-4o-2024-08-06" &rarr; starts with "gpt-4o" &rarr; use gpt-4o pricing
-3. Default:        unknown model &rarr; conservative ($10/$30 per 1M)</pre>
-
-<h3>Usage Aggregation</h3>
-<p>Instead of scanning millions of audit rows for cost reports, we maintain <code>usage_summaries</code> with daily totals per team/model/provider. Each request upserts the matching row. Cost dashboard queries hit ~1,000 rows (teams &times; models &times; days) instead of millions.</p>
-
-<!-- ============================================================= -->
-<h2 id="policy">6. Policy Engine</h2>
-
-<pre>{
-  "name": "Block expensive models for interns",
-  "team_id": "intern-team-uuid",     // null = global
-  "policy_type": "deny",              // "allow" or "deny"
-  "resource": "gpt-4*",               // glob pattern
-  "priority": 100,                    // higher wins
-  "conditions": {
-    "max_tokens": 4096,               // deny large requests
-    "time_window": {"start_hour": 0, "end_hour": 8},
-    "denied_models": ["gpt-4-turbo"]
-  }
-}</pre>
-
-<h3>Evaluation Algorithm</h3>
-<ol>
-<li>Fetch <strong>active</strong> policies for team + global</li>
-<li>Filter: <code>fnmatch(resource, model)</code></li>
-<li>Sort by <code>priority DESC</code></li>
-<li>First match wins (allow or deny)</li>
-<li>No match &rarr; <strong>default ALLOW</strong></li>
-</ol>
-<p><strong>Why default allow?</strong> Principle of least surprise. If you haven't configured policies, everything works. You add restrictions incrementally.</p>
-
-<!-- ============================================================= -->
-<h2 id="ratelimit">7. Rate Limiting</h2>
-
-<h3>Sliding Window vs Fixed Window vs Token Bucket</h3>
-<table>
-<tr><th>Algorithm</th><th>Burst Problem</th><th>Memory</th><th>Accuracy</th><th>We Use</th></tr>
-<tr><td>Fixed Window</td><td>Yes (boundary burst)</td><td>O(1)</td><td>Low</td><td></td></tr>
-<tr><td>Sliding Window Log</td><td>No</td><td>O(N) per team</td><td>High</td><td style="color:var(--green)">Yes</td></tr>
-<tr><td>Token Bucket</td><td>Controlled burst</td><td>O(1)</td><td>Medium</td><td></td></tr>
-<tr><td>Leaky Bucket</td><td>No burst allowed</td><td>O(1)</td><td>High</td><td></td></tr>
-</table>
-<p><strong>Why sliding window?</strong> It's the most accurate for "60 requests per minute" semantics. Token bucket allows bursts (which we don't want for LLM APIs that have their own rate limits). The O(N) memory cost is negligible &mdash; at 60 RPM, each team's sorted set has at most 60 entries.</p>
-
-<p><strong>Redis implementation:</strong> Sorted set where score = timestamp. <code>ZREMRANGEBYSCORE</code> prunes old entries in O(log N + M). All 4 operations run in a pipeline (single round-trip). 120s TTL is safety net for abandoned keys.</p>
-
-<!-- ============================================================= -->
-<h2 id="cache">8. Response Caching</h2>
-
-<h3>Cache Key</h3>
-<pre>Input:  {model, messages, temperature, top_p, max_tokens, n}
-        &darr; json.dumps(sort_keys=True)
-        &darr; SHA256
-Output: "cache:chat:a1b2c3d4..."  (64 hex chars)</pre>
-
-<h3>Rules</h3>
-<ul>
-<li><strong>Only cache when temperature = 0</strong> &mdash; deterministic output, safe to reuse</li>
-<li><strong>TTL from config</strong> &mdash; default 3600s (1 hour)</li>
-<li><strong>Cache key includes all params</strong> &mdash; different max_tokens = different cache entry</li>
-</ul>
-
-<h3>Cache Invalidation</h3>
-<p>Pattern-based via <code>SCAN</code> + <code>DELETE</code>. Current limitation: model name not in key prefix (it's inside the hash), so you can only invalidate all entries. Improvement: prefix key with model name for targeted invalidation.</p>
-
-<!-- ============================================================= -->
-<h2 id="database">9. Database Design</h2>
-
-<div class="diagram">
-┌────────────────┐     ┌──────────────┐     ┌──────────────┐
-│     teams      │&larr;───&gt;│   api_keys   │     │   policies   │
-│                │     │              │     │              │
-│ id (UUID PK)   │     │ id (UUID PK) │     │ id (UUID PK) │
-│ name (unique)  │     │ team_id (FK) │     │ team_id (FK) │  nullable
-│ description    │     │ key_hash     │     │ name         │
-│ is_active      │     │ key_prefix   │     │ policy_type  │  allow/deny
-│ token_budget   │     │ name         │     │ resource     │  glob pattern
-│ rate_limit_rpm │     │ is_active    │     │ conditions   │  JSONB
-│ created_at     │     │ last_used_at │     │ priority     │
-│ updated_at     │     │ created_at   │     │ is_active    │
-└───────┬────────┘     └──────────────┘     └──────────────┘
-        │ 1:N
-        ├─────────────────────────────────────┐
-        ▼                                     ▼
-┌──────────────────┐              ┌──────────────────────┐
-│   audit_logs     │              │   usage_summaries    │
-│                  │              │                      │
-│ request_id (uniq)│              │ team_id + model +    │
-│ team_id, key_id  │              │ provider + date      │
-│ model, provider  │              │ = UNIQUE constraint  │
-│ tokens (in/out)  │              │                      │
-│ cost_usd         │              │ total_requests       │
-│ latency_ms       │              │ total_tokens         │
-│ status           │              │ total_cost_usd       │
-│ cache_hit        │              │ cache_hits           │
-│ req/resp body    │              └──────────────────────┘
-│ created_at       │
-└──────────────────┘
+    # ── CACHE + RETURN ───────────────────────────────────────────
+    response_dict = response.model_dump()
+    await set_cached_response(redis, request, response_dict)
+    response_dict["gateway_metadata"] = {
+        "cost_usd": cost,
+        "cache_hit": False,
+        "provider": provider_name,
+        "latency_ms": int((time.time() - start_time) * 1000),
+        "request_id": request_id,
+    }
+    return JSONResponse(content=response_dict)</pre>
 </div>
 
-<h3>Key Design Choices</h3>
-<ul>
-<li><strong>UUID PKs</strong> &mdash; No sequential IDs revealing record counts. Generated client-side, no DB round-trip.</li>
-<li><strong>key_hash not key</strong> &mdash; Raw key shown once on creation. Stored as SHA256. key_prefix (<code>gw-abc1234</code>) for UI identification.</li>
-<li><strong>JSONB conditions</strong> &mdash; Flexible policy conditions without migrations for each new condition type.</li>
-<li><strong>Unique constraint on usage_summaries</strong> &mdash; <code>(team, model, provider, date)</code> enables safe upsert for aggregation.</li>
-<li><strong>Body truncation</strong> &mdash; request/response bodies truncated to 500 chars in audit. Reduces PII exposure and table bloat.</li>
-</ul>
 
 <!-- ============================================================= -->
-<h2 id="auth">10. Authentication &amp; Team Isolation</h2>
+<h2 id="providers">5. Multi-Provider Routing</h2>
 
-<pre>1. Admin creates team:    POST /v1/teams {"name": "engineering"}
-2. Admin generates key:   POST /v1/teams/{id}/keys {"name": "prod-key"}
-   &rarr; Returns: {"key": "gw-abc123..."}    (shown ONCE)
-   &rarr; Stored:  key_hash = SHA256("gw-abc123..."), key_prefix = "gw-abc1234"
+<h3>What is a Provider?</h3>
+<p>A "provider" is a company that hosts AI models and lets you use them via HTTP. Each provider has a <strong>different API format</strong>, <strong>different authentication</strong>, and <strong>different pricing</strong>. Our gateway hides all these differences behind one uniform API.</p>
 
-3. Client uses key:       Authorization: Bearer gw-abc123...
-   &rarr; Gateway: SHA256 &rarr; lookup api_keys &rarr; join team &rarr; proceed</pre>
+<div class="diagram">
+  The Adapter Pattern: Same Interface, Different Backends
+  ═══════════════════════════════════════════════════════
 
-<p><strong>Prefix <code>gw-</code></strong> &mdash; Like <code>sk-</code> for OpenAI. Enables automated secret scanning (GitHub, GitGuardian). <strong>Show-once</strong> &mdash; Like AWS/Stripe. Forces secure storage. Lost key = revoke and regenerate.</p>
+  Your request (OpenAI format):
+  {"model": "gpt-4o-mini", "messages": [...]}
+         │
+         ▼
+  ┌──────────────────────────────────────────────────────────────┐
+  │                    PROVIDER ROUTER                            │
+  │                                                               │
+  │  "Which providers support gpt-4o-mini?"                       │
+  │                                                               │
+  │  ┌───────────────┐  ┌───────────────┐  ┌───────────────┐     │
+  │  │ OpenAI Adapter│  │ Azure Adapter │  │Bedrock Adapter│     │
+  │  │               │  │               │  │               │     │
+  │  │ Supports:     │  │ Supports:     │  │ Supports:     │     │
+  │  │  gpt-4o    ✓  │  │  gpt-4o    ✓  │  │  claude-3  ✓  │     │
+  │  │  gpt-4o-  ✓  │  │  gpt-4o-  ✓  │  │  claude-   ✓  │     │
+  │  │   mini        │  │   mini        │  │   3-opus      │     │
+  │  │  o1, o3    ✓  │  │              │  │  claude-   ✓  │     │
+  │  │               │  │               │  │   3-haiku     │     │
+  │  │ Auth: Bearer  │  │ Auth: api-key │  │ Auth: IAM     │     │
+  │  │  token        │  │  header       │  │  SigV4        │     │
+  │  │               │  │               │  │               │     │
+  │  │ Format:       │  │ Format:       │  │ Format:       │     │
+  │  │  OpenAI native│  │  OpenAI-like  │  │  Converse API │     │
+  │  └───────┬───────┘  └───────┬───────┘  └───────┬───────┘     │
+  │          │                  │                   │              │
+  │    All adapters translate to/from the SAME format!            │
+  └──────────┴──────────────────┴───────────────────┴─────────────┘
+</div>
+<p class="diagram-label">Diagram 17: The Adapter Pattern &mdash; One Interface, Three Providers</p>
 
-<!-- ============================================================= -->
-<h2 id="dashboard">11. Dashboard &amp; Analytics</h2>
+<div class="card-analogy">
+<h4>Analogy: Power Adapters for Travel</h4>
+<p style="color:var(--text)">When you travel to Europe, you bring a power adapter. Your laptop plug (your code) stays the same. The adapter converts to the local outlet format (provider API). Adding a new country (new AI provider) just means buying a new adapter &mdash; your laptop doesn't change.</p>
+</div>
 
 <table>
-<tr><th>Page</th><th>Shows</th><th>API Source</th></tr>
-<tr><td><strong>Overview</strong></td><td>Stats cards (total spend, teams, avg utilization), budget progress bars, top models, cost trend chart</td><td><code>/v1/usage/budget-status</code>, <code>/v1/usage/top-models</code></td></tr>
-<tr><td><strong>Usage &amp; Costs</strong></td><td>Cost breakdown table by team and model</td><td><code>/v1/usage/costs</code></td></tr>
-<tr><td><strong>Teams</strong></td><td>Team cards with budget, rate limit, status</td><td><code>/v1/teams</code></td></tr>
-<tr><td><strong>Policies</strong></td><td>Policy documentation and curl examples</td><td>Static</td></tr>
+<tr><th>Provider</th><th>Models</th><th>Auth Method</th><th>API Format</th><th>Our Adapter</th></tr>
+<tr><td><strong>OpenAI</strong></td><td>gpt-4o, gpt-4o-mini, o1, o3-mini</td><td>Bearer token (<code>sk-...</code>)</td><td>OpenAI Chat Completions</td><td><code>openai_provider.py</code></td></tr>
+<tr><td><strong>Azure OpenAI</strong></td><td>Same models, different deployments</td><td><code>api-key</code> header</td><td>OpenAI-compatible</td><td><code>azure_provider.py</code></td></tr>
+<tr><td><strong>AWS Bedrock</strong></td><td>Claude 3.5 Sonnet, Opus, Haiku</td><td>AWS IAM SigV4 signing</td><td>Bedrock Converse API</td><td><code>bedrock_provider.py</code></td></tr>
 </table>
 
-<h3>Production Dashboard Improvements</h3>
+<div class="card-example">
+<h4>Example: How Bedrock Translation Works</h4>
+<pre># YOUR REQUEST (OpenAI format):
+{"model": "claude-3-5-sonnet", "messages": [{"role": "user", "content": "Hi"}]}
+
+# BEDROCK ADAPTER translates to Bedrock Converse format:
+{
+    "modelId": "anthropic.claude-3-5-sonnet-20241022-v2:0",  # Full AWS model ID
+    "messages": [{"role": "user", "content": [{"text": "Hi"}]}],  # Different structure!
+    "inferenceConfig": {"maxTokens": 500, "temperature": 0.7}  # Different field names!
+}
+
+# BEDROCK RESPONDS in its own format, ADAPTER translates BACK:
+{"choices": [{"message": {"role": "assistant", "content": "Hello!"}}]}
+
+# YOUR CODE NEVER KNOWS it talked to AWS Bedrock, not OpenAI!</pre>
+<p><strong>Key insight:</strong> Adding a new provider (Google Vertex, Cohere) means writing ONE adapter class. Zero changes anywhere else.</p>
+</div>
+
+
+<!-- ============================================================= -->
+<h2 id="cost">6. Cost Tracking &amp; Token Pricing</h2>
+
+<h3>Why Costs Matter So Much</h3>
+
+<div class="diagram">
+  AI Model Pricing Comparison (per 1M tokens)
+  ═════════════════════════════════════════════
+
+  Model            Input Cost    Output Cost    1K in + 500 out    Relative
+  ─────            ──────────    ───────────    ───────────────    ────────
+  gpt-4o-mini      $0.15         $0.60          $0.00045          1x (cheapest)
+  gpt-3.5-turbo    $0.50         $1.50          $0.00125          2.8x
+  gpt-4o           $2.50         $10.00         $0.00750          16.7x
+  claude-3-5-son.  $3.00         $15.00         $0.01050          23.3x
+  claude-3-opus    $15.00        $75.00         $0.05250          116x
+  gpt-4            $30.00        $60.00         $0.06000          133x (priciest!)
+
+  ┌──────────────────────────────────────────────────────────────────┐
+  │                                                                   │
+  │  Using gpt-4 instead of gpt-4o-mini costs 133x MORE              │
+  │  for often the SAME quality answer on simple questions!           │
+  │                                                                   │
+  │  Customer support bot (1000 requests/day):                        │
+  │    gpt-4:       $13.50/day = $405/month                          │
+  │    gpt-4o-mini:  $0.13/day = $3.83/month  &larr; 99% savings!      │
+  │                                                                   │
+  └──────────────────────────────────────────────────────────────────┘
+</div>
+<p class="diagram-label">Diagram 18: Model Pricing &mdash; Choose Wisely!</p>
+
+<div class="card-analogy">
+<h4>Analogy: Uber vs. Bus</h4>
+<p style="color:var(--text)">GPT-4 is like taking an Uber Black &mdash; premium, expensive. GPT-4o-mini is like the bus &mdash; cheap, gets you to the same place. Would you take an Uber Black to the corner store? No! But without the gateway tracking costs, teams don't even know they're taking an Uber Black for every trip.</p>
+</div>
+
+<h3>How Pricing Resolution Works</h3>
+
+<div class="diagram">
+  Pricing Lookup: Exact Match &rarr; Prefix Match &rarr; Default
+  ═══════════════════════════════════════════════════════════
+
+  Request model: "gpt-4o-2024-08-06"
+         │
+         ▼
+  Step 1: Exact match?
+  ┌──────────────────────────┐
+  │ "gpt-4o-2024-08-06" in   │
+  │  pricing table?           │  &rarr; NO
+  └──────────┬───────────────┘
+             │
+             ▼
+  Step 2: Prefix match?
+  ┌──────────────────────────────────┐
+  │ Does "gpt-4o-2024-08-06" START   │
+  │ with any known model name?        │
+  │                                   │
+  │ "gpt-4o-mini"?  NO               │
+  │ "gpt-4o"?       YES! &larr; Match!   │
+  │                                   │
+  │ Use pricing for "gpt-4o":         │
+  │ ($2.50/1M input, $10.00/1M output)│
+  └──────────────────────────────────┘
+
+  Step 3: (if no prefix match)
+  ┌──────────────────────────┐
+  │ Default: ($10, $30)       │   Assume expensive.
+  │ Unknown model = be safe.  │   Better to overestimate.
+  └──────────────────────────┘
+</div>
+<p class="diagram-label">Diagram 19: Pricing Resolution</p>
+
+<pre>def _get_pricing(model: str) -> tuple[float, float]:
+    if model in MODEL_PRICING:                    # Exact match
+        return MODEL_PRICING[model]
+    for known, pricing in MODEL_PRICING.items():  # Prefix match
+        if model.startswith(known):
+            return pricing
+    return (10.00, 30.00)                          # Default (conservative)</pre>
+
+
+<!-- ============================================================= -->
+<h2 id="policy">7. Policy Engine</h2>
+
+<h3>What is a Policy?</h3>
+<p>A policy is a rule that says "allow" or "deny" access to specific AI models for specific teams. Think of it like firewall rules, but for AI models.</p>
+
+<div class="card-analogy">
+<h4>Analogy: Employee Expense Policy</h4>
+<p style="color:var(--text)">"Interns can only expense meals under $25. Managers can expense up to $100. VPs have no limit." Our gateway does the same for AI: "Interns can only use cheap models. ML Research can use any model. No one uses GPT-4 (deprecated)."</p>
+</div>
+
+<div class="card-example">
+<h4>Example Policies</h4>
+<pre># Policy 1: "Interns can only use cheap models"
+{
+  "name": "Restrict interns to budget models",
+  "team_id": "intern-team-uuid",
+  "policy_type": "deny",
+  "resource": "gpt-4*",            &larr; blocks gpt-4o, gpt-4o-mini, gpt-4-turbo
+  "priority": 100
+}
+
+# Policy 2: "Block Claude models company-wide"
+{
+  "name": "No Claude models",
+  "team_id": null,                  &larr; null = applies to ALL teams (global)
+  "policy_type": "deny",
+  "resource": "claude-*",
+  "priority": 50
+}
+
+# Policy 3: "ML Research CAN use Claude (exception)"
+{
+  "name": "Allow Claude for ML Research",
+  "team_id": "ml-research-uuid",
+  "policy_type": "allow",
+  "resource": "claude-*",
+  "priority": 200                   &larr; higher priority = wins!
+}</pre>
+</div>
+
+<div class="diagram">
+  How Policy Priority Works
+  ═════════════════════════
+
+  Scenario: ML Research team asks to use "claude-3-5-sonnet"
+
+  All matching policies (sorted by priority):
+
+  Priority 200  ALLOW  "claude-*"  (ML Research only)   ◄── WINNER!
+  Priority  50  DENY   "claude-*"  (global)
+  Priority  10  ALLOW  "*"         (global fallback)
+
+  Rule: Highest priority match wins. Period.
+
+  ┌──────────────────────────────────────────────────────────┐
+  │  Same scenario, but for "Intern" team:                    │
+  │                                                           │
+  │  Priority  50  DENY  "claude-*" (global)  ◄── WINNER!   │
+  │  Priority  10  ALLOW "*"        (global)                 │
+  │                                                           │
+  │  No team-specific override &rarr; DENIED                     │
+  └──────────────────────────────────────────────────────────┘
+</div>
+<p class="diagram-label">Diagram 20: Policy Priority</p>
+
+<h3>Glob Pattern Matching</h3>
+<div class="diagram">
+  Glob Patterns (like file wildcards)
+  ═══════════════════════════════════
+
+  Pattern          Matches                         Doesn't Match
+  ───────          ───────                         ─────────────
+  "gpt-4*"         gpt-4, gpt-4o, gpt-4o-mini     gpt-3.5-turbo
+  "claude-*"       claude-3-5-sonnet, claude-3-opus gpt-4o
+  "gpt-4o-mini"   gpt-4o-mini only                 gpt-4o
+  "*"              EVERYTHING
+
+  ┌──────────────────────────────────────────────────────────┐
+  │ When OpenAI releases "gpt-4o-2025-03-15", your policy   │
+  │ "gpt-4*" ALREADY covers it! No policy updates needed.   │
+  └──────────────────────────────────────────────────────────┘
+</div>
+<p class="diagram-label">Diagram 21: Glob Pattern Matching</p>
+
+
+<!-- ============================================================= -->
+<h2 id="ratelimit">8. Rate Limiting (Deep Dive)</h2>
+
+<h3>Why Rate Limit?</h3>
 <ul>
-<li><strong>Cost anomaly detection</strong> &mdash; Compare today's spend vs 7-day rolling average. Alert at &gt;2x deviation. API: new endpoint aggregating last 7 days of <code>usage_summaries</code>.</li>
-<li><strong>Most expensive requests</strong> &mdash; Top-N audit_log entries by <code>cost_usd DESC</code>. Shows which prompts burn budget.</li>
-<li><strong>Cache hit rate visualization</strong> &mdash; <code>cache_hits / total_requests</code> from usage_summaries. Low hit rate = teams sending diverse prompts or using temp &gt; 0.</li>
-<li><strong>Per-user breakdown</strong> &mdash; Requires adding <code>user_id</code> to requests (via custom header). Currently team-level only.</li>
+<li>One runaway script can exhaust the company's OpenAI quota</li>
+<li>Rack up thousands of dollars in minutes</li>
+<li>Slow down or block other teams' requests</li>
 </ul>
 
+<h3>Sliding Window vs. Fixed Window</h3>
+
+<div class="diagram">
+  WHY Sliding Window is Better Than Fixed Window
+  ═══════════════════════════════════════════════
+
+  THE PROBLEM WITH FIXED WINDOWS (limit: 5/min):
+  ───────────────────────────────────────────────
+
+  Fixed Window 1: 10:00-10:01        Fixed Window 2: 10:01-10:02
+  ┌─────────────────────────┐        ┌─────────────────────────┐
+  │           ■ ■ ■ ■ ■     │        │ ■ ■ ■ ■ ■              │
+  │          10:00:55-59    │        │ 10:01:00-04             │
+  │          5/5 ALLOWED     │        │ 5/5 ALLOWED             │
+  └─────────────────────────┘        └─────────────────────────┘
+
+  Problem: 10 requests in 9 seconds! Both windows say "under limit"
+  but actual rate = 67 requests/minute.
+
+  SLIDING WINDOW FIX:
+  ───────────────────
+  At 10:01:03, look back 60 seconds to 10:00:03:
+  ┌──────────────────────────────────────────────────┐
+  │   10:00:55  56  57  58  59  01:00  01  02        │
+  │     ■    ■   ■   ■   ■    ■    ■   ■            │
+  │                                                   │
+  │   Count = 8 in last 60 seconds                    │
+  │   8 &gt; 5 limit ──► DENIED!                        │
+  └──────────────────────────────────────────────────┘
+</div>
+<p class="diagram-label">Diagram 22: Fixed Window Bug vs. Sliding Window</p>
+
+<h3>Redis Sorted Set</h3>
+
+<div class="diagram">
+  Redis Sorted Set for Rate Limiting
+  ═══════════════════════════════════
+
+  A sorted set = collection where each item has a SCORE (timestamp)
+
+  Key: "rate_limit:chatbot-team-uuid"
+
+  ┌─────────────────────────────────────────────┐
+  │ SCORE (timestamp)    MEMBER (request ID)     │
+  │ ──────────────────   ────────────────────    │
+  │ 1711900741.00        "req_001"               │
+  │ 1711900756.00        "req_002"               │
+  │ 1711900770.00        "req_003"               │
+  │ 1711900785.00        "req_004"               │
+  │ 1711900795.00        "req_005"               │
+  └─────────────────────────────────────────────┘
+
+  New request at timestamp 1711900800:
+
+  1. ZREMRANGEBYSCORE key -inf 1711900740  (remove old entries)
+  2. ZCARD key                              (count remaining)
+  3. ZADD key 1711900800 "req_006"          (add new request)
+  4. EXPIRE key 120                         (auto-cleanup)
+
+  All 4 in a PIPELINE = 1 network round trip = ~1ms!
+  Memory: 60 entries &times; 50 bytes = 3KB per team. Negligible.
+</div>
+<p class="diagram-label">Diagram 23: Redis Sorted Set Internals</p>
+
+
 <!-- ============================================================= -->
-<h2 id="testing">12. Testing Strategy</h2>
+<h2 id="cache">9. Response Caching</h2>
 
-<table>
-<tr><th>Layer</th><th>What</th><th>Files</th><th>Technique</th></tr>
-<tr><td>Unit</td><td>Cost calc, cache keys, policy matching, schemas</td><td><code>test_cost_tracker.py</code>, <code>test_cache.py</code>, <code>test_policy_engine.py</code>, <code>test_schemas.py</code></td><td>Pure functions, no mocks</td></tr>
-<tr><td>Component</td><td>Provider router with mock providers</td><td><code>test_router.py</code></td><td>AsyncMock</td></tr>
-<tr><td>Integration</td><td>Admin API, health endpoints</td><td><code>test_admin.py</code>, <code>test_health.py</code></td><td>SQLite in-memory, FastAPI TestClient</td></tr>
-</table>
+<div class="card-analogy">
+<h4>Analogy: Asking the Same Question Twice</h4>
+<p style="color:var(--text)">If you ask a librarian "What year was the Eiffel Tower built?" and they look it up (2 minutes), you'd write down the answer. Next time, check your notes (2 seconds). <strong>But</strong> if someone asks "Tell me a joke", you want a <em>different</em> joke each time &mdash; caching wouldn't work. That's why we only cache <code>temperature=0</code>.</p>
+</div>
 
-<h3>Test Infrastructure</h3>
-<pre># conftest.py:
-- SQLite in-memory (fast, no Docker)
-- Redis mocked as None (services fail-open)
-- Dependency overrides: get_db, get_redis, get_settings
-- pytest-asyncio auto mode
-- Fixtures: db_session, client, test_team, test_api_key</pre>
+<div class="diagram">
+  When Does Caching Work?
+  ═══════════════════════
+
+  temperature = 0  (deterministic)          temperature &gt; 0  (creative)
+  ┌──────────────────────────┐              ┌──────────────────────────┐
+  │ Q: "What is 2+2?"        │              │ Q: "Tell me a joke"      │
+  │ A: "4"  (always)          │              │ A: "Why did the..."      │
+  │ A: "4"  (always)          │              │ A: "A priest walks..."   │
+  │ A: "4"  (always)          │              │ A: "Knock knock..."      │
+  │                           │              │                          │
+  │ ✓ SAFE TO CACHE           │              │ ✗ DO NOT CACHE           │
+  └──────────────────────────┘              └──────────────────────────┘
+
+  FAQ Bot (100 users ask same question):
+
+  WITHOUT cache:                     WITH cache:
+  ┌────────────────────────┐        ┌────────────────────────┐
+  │ 100 API calls           │        │ 1 API call + 99 FREE   │
+  │ Cost: $0.013            │        │ Cost: $0.00013          │
+  │ Time: 100 &times; 850ms       │        │ Time: 1 &times; 850ms + 99 &times; 1ms│
+  └────────────────────────┘        └────────────────────────┘
+                                     Savings: 99%!
+</div>
+<p class="diagram-label">Diagram 24: Caching Saves Money and Time</p>
+
+<div class="diagram">
+  Building a Cache Key
+  ════════════════════
+
+  Combine these fields into a fingerprint:
+
+  ┌─────────────────────────────────────┐
+  │ model:      "gpt-4o-mini"          │
+  │ messages:   [{role, content}, ...]  │       JSON.stringify
+  │ temperature: 0                      │──────────────────────► SHA256()
+  │ top_p:      1                       │                            │
+  │ max_tokens: 500                     │                            ▼
+  └─────────────────────────────────────┘              "cache:chat:e4f2a8b1..."
+
+  SAME params from ANY team = SAME cache key = cache HIT!
+</div>
+<p class="diagram-label">Diagram 25: How Cache Keys Work</p>
+
 
 <!-- ============================================================= -->
-<!-- PRODUCTION & DEPTH SECTIONS -->
-<!-- ============================================================= -->
+<h2 id="database">10. Database Design</h2>
 
-<h2 id="observability">13. Observability &amp; Production Readiness</h2>
+<div class="card-analogy">
+<h4>Analogy: Filing Cabinet</h4>
+<p style="color:var(--text)">5 drawers: <strong>Teams</strong> (departments), <strong>API Keys</strong> (ID badges), <strong>Policies</strong> (rules book), <strong>Audit Logs</strong> (every receipt ever), <strong>Usage Summaries</strong> (monthly expense reports). First three: small, rarely change. Audit: grows fast. Summaries: pre-calculated for speed.</p>
+</div>
+
+<div class="diagram">
+  DATABASE SCHEMA (Entity Relationship Diagram)
+  ═════════════════════════════════════════════
+
+  ┌────────────────────┐        ┌──────────────────┐        ┌──────────────────┐
+  │      teams         │        │    api_keys       │        │    policies      │
+  │ ════════════       │        │ ═══════════       │        │ ══════════       │
+  │ id (UUID PK)       │───────&lt;│ id (UUID PK)      │        │ id (UUID PK)     │
+  │ name (unique)      │  1:N   │ team_id (FK) ─────┤        │ team_id (FK) ────┤
+  │ description        │        │ key_hash (unique)  │        │   (nullable!     │
+  │ is_active          │        │ key_prefix         │        │    null = global) │
+  │ token_budget       │        │ name               │        │ name             │
+  │ rate_limit_rpm     │        │ is_active          │        │ policy_type      │
+  │ created_at         │        │ last_used_at       │        │   "allow"/"deny" │
+  │ updated_at         │        │ created_at         │        │ resource (glob)  │
+  └─────────┬──────────┘        └──────────────────┘        │ conditions (JSONB)│
+            │                                                │ priority (int)    │
+            │ 1:N                                            │ is_active         │
+            │                                                └──────────────────┘
+  ┌─────────┴──────────┐
+  │                     │
+  ▼                     ▼
+  ┌──────────────────┐  ┌──────────────────────┐
+  │   audit_logs     │  │   usage_summaries    │
+  │  (append-only)   │  │  (daily aggregates)  │
+  │                  │  │                      │
+  │ request_id       │  │ UNIQUE(team_id,      │
+  │ team_id, key_id  │  │   model, provider,   │
+  │ model, provider  │  │   date)              │
+  │ tokens, cost     │  │                      │
+  │ latency, status  │  │ total_requests: 148  │
+  │ cache_hit        │  │ total_tokens: 16390  │
+  │ created_at       │  │ total_cost: $0.009   │
+  └──────────────────┘  └──────────────────────┘
+  MILLIONS of rows       ~1000 rows/month
+  (detailed debugging)   (fast dashboards!)
+</div>
+<p class="diagram-label">Diagram 26: Database Schema</p>
+
+
+<!-- ============================================================= -->
+<h2 id="auth">11. Authentication &amp; Team Isolation</h2>
+
+<div class="diagram">
+  API Key Lifecycle: Create &rarr; Use &rarr; Rotate &rarr; Revoke
+  ═══════════════════════════════════════════════════════
+
+  STEP 1: Admin creates a team
+  ┌────────────────────────────────────────────┐
+  │ POST /v1/teams                              │
+  │ X-Admin-Key: super-secret-admin-key         │
+  │ Body: {name: "chatbot", rate_limit_rpm: 60} │
+  └─────────────────────┬──────────────────────┘
+                        ▼
+  STEP 2: Admin generates an API key
+  ┌────────────────────────────────────────────┐
+  │ POST /v1/teams/550e8400.../keys             │
+  │ Response: {                                 │
+  │   key: "gw-chatbot-prod-abc123..."          │ ◄── SHOWN ONLY ONCE!
+  │   key_prefix: "gw-chatbot-p"               │
+  │ }                                           │
+  │ Stored in DB: SHA256(key), NOT the key!    │
+  └─────────────────────┬──────────────────────┘
+                        ▼
+  STEP 3: Engineer uses the key
+  ┌────────────────────────────────────────────┐
+  │ client = OpenAI(                            │
+  │   api_key="gw-chatbot-prod-abc123...",      │
+  │   base_url="http://gateway:8000/v1"         │
+  │ )                                           │
+  └─────────────────────┬──────────────────────┘
+                        ▼
+  STEP 4: Key rotation (zero downtime)
+  ┌────────────────────────────────────────────────────┐
+  │ 1. Generate NEW key (key-2)                         │
+  │ 2. Deploy key-2 to production                       │
+  │ 3. Check last_used_at for old key-1                 │
+  │ 4. Revoke old key-1                                 │
+  │ Both keys work during transition!                   │
+  └────────────────────────────────────────────────────┘
+</div>
+<p class="diagram-label">Diagram 27: API Key Lifecycle</p>
+
+<div class="diagram">
+  Team Isolation
+  ══════════════
+
+  ┌─────────────────────┐    ┌─────────────────────┐
+  │  Chatbot Team        │    │  ML Research Team    │
+  │  Keys: gw-chatbot-*  │    │  Keys: gw-mlres-*   │
+  │  Budget: 5M tokens   │    │  Budget: 10M tokens  │
+  │  RPM: 60             │    │  RPM: 120            │
+  │  Can't see ML data   │    │  Can't see Chat data │
+  └──────────┬───────────┘    └──────────┬───────────┘
+             └───────────┬───────────────┘
+                         ▼
+                ┌─────────────────────┐
+                │ Admin (X-Admin-Key)  │
+                │ Can see ALL teams    │
+                │ SEPARATE auth!       │
+                └─────────────────────┘
+</div>
+<p class="diagram-label">Diagram 28: Team Isolation</p>
+
+
+<!-- ============================================================= -->
+<h2 id="dashboard">12. Dashboard &amp; Analytics</h2>
+
+<div class="diagram">
+  Dashboard Pages
+  ═══════════════
+
+  ┌─────────────────────────────────────────────────────────────┐
+  │  OVERVIEW PAGE                                               │
+  │  ┌───────────┐  ┌───────────┐  ┌───────────┐  ┌──────────┐│
+  │  │ Total Spend│  │ Active    │  │ Avg Budget│  │ Top 5    ││
+  │  │ (MTD)     │  │ Teams     │  │ Usage %   │  │ Models   ││
+  │  │  $127.40  │  │    8      │  │   62%     │  │ (chart)  ││
+  │  └───────────┘  └───────────┘  └───────────┘  └──────────┘│
+  │                                                             │
+  │  ┌──────────────────────────────────────────────────┐      │
+  │  │ Daily Cost Chart (last 30 days)                   │      │
+  │  │  $10 │     ___                                    │      │
+  │  │      │    /   \     ___                           │      │
+  │  │   $5 │___/     \___/   \___                       │      │
+  │  │      │                     \___                   │      │
+  │  │   $0 └───────────────────────────                 │      │
+  │  └──────────────────────────────────────────────────┘      │
+  │                                                             │
+  │  Data: /v1/usage/budget-status, /v1/usage/top-models       │
+  └─────────────────────────────────────────────────────────────┘
+
+  ┌─────────────────────────────────────────────────────────────┐
+  │  USAGE &amp; COSTS PAGE                                         │
+  │  ┌───────┬────────────┬──────────┬──────────┬──────────┐   │
+  │  │ Team  │ Model      │ Requests │ Tokens   │ Cost     │   │
+  │  ├───────┼────────────┼──────────┼──────────┼──────────┤   │
+  │  │Chatbot│ gpt-4o-mini│  1,234   │ 145,000  │  $0.087  │   │
+  │  │ML Res.│ claude-3-5 │    456   │ 890,000  │  $9.340  │   │
+  │  │Interns│ gpt-4o     │     23   │  12,000  │  $0.090  │   │
+  │  └───────┴────────────┴──────────┴──────────┴──────────┘   │
+  └─────────────────────────────────────────────────────────────┘
+</div>
+<p class="diagram-label">Diagram 29: Dashboard Pages</p>
+
+
+<!-- ============================================================= -->
+<h2 id="testing">13. Testing Strategy</h2>
+
+<div class="diagram">
+  Testing Pyramid
+  ═══════════════
+
+                  ┌───────────┐
+                  │   E2E     │  Few, slow, expensive
+                  ├───────────┤
+                  │Integration│  Some, medium speed
+                  ├───────────┤
+                  │   Unit    │  Many, fast, cheap
+                  └───────────┘
+
+  Our tests:
+  ┌─────────────────────────────────────────────────┐
+  │ test_cost_tracker.py   │ Unit     │ 11 tests    │
+  │ test_policy_engine.py  │ Unit     │  8 tests    │
+  │ test_cache.py          │ Unit     │  5 tests    │
+  │ test_schemas.py        │ Unit     │  6 tests    │
+  │ test_router.py         │ Unit     │  4 tests    │
+  │ test_health.py         │ Integr.  │  2 tests    │
+  │ test_admin.py          │ Integr.  │  8 tests    │
+  └─────────────────────────────────────────────────┘
+</div>
+<p class="diagram-label">Diagram 30: Testing Strategy</p>
+
+<div class="card-example">
+<h4>Example Tests</h4>
+<pre># test_cost_tracker.py
+def test_gpt4o_mini_cost():
+    cost = calculate_cost("gpt-4o-mini", prompt_tokens=1000, completion_tokens=500)
+    expected = (1000 * 0.15 / 1_000_000) + (500 * 0.60 / 1_000_000)  # = $0.00045
+    assert abs(cost - expected) < 1e-8
+
+def test_unknown_model_uses_default():
+    pricing = _get_pricing("some-future-model-v99")
+    assert pricing == (10.00, 30.00)  # Assume expensive
+
+# test_router.py
+async def test_failover_on_provider_error():
+    """If first provider fails, should try the next one."""
+    router = ProviderRouter()
+    router._providers = [
+        make_mock_provider("openai", ["gpt-4o"], should_fail=True),
+        make_mock_provider("azure", ["gpt-4o"], should_fail=False),
+    ]
+    response = await router.route_request(make_request("gpt-4o"))
+    assert response.choices[0].message.content == "Hello!"  # Azure worked!</pre>
+</div>
+
+
+<!-- ============================================================= -->
+<h2 id="observability">14. Observability &amp; Production Readiness</h2>
+
+<div class="diagram">
+  Three Pillars of Observability
+  ═══════════════════════════════
+
+  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
+  │    LOGS       │    │   METRICS    │    │   TRACES     │
+  │ "What         │    │ "How many    │    │ "How long    │
+  │  happened?"   │    │  and how     │    │  did each    │
+  │               │    │  often?"     │    │  step take?" │
+  │ JSON with     │    │ Prometheus   │    │ OpenTelemetry│
+  │ request_id    │    │ counters     │    │ spans        │
+  └──────────────┘    └──────────────┘    └──────────────┘
+</div>
+<p class="diagram-label">Diagram 31: Three Pillars</p>
 
 <h3>Structured Logging</h3>
-<pre># Every log line is JSON with correlation ID:
-{
-  "timestamp": "2026-03-15T14:30:22Z",
-  "level": "INFO",
-  "request_id": "req_a1b2c3d4",
-  "team_id": "eng-team",
-  "model": "gpt-4o",
-  "message": "Provider routing complete",
-  "provider": "openai",
-  "latency_ms": 892
-}</pre>
-<p><strong>Implementation:</strong> Add a middleware that generates <code>request_id</code> (UUID) and injects it into Python's logging context via <code>contextvars</code>. Every log call in the request lifecycle includes this ID for end-to-end tracing.</p>
-<pre># middleware/request_id.py
-import uuid
-from contextvars import ContextVar
-from starlette.middleware.base import BaseHTTPMiddleware
+<pre>{"timestamp": "2026-03-15T14:30:22Z", "level": "INFO",  "request_id": "req_a1b2",
+ "message": "Auth successful", "team": "chatbot"}
 
-request_id_var: ContextVar[str] = ContextVar("request_id", default="")
+{"timestamp": "2026-03-15T14:30:22Z", "level": "INFO",  "request_id": "req_a1b2",
+ "message": "Rate limit OK", "remaining": 36}
 
-class RequestIDMiddleware(BaseHTTPMiddleware):
-    async def dispatch(self, request, call_next):
-        rid = str(uuid.uuid4())[:8]
-        request_id_var.set(rid)
-        response = await call_next(request)
-        response.headers["X-Request-ID"] = rid
-        return response</pre>
+{"timestamp": "2026-03-15T14:30:23Z", "level": "INFO",  "request_id": "req_a1b2",
+ "message": "Request complete", "cost_usd": 0.0000516, "total_ms": 862}
 
-<h3>Metrics (Prometheus)</h3>
-<table>
-<tr><th>Metric</th><th>Type</th><th>Labels</th><th>What It Tells You</th></tr>
-<tr><td><code>gateway_requests_total</code></td><td>Counter</td><td>team, model, provider, status</td><td>Traffic volume, error rate</td></tr>
-<tr><td><code>gateway_request_duration_seconds</code></td><td>Histogram</td><td>model, provider</td><td>Latency distribution (p50, p95, p99)</td></tr>
-<tr><td><code>gateway_tokens_total</code></td><td>Counter</td><td>team, model, direction (in/out)</td><td>Token consumption rate</td></tr>
-<tr><td><code>gateway_cost_usd_total</code></td><td>Counter</td><td>team, model</td><td>Real-time cost accumulation</td></tr>
-<tr><td><code>gateway_cache_hits_total</code></td><td>Counter</td><td>result (hit/miss)</td><td>Cache effectiveness</td></tr>
-<tr><td><code>gateway_rate_limit_rejections</code></td><td>Counter</td><td>team</td><td>Teams hitting limits</td></tr>
-</table>
-
-<pre># Instrumentation example (using prometheus-fastapi-instrumentator):
-from prometheus_client import Counter, Histogram
-
-REQUEST_COUNT = Counter(
-    "gateway_requests_total",
-    "Total gateway requests",
-    ["team", "model", "provider", "status"]
-)
-REQUEST_LATENCY = Histogram(
-    "gateway_request_duration_seconds",
-    "Request latency",
-    ["model", "provider"],
-    buckets=[0.1, 0.5, 1.0, 2.0, 5.0, 10.0, 30.0]
-)</pre>
-
-<h3>Distributed Tracing (OpenTelemetry)</h3>
-<pre># Trace spans for each pipeline step:
-Gateway Request
-  ├── Auth Lookup            (2ms)
-  ├── Rate Limit Check       (1ms)
-  ├── Policy Evaluation      (3ms)
-  ├── Cache Lookup           (1ms)
-  ├── Provider: OpenAI       (892ms)  ← the bottleneck
-  ├── Cost Calculation       (0.1ms)
-  ├── Audit Log Write        (5ms)
-  └── Usage Aggregation      (3ms)</pre>
-<p>OpenTelemetry SDK auto-instruments FastAPI, httpx, SQLAlchemy, and Redis. Each span gets the <code>request_id</code> as a trace attribute. Export to Jaeger, Datadog, or Grafana Tempo.</p>
+# Search by request_id to see full journey: grep "req_a1b2" gateway.log</pre>
 
 <h3>Alerting Rules</h3>
 <table>
-<tr><th>Alert</th><th>Condition</th><th>Severity</th></tr>
-<tr><td>Cost Spike</td><td>Hourly cost &gt; 2x rolling 7-day average</td><td>Warning</td></tr>
-<tr><td>Error Rate High</td><td>&gt;5% of requests returning 5xx in 5min window</td><td>Critical</td></tr>
-<tr><td>Latency Degradation</td><td>p95 latency &gt; 10s for 5 minutes</td><td>Warning</td></tr>
-<tr><td>Budget Near Limit</td><td>Team at &gt;90% monthly budget</td><td>Warning</td></tr>
-<tr><td>Provider Down</td><td>Provider error rate &gt;50% in 2min</td><td>Critical</td></tr>
-<tr><td>Redis Unavailable</td><td>Redis health check failing</td><td>Critical</td></tr>
+<tr><th>Alert</th><th>Condition</th><th>Severity</th><th>Example</th></tr>
+<tr><td>Cost Spike</td><td>Hourly cost &gt; 2x average</td><td>Warning</td><td>Intern team: $0.50/hr &rarr; $5/hr</td></tr>
+<tr><td>Error Rate</td><td>&gt;5% 5xx in 5min</td><td>Critical</td><td>OpenAI down</td></tr>
+<tr><td>Latency</td><td>p95 &gt; 10s for 5min</td><td>Warning</td><td>Provider slow</td></tr>
+<tr><td>Budget</td><td>&gt;90% monthly budget</td><td>Warning</td><td>ML Research at 92%</td></tr>
 </table>
 
+
 <!-- ============================================================= -->
-<h2 id="failures">14. Failure Scenarios &amp; Edge Cases</h2>
+<h2 id="failures">15. Failure Scenarios &amp; Edge Cases</h2>
+
+<div class="diagram">
+  What Can Go Wrong?
+  ══════════════════
+
+  ┌─────────────────────────────────────────────────────────┐
+  │  FAILURE              │ IMPACT        │ OUR RESPONSE     │
+  ├───────────────────────┼───────────────┼──────────────────┤
+  │ Redis goes down       │ No rate limit │ FAIL-OPEN:       │
+  │                       │ No cache      │ Allow requests   │
+  ├───────────────────────┼───────────────┼──────────────────┤
+  │ PostgreSQL goes down  │ No auth!      │ FAIL-CLOSED:     │
+  │                       │ No audit      │ Block everything │
+  ├───────────────────────┼───────────────┼──────────────────┤
+  │ OpenAI goes down      │ GPT models    │ AUTO-FAILOVER:   │
+  │                       │ unavailable   │ Try Azure        │
+  ├───────────────────────┼───────────────┼──────────────────┤
+  │ Crash after LLM call  │ Missing audit │ PRE-WRITE:       │
+  │ before audit          │ entry         │ Write "pending"  │
+  └───────────────────────┴───────────────┴──────────────────┘
+</div>
+<p class="diagram-label">Diagram 32: Failure Scenarios</p>
 
 <div class="card-warn">
 <h3>Scenario 1: Redis Down</h3>
-<div class="grid-3">
-<div><strong style="color:var(--text)">What happens:</strong><br>Rate limiter returns <code>allowed=True</code> (fail-open). Cache returns <code>None</code> (miss). All requests hit providers directly.</div>
-<div><strong style="color:var(--orange)">Problem:</strong><br>No rate protection. No caching savings. Provider bills spike. A runaway script could exhaust quotas.</div>
-<div><strong style="color:var(--green)">Fix:</strong><br>In-memory fallback rate limiter (per-instance, not global). Redis Sentinel for automatic failover. Alert on Redis health check failure.</div>
-</div>
+<p><strong>Fail-open:</strong> Rate limiter allows all. Cache always misses. <strong>Why?</strong> Blocking ALL traffic because Redis is down is worse than allowing extra traffic. Auth (PostgreSQL) still works.</p>
 </div>
 
 <div class="card-warn">
-<h3>Scenario 2: PostgreSQL Slow/Down</h3>
-<div class="grid-3">
-<div><strong style="color:var(--text)">What happens:</strong><br>Auth lookup fails (can't verify API key). Audit log writes fail. Usage aggregation fails.</div>
-<div><strong style="color:var(--orange)">Problem:</strong><br>All requests fail with 500. Complete outage even though LLM providers are healthy.</div>
-<div><strong style="color:var(--green)">Fix:</strong><br>(1) Cache valid API keys in Redis with 5-min TTL &mdash; auth works even if DB is down. (2) Queue audit writes to Redis list, drain to Postgres via background worker. (3) Circuit breaker on DB calls.</div>
-</div>
+<h3>Scenario 2: PostgreSQL Down</h3>
+<p><strong>Fail-closed:</strong> Auth fails, all requests return 500. <strong>Why?</strong> Without auth, we can't know who's making requests. <strong>Fix:</strong> Cache API keys in Redis with 5-min TTL.</p>
 </div>
 
 <div class="card-warn">
-<h3>Scenario 3: All Providers Fail</h3>
-<div class="grid-3">
-<div><strong style="color:var(--text)">What happens:</strong><br>Each provider tried in order. All throw exceptions. Gateway returns <code>RuntimeError("All providers failed")</code>.</div>
-<div><strong style="color:var(--orange)">Problem:</strong><br>Client gets a 500 with no useful error. No way to distinguish "all down" from "your request is bad."</div>
-<div><strong style="color:var(--green)">Fix:</strong><br>Return 503 Service Unavailable with <code>Retry-After</code> header. Circuit breaker per provider &mdash; if a provider fails 5x in 10s, skip it for 30s. Return cached response if available (even for temp &gt; 0) as degraded fallback.</div>
-</div>
+<h3>Scenario 3: Crash After LLM Call</h3>
+<p><strong>Problem:</strong> Client got response, but audit is missing. <strong>Fix:</strong> Write "pending" before LLM call, update to "completed" after. Monthly reconciliation with provider billing.</p>
 </div>
 
-<div class="card-warn">
-<h3>Scenario 4: Provider Timeout / Partial Response</h3>
-<div class="grid-3">
-<div><strong style="color:var(--text)">What happens:</strong><br>httpx times out at 30s. Bedrock boto3 hangs. Partial JSON response can't be parsed.</div>
-<div><strong style="color:var(--orange)">Problem:</strong><br>Provider may have consumed tokens (they charge on generation start). We don't log the cost because the response failed to parse.</div>
-<div><strong style="color:var(--green)">Fix:</strong><br>Log partial requests with <code>status="timeout"</code> and estimated cost. Add request timeout to httpx client. For streaming, track incremental token count.</div>
-</div>
-</div>
-
-<div class="card-warn">
-<h3>Scenario 5: Gateway Crash Mid-Request</h3>
-<div class="grid-3">
-<div><strong style="color:var(--text)">What happens:</strong><br>LLM response received but gateway crashes before audit write.</div>
-<div><strong style="color:var(--orange)">Problem:</strong><br>Cost shows up in provider invoice but not in our tracking. Usage summaries are under-counted.</div>
-<div><strong style="color:var(--green)">Fix:</strong><br>Write "request started" entry (status=pending) before calling provider. Update to completed/failed after. Pending entries older than 60s = lost requests. Reconcile with provider billing API.</div>
-</div>
-</div>
-
-<h3>Key Patterns</h3>
+<h3>Key Resilience Patterns</h3>
 <div class="grid-2">
 <div class="card">
 <h4>Circuit Breaker</h4>
-<pre>States: CLOSED &rarr; OPEN &rarr; HALF_OPEN
-
-CLOSED:  Normal operation. Track failures.
-         If failures > threshold in window:
-         &rarr; switch to OPEN
-
-OPEN:    All requests fail-fast (no attempt).
-         After timeout (30s):
-         &rarr; switch to HALF_OPEN
-
-HALF_OPEN: Allow 1 test request.
-           If success: &rarr; CLOSED
-           If failure: &rarr; OPEN</pre>
+<div class="diagram">
+  ┌────────┐  5 failures   ┌────────┐
+  │ CLOSED │──────────────►│  OPEN  │
+  │(normal)│               │(reject │
+  └───┬────┘  ◄────────────│ all)   │
+      │       success      └───┬────┘
+      │       ┌────────────┐   │ 30s
+      └───────│ HALF-OPEN  │◄──┘
+              │(try 1 req) │
+              └────────────┘
+</div>
 </div>
 <div class="card">
 <h4>Exponential Backoff</h4>
-<pre>attempt = 0
-while attempt < max_retries:
-    try:
-        return await provider.call(request)
-    except RetryableError:
-        wait = min(base * 2^attempt, max_wait)
-        wait += random.uniform(0, jitter)
-        await asyncio.sleep(wait)
-        attempt += 1
+<pre>attempt 1: wait 0.5s
+attempt 2: wait 1.0s
+attempt 3: wait 2.0s
+attempt 4: wait 4.0s
+attempt 5: wait 8.0s + jitter
 
-# base=0.5s, max_wait=30s, jitter=0.5s
-# Waits: 0.5s, 1s, 2s, 4s, 8s, 16s, 30s</pre>
+Each retry waits 2x longer.
+Jitter = random extra time
+(prevents thundering herd)</pre>
 </div>
 </div>
 
-<div class="card">
-<h4>Idempotency Keys</h4>
-<p>Client sends <code>X-Idempotency-Key: abc123</code>. Gateway checks Redis for this key. If found, return the stored response. If not, process request and store response with TTL. Prevents duplicate charges on network retries.</p>
-</div>
 
 <!-- ============================================================= -->
-<h2 id="scalability">15. Scalability Deep Dive</h2>
+<h2 id="scalability">16. Scalability Deep Dive</h2>
 
-<table>
-<tr><th>Scale</th><th>Requests/Day</th><th>Bottleneck</th><th>Solution</th></tr>
-<tr><td>Small</td><td>1K</td><td>None &mdash; single instance handles it</td><td>Docker Compose as-is</td></tr>
-<tr><td>Medium</td><td>100K</td><td>PostgreSQL audit_log inserts (~1.2/sec)</td><td>Batch audit writes via Redis queue + background worker</td></tr>
-<tr><td>Large</td><td>1M</td><td>PostgreSQL (12/sec), Redis sorted sets</td><td>Read replicas, partitioned audit_logs, Redis cluster</td></tr>
-<tr><td>Enterprise</td><td>10M+</td><td>Everything</td><td>Kafka for async pipeline, sharded PostgreSQL, dedicated Redis clusters</td></tr>
-</table>
-
-<h3>Scaled Architecture</h3>
 <div class="diagram">
-                    ┌──────────────┐
-                    │ Load Balancer│
-                    └──────┬───────┘
-                           │
-         ┌─────────────────┼─────────────────┐
-         ▼                 ▼                 ▼
-   ┌───────────┐    ┌───────────┐    ┌───────────┐
-   │ Gateway 1 │    │ Gateway 2 │    │ Gateway N │
-   │ (stateless)    │ (stateless)    │ (stateless)│
-   └─────┬─────┘    └─────┬─────┘    └─────┬─────┘
-         │                │                │
-         └────────────────┼────────────────┘
-                          │
-              ┌───────────┼───────────┐
-              ▼           ▼           ▼
-       ┌──────────┐ ┌──────────┐ ┌──────────────┐
-       │  Redis   │ │  Kafka   │ │ PostgreSQL   │
-       │ Cluster  │ │ (audit,  │ │ Primary +    │
-       │ (rate +  │ │  usage)  │ │ Read Replica │
-       │  cache)  │ │          │ │ (partitioned)│
-       └──────────┘ └────┬─────┘ └──────────────┘
-                         │
-                   ┌─────┴─────┐
-                   │  Workers  │  batch insert audit
-                   │ (N pods)  │  aggregate usage
-                   └───────────┘
+  Scaling Stages
+  ══════════════
+
+  ┌──────────┬─────────────┬────────────────────┬──────────────────────┐
+  │  SCALE   │ Requests/Day│ Bottleneck          │ Solution              │
+  ├──────────┼─────────────┼────────────────────┼──────────────────────┤
+  │ Small    │    1,000    │ None                │ Single Docker Compose │
+  ├──────────┼─────────────┼────────────────────┼──────────────────────┤
+  │ Medium   │  100,000    │ PostgreSQL audit    │ Queue via Redis,      │
+  │          │             │ inserts             │ batch-insert          │
+  ├──────────┼─────────────┼────────────────────┼──────────────────────┤
+  │ Large    │ 1,000,000   │ PostgreSQL + Redis  │ Read replicas,        │
+  │          │             │                     │ partition audit_logs  │
+  ├──────────┼─────────────┼────────────────────┼──────────────────────┤
+  │Enterprise│ 10,000,000+ │ Everything          │ Kafka, sharded DB,    │
+  │          │             │                     │ dedicated Redis       │
+  └──────────┴─────────────┴────────────────────┴──────────────────────┘
 </div>
+<p class="diagram-label">Diagram 33: Scaling Stages</p>
 
-<h3>Database Optimizations</h3>
-<ul>
-<li><strong>Audit log partitioning:</strong> Range partition by <code>created_at</code> (monthly). Old partitions detach and archive to S3. Queries with date filters only scan relevant partitions.</li>
-<li><strong>Read replica:</strong> Dashboard queries (usage, costs, top models) hit the replica. Writes (audit, usage upsert) go to primary.</li>
-<li><strong>Connection pooling:</strong> PgBouncer in front of PostgreSQL. Each gateway instance gets a bounded pool instead of unbounded connections.</li>
-<li><strong>Indexes:</strong> <code>audit_logs(created_at, team_id)</code>, <code>usage_summaries(date, team_id)</code>, <code>api_keys(key_hash)</code></li>
-</ul>
+<div class="diagram">
+  Moving Audit Off the Hot Path (at scale)
+  ═════════════════════════════════════════
 
-<h3>Async Processing with Queue</h3>
-<pre># Current: synchronous in request pipeline
-response = await provider.chat_completion(request)
-cost = calculate_cost(...)                  # fast
-await audit.log_request(db, ...)            # 5ms DB write  &larr; slows request
-await cost_tracker.update_usage(db, ...)    # 5ms DB upsert &larr; slows request
+  BEFORE: Audit blocks the response
+  Request ──► ... ──► LLM (850ms) ──► Audit (5ms) ──► Return
+                                       ▲ blocks!       Total: 862ms
 
-# Improved: decouple audit/usage from hot path
-response = await provider.chat_completion(request)
-cost = calculate_cost(...)
-await kafka.produce("audit_events", event)   # &lt;1ms  &larr; async, non-blocking
-return response                              # client gets response faster
+  AFTER: Audit happens in background
+  Request ──► ... ──► LLM (850ms) ──► Return          Total: 851ms
+                                  └──► Kafka ──► Worker ──► DB
+                                       (async, &lt;1ms)   (batch every 100)
+</div>
+<p class="diagram-label">Diagram 34: Async Audit at Scale</p>
 
-# Background worker (separate process):
-async for event in kafka.consume("audit_events"):
-    await audit.log_request(db, event)
-    await cost_tracker.update_usage(db, event)</pre>
 
 <!-- ============================================================= -->
-<h2 id="security">16. Security Deep Dive</h2>
+<h2 id="security">17. Security Deep Dive</h2>
 
-<h3>Current Security Measures</h3>
-<ol>
-<li><strong>API key hashing</strong> &mdash; SHA256, shown once, prefix for ID</li>
-<li><strong>Admin isolation</strong> &mdash; Separate admin API key for management</li>
-<li><strong>Team isolation</strong> &mdash; Each key belongs to one team, no cross-team access</li>
-<li><strong>Body truncation</strong> &mdash; Audit logs truncate to 500 chars, reducing PII exposure</li>
-<li><strong>Env-based secrets</strong> &mdash; No credentials in code</li>
-<li><strong>Docker network isolation</strong> &mdash; Postgres/Redis not exposed to host in production</li>
-</ol>
+<div class="diagram">
+  Security Layers (Defense in Depth)
+  ═════════════════════════════════
 
-<h3>Production Improvements</h3>
+  Layer 1: API Key Hashing
+  ┌─────────────────────────────────────────────────────────┐
+  │ Key "gw-abc123..." ──► SHA256 ──► "a7f3b2..." in DB    │
+  │ Database breach = hashes only, NOT usable keys          │
+  └─────────────────────────────────────────────────────────┘
 
-<div class="card">
-<h4>API Key Rotation</h4>
-<p>Allow teams to have multiple active keys simultaneously. New key created, old key set to expire in 24h. Client migrates to new key. Zero-downtime rotation.</p>
-<pre># Rotation flow:
-1. POST /v1/teams/{id}/keys {"name": "prod-key-v2"}  # new key created
-2. Deploy new key to client applications
-3. DELETE /v1/teams/{id}/keys/{old_key_id}            # revoke old key</pre>
+  Layer 2: Admin Isolation
+  ┌─────────────────────────────────────────────────────────┐
+  │ Team API keys ≠ Admin API key (separate domains)        │
+  └─────────────────────────────────────────────────────────┘
+
+  Layer 3: Team Isolation
+  ┌─────────────────────────────────────────────────────────┐
+  │ Each key = one team. No cross-team access possible.     │
+  └─────────────────────────────────────────────────────────┘
+
+  Layer 4: "gw-" Prefix for Secret Scanning
+  ┌─────────────────────────────────────────────────────────┐
+  │ GitHub/GitLab detect "gw-" prefix if accidentally pushed│
+  └─────────────────────────────────────────────────────────┘
+
+  Layer 5: Body Truncation
+  ┌─────────────────────────────────────────────────────────┐
+  │ Audit logs store only 500 chars of request/response     │
+  └─────────────────────────────────────────────────────────┘
+
+  Layer 6: Env-Based Secrets
+  ┌─────────────────────────────────────────────────────────┐
+  │ All credentials in .env file, never in code             │
+  └─────────────────────────────────────────────────────────┘
 </div>
+<p class="diagram-label">Diagram 35: Security Layers</p>
 
-<div class="card">
-<h4>Per-Key Rate Limiting</h4>
-<p>Currently rate limiting is per-team. A single runaway key in a team affects all keys. Fix: add <code>rate_limit_rpm</code> to <code>api_keys</code> table, check both team-level and key-level limits.</p>
-</div>
-
-<div class="card">
-<h4>PII Redaction in Audit Logs</h4>
-<p>Before storing request/response bodies, scan for PII patterns (emails, SSNs, phone numbers) and replace with <code>[REDACTED]</code>. Use regex patterns for common formats. For production: integrate with a dedicated PII detection service.</p>
-</div>
-
-<h3>Threat Scenarios</h3>
-<table>
-<tr><th>Threat</th><th>Impact</th><th>Mitigation</th></tr>
-<tr><td>API key leaked in Git</td><td>Unauthorized access to LLM via team's budget</td><td><code>gw-</code> prefix enables GitHub secret scanning. Webhook auto-revokes leaked keys.</td></tr>
-<tr><td>Prompt injection via gateway</td><td>LLM manipulated to reveal system prompts or bypass controls</td><td>Gateway is a routing layer; add content filter service in pipeline. Log suspicious patterns.</td></tr>
-<tr><td>DDoS on gateway</td><td>Exhausts resources, blocks legitimate traffic</td><td>Rate limiting at gateway + WAF/CloudFront at edge. Redis rate limit survives application restart.</td></tr>
-<tr><td>Admin key compromise</td><td>Attacker creates teams, generates keys, modifies policies</td><td>Admin key rotation. IP allowlist for admin endpoints. Audit log for all admin actions.</td></tr>
-<tr><td>Database breach</td><td>Team names, usage patterns exposed</td><td>API keys are hashed (unusable). Encrypt PII columns at rest. Minimize stored data.</td></tr>
-</table>
 
 <!-- ============================================================= -->
-<h2 id="advanced">17. Advanced Features</h2>
+<h2 id="advanced">18. Advanced Features</h2>
 
 <div class="card-success">
 <h3>1. Smart Model Routing</h3>
-<p><strong>What:</strong> Automatically choose the cheapest model that meets quality requirements.</p>
-<p><strong>Why:</strong> Teams often default to GPT-4o when GPT-4o-mini would suffice. A 16x cost difference at scale.</p>
-<p><strong>How:</strong></p>
-<pre># Policy condition: "auto_downgrade": true
-# If request doesn't specify a model preference:
-1. Estimate prompt complexity (token count, presence of code/math)
-2. If simple (&lt;500 tokens, no code): route to gpt-4o-mini
-3. If complex: route to gpt-4o
-4. Track quality feedback (thumbs up/down from teams) to tune thresholds</pre>
+<p>Automatically route to cheapest model that handles the request quality-wise. Simple prompts &rarr; gpt-4o-mini. Complex &rarr; gpt-4o. <strong>16x savings on simple requests.</strong></p>
 </div>
 
 <div class="card-success">
 <h3>2. Hard Budget Enforcement</h3>
-<p><strong>What:</strong> Reject requests when a team exceeds their monthly token budget.</p>
-<p><strong>Why:</strong> Currently budget is monitoring-only. Finance needs hard limits.</p>
-<p><strong>How:</strong></p>
-<pre># In gateway pipeline, between auth and rate limit:
-budget_cache_key = f"budget:{team_id}:{current_month}"
-spent = await redis.get(budget_cache_key)
-if spent is None:
-    spent = await db.query(SUM(usage_summaries.total_cost) WHERE month=current)
-    await redis.setex(budget_cache_key, 60, spent)  # cache 60s
-if spent >= team.token_budget_monthly:
-    return 429, "Monthly budget exceeded"</pre>
-<p><strong>Tradeoff:</strong> 60s cache means a team can exceed budget by up to 60s worth of requests. Acceptable for cost management; use shorter TTL if tighter control needed.</p>
+<p>Check cached budget in Redis (60s TTL). If team exceeds monthly budget &rarr; 429 error.</p>
 </div>
 
 <div class="card-success">
-<h3>3. Prompt Fingerprinting &amp; Deduplication</h3>
-<p><strong>What:</strong> Detect repeated prompts across teams and improve cache hit rate.</p>
-<p><strong>Why:</strong> Multiple teams often send identical prompts (e.g., summarization templates). Each pays full cost.</p>
-<p><strong>How:</strong></p>
-<pre># Shared cache pool (cross-team):
-# Only for non-sensitive requests (opt-in per team policy)
-# Hash prompt without team context
-shared_key = "cache:shared:" + SHA256(model + messages)
-# Check shared cache before provider call
-# Teams opt-in via policy: {"shared_cache": true}</pre>
+<h3>3. Shared Cache Across Teams</h3>
+<p>Team A and Team B ask same question &rarr; only 1 API call. Second request is a free cache hit.</p>
 </div>
+
 
 <!-- ============================================================= -->
-<h2 id="decisions">18. Design Decisions &amp; Tradeoffs</h2>
+<h2 id="decisions">19. Design Decisions &amp; Tradeoffs</h2>
 
-<p>Every major component had alternatives considered. This section explains <strong>what we chose, what we didn't, and why</strong>.</p>
+<p><strong>Interview gold:</strong> "I chose X over Y because Z."</p>
+
+<div class="diagram">
+  Key Decision Map
+  ════════════════
+
+  ┌──────────────────┬──────────────┬──────────────┬──────────────────────────────┐
+  │ Decision          │ We Chose     │ Alternative  │ Why                          │
+  ├──────────────────┼──────────────┼──────────────┼──────────────────────────────┤
+  │ Rate Limiting     │ Sliding      │ Token Bucket │ Token bucket allows bursts;  │
+  │                   │ Window       │              │ LLM providers reject bursts  │
+  ├──────────────────┼──────────────┼──────────────┼──────────────────────────────┤
+  │ Cache Backend     │ Redis        │ In-memory    │ Multiple instances need      │
+  │                   │              │              │ shared cache                 │
+  ├──────────────────┼──────────────┼──────────────┼──────────────────────────────┤
+  │ Database          │ PostgreSQL   │ MongoDB      │ Relational data, JOINs,     │
+  │                   │              │              │ upserts, JSONB              │
+  ├──────────────────┼──────────────┼──────────────┼──────────────────────────────┤
+  │ Key Hashing       │ SHA256       │ bcrypt       │ 64-char keys = brute force  │
+  │                   │              │              │ impossible; bcrypt too slow  │
+  ├──────────────────┼──────────────┼──────────────┼──────────────────────────────┤
+  │ Redis failure     │ Fail-open    │ Fail-closed  │ Better to allow than block  │
+  ├──────────────────┼──────────────┼──────────────┼──────────────────────────────┤
+  │ Cache scope       │ temp=0 only  │ All requests │ Non-deterministic = bad cache│
+  └──────────────────┴──────────────┴──────────────┴──────────────────────────────┘
+</div>
+<p class="diagram-label">Diagram 36: Design Decisions</p>
 
 <div class="card">
-<h3>Rate Limiting: Sliding Window Log vs Token Bucket</h3>
-<table>
-<tr><th></th><th>Sliding Window (Chosen)</th><th>Token Bucket</th></tr>
-<tr><td><strong>Accuracy</strong></td><td>Exact count in window</td><td>Allows bursts up to bucket size</td></tr>
-<tr><td><strong>Memory</strong></td><td>O(N) per team (N = requests in window)</td><td>O(1) per team</td></tr>
-<tr><td><strong>Burst handling</strong></td><td>No burst allowed</td><td>Controlled bursts</td></tr>
-<tr><td><strong>Why chosen</strong></td><td colspan="2">LLM APIs have their own strict rate limits. Allowing bursts at our gateway means hitting provider limits, which causes cascading failures. Strict enforcement at our layer prevents this.</td></tr>
-</table>
+<h3>SHA256 vs bcrypt (Common Interview Question)</h3>
+<div class="diagram">
+  PASSWORDS (use bcrypt)              API KEYS (use SHA256)
+  ═══════════════════════             ═════════════════════
+
+  "password123"                       "gw-x7k2m9p4q8r1..."
+  8-20 chars, human-chosen            64+ chars, machine-generated
+  Low entropy (guessable)             High entropy (unguessable)
+
+  Brute force: might work!            Brute force: heat death of universe
+
+  bcrypt: 100ms per hash              SHA256: 0.001ms per hash
+  (slow = good for passwords)         (fast = good for every-request auth)
+
+  Used per: login (rare)              Used per: API call (every request!)
+  100ms is fine                       100ms per call = UNACCEPTABLE
+</div>
+<p class="diagram-label">Diagram 37: SHA256 vs bcrypt</p>
 </div>
 
-<div class="card">
-<h3>Cache: Redis vs In-Memory (LRU)</h3>
-<table>
-<tr><th></th><th>Redis (Chosen)</th><th>In-Memory LRU</th></tr>
-<tr><td><strong>Shared</strong></td><td>All instances share one cache</td><td>Per-instance, duplicated</td></tr>
-<tr><td><strong>Persistence</strong></td><td>Survives restart</td><td>Lost on restart</td></tr>
-<tr><td><strong>Latency</strong></td><td>~1ms network hop</td><td>~0.01ms (in-process)</td></tr>
-<tr><td><strong>Why chosen</strong></td><td colspan="2">With multiple gateway instances, in-memory cache has low hit rate (request A cached on instance 1, request B goes to instance 2 = miss). Redis gives global cache. The 1ms overhead is negligible vs 500ms-5s LLM response.</td></tr>
-</table>
-</div>
-
-<div class="card">
-<h3>Database: PostgreSQL vs MongoDB</h3>
-<table>
-<tr><th></th><th>PostgreSQL (Chosen)</th><th>MongoDB</th></tr>
-<tr><td><strong>Schema</strong></td><td>Strict schema + JSONB flex</td><td>Fully schemaless</td></tr>
-<tr><td><strong>Transactions</strong></td><td>Full ACID</td><td>Multi-doc transactions (slower)</td></tr>
-<tr><td><strong>Aggregation</strong></td><td>SQL aggregates, window functions</td><td>Aggregation pipeline</td></tr>
-<tr><td><strong>Why chosen</strong></td><td colspan="2">Our data is relational (teams → keys, teams → policies, teams → usage). SQL joins, unique constraints, and upserts are natural. JSONB gives schema-less flexibility for policy conditions. Async driver (asyncpg) is the fastest Python DB driver.</td></tr>
-</table>
-</div>
-
-<div class="card">
-<h3>Auth: SHA256 vs bcrypt vs HMAC</h3>
-<table>
-<tr><th></th><th>SHA256 (Chosen)</th><th>bcrypt</th><th>HMAC</th></tr>
-<tr><td><strong>Speed</strong></td><td>~0.001ms</td><td>~100ms</td><td>~0.001ms</td></tr>
-<tr><td><strong>Purpose</strong></td><td>Fast irreversible hash</td><td>Intentionally slow</td><td>Keyed hash</td></tr>
-<tr><td><strong>Why chosen</strong></td><td colspan="3">API keys are 64+ random chars = high entropy. Brute-force infeasible. bcrypt's slowness is needed for low-entropy passwords, not for random keys. HMAC needs a server-side secret (another thing to manage). SHA256 = fast + secure for this use case.</td></tr>
-</table>
-</div>
-
-<div class="card">
-<h3>Caching Only at temperature=0</h3>
-<p><strong>Alternative:</strong> Cache all responses with a "freshness" header.</p>
-<p><strong>Why not:</strong> At temperature &gt; 0, the user explicitly wants randomness. Returning cached output defeats this. We'd need a "stale but fast" opt-in mechanism, which adds API complexity. The simple rule (temp=0 = cacheable) is easy to reason about and never returns unexpected results.</p>
-</div>
-
-<div class="card">
-<h3>Fail-Open vs Fail-Closed</h3>
-<p><strong>Chosen: Fail-open</strong> for rate limiting and caching. <strong>Fail-closed</strong> for auth (no DB = no auth = deny).</p>
-<p><strong>Why:</strong> Auth is a security boundary &mdash; you can't bypass it. Rate limiting and caching are optimizations &mdash; the core functionality (routing LLM requests) works without them. Blocking all traffic because Redis is down is worse than allowing some extra traffic.</p>
-</div>
-
-<!-- ============================================================= -->
-<h2 id="deployment">19. Deployment &amp; Infrastructure</h2>
-
-<pre># docker-compose.yml
-services:
-  gateway:     # FastAPI (port 8000), depends on postgres + redis
-  postgres:    # PostgreSQL 16 (port 5432), healthcheck: pg_isready
-  redis:       # Redis 7 (port 6379), healthcheck: redis-cli ping</pre>
-
-<h3>Production Deployment</h3>
-<ul>
-<li><strong>Container orchestration:</strong> Kubernetes with 3+ gateway replicas</li>
-<li><strong>Managed databases:</strong> AWS RDS (PostgreSQL), ElastiCache (Redis)</li>
-<li><strong>CI/CD:</strong> GitHub Actions &rarr; build Docker image &rarr; push to ECR &rarr; rolling deploy to EKS</li>
-<li><strong>Secrets:</strong> AWS Secrets Manager / HashiCorp Vault, injected as env vars at deploy time</li>
-<li><strong>Zero-downtime deploy:</strong> Rolling update strategy, health check endpoints, graceful shutdown</li>
-</ul>
 
 <!-- ============================================================= -->
 <h2 id="elevator">20. Elevator Pitches</h2>
 
 <div class="elevator">
+<h3>30-Second Version</h3>
+<p style="color:var(--text)">I built an AI Gateway &mdash; a centralized proxy between engineering teams and LLM providers like OpenAI and AWS Bedrock. It gives full visibility into who's spending what, enforces access control, prevents runaway costs, caches repeated requests, and auto-fails over between providers. Teams change one line of code.</p>
+</div>
+
+<div class="elevator">
 <h3>2-Minute Version</h3>
-<p style="color:var(--text)">I built an AI Gateway &mdash; a centralized proxy that sits between an organization's engineering teams and LLM providers like OpenAI and AWS Bedrock. The problem it solves: when you have 10+ teams independently calling AI APIs, you get a $50K monthly bill with no visibility into who's spending what, no access control, and no rate protection.</p>
-<p style="color:var(--text)">The gateway exposes an OpenAI-compatible API, so teams only change their base URL. Every request goes through an 8-step pipeline: authentication, rate limiting, policy evaluation, caching, provider routing with failover, cost tracking, audit logging, and usage aggregation. Built with FastAPI, PostgreSQL, Redis, and a React dashboard for cost monitoring. The architecture is async end-to-end and horizontally scalable.</p>
+<p style="color:var(--text)">I built an AI Gateway that sits between 10+ engineering teams and LLM providers. The problem: $47K monthly AI bill with zero visibility. The gateway exposes an OpenAI-compatible API, so teams change only their base URL. Every request flows through 8 steps: SHA256 auth, Redis sliding-window rate limiting, glob-pattern policy engine, deterministic caching, multi-provider failover routing, per-token cost tracking, audit logging, and pre-aggregated usage summaries. Built with FastAPI, PostgreSQL, Redis, and a React dashboard.</p>
 </div>
 
 <div class="elevator">
 <h3>5-Minute Deep Version</h3>
-<p style="color:var(--text)"><strong>Problem:</strong> At CVS Health, we had multiple teams calling OpenAI independently. The finance team came to us asking who spent $47K on GPT-4 last month. Nobody knew. No audit trail, no access control, one intern's test script was calling GPT-4 Turbo in a loop.</p>
-<p style="color:var(--text)"><strong>Solution:</strong> I designed and built a centralized AI Gateway. It's a FastAPI application that acts as a proxy between internal teams and multiple LLM providers. The key design decision was making it OpenAI-compatible &mdash; teams don't change their code, just the base URL and API key.</p>
-<p style="color:var(--text)"><strong>Technical depth:</strong> The request pipeline is the core. Auth uses SHA256-hashed API keys (like Stripe). Rate limiting uses a Redis sorted set with a sliding window &mdash; I chose this over a token bucket because LLM APIs have strict rate limits, and allowing bursts at our gateway means hitting their limits. The policy engine uses glob-pattern matching so <code>gpt-4*</code> covers all GPT-4 variants without updating policies when new versions launch. Caching only applies to temperature=0 requests (deterministic output). Provider routing has automatic failover &mdash; if OpenAI is down, it tries Azure OpenAI.</p>
-<p style="color:var(--text)"><strong>Cost tracking</strong> uses per-model token pricing with prefix matching for versioned model names. Usage is pre-aggregated into daily summaries (team + model + provider + date) so the dashboard reads ~1,000 rows instead of scanning millions of audit logs.</p>
-<p style="color:var(--text)"><strong>Scale considerations:</strong> The gateway is stateless &mdash; horizontal scaling is just more instances behind a load balancer. Redis handles shared state (rate limits, cache). For high throughput, I'd decouple audit logging via Kafka to take writes off the hot path. PostgreSQL audit logs would be range-partitioned by month for efficient archival.</p>
+<p style="color:var(--text)"><strong>Problem:</strong> 10+ teams calling OpenAI independently. $47K bill, nobody knows who spent what. Intern's test script calling GPT-4 in a loop.</p>
+<p style="color:var(--text)"><strong>Solution:</strong> Centralized AI Gateway. OpenAI-compatible (one config change). 8-step pipeline.</p>
+<p style="color:var(--text)"><strong>Key decisions:</strong> SHA256 over bcrypt (API keys are high-entropy, bcrypt's 100ms is too slow per request). Sliding window over token bucket (LLM providers reject bursts). Fail-open rate limiting (availability over strictness). temp=0 caching only (deterministic). Pre-aggregated usage summaries (~1000 rows vs scanning millions of audit logs).</p>
+<p style="color:var(--text)"><strong>Scale:</strong> Stateless gateway = horizontal scaling. Decouple audit via Kafka at high throughput. Partition audit_logs monthly.</p>
 </div>
+
 
 <!-- ============================================================= -->
 <h2 id="interview">21. Interview Questions &amp; Answers (25+)</h2>
@@ -971,220 +2070,163 @@ services:
 <h3>Architecture &amp; System Design</h3>
 
 <div class="qa">
-<div class="qa-q">Q1: Walk me through what happens when a request hits /v1/chat/completions.</div>
-<div class="qa-a">
-<strong>A:</strong> 8-step pipeline: (1) <strong>Auth</strong> &mdash; SHA256 hash Bearer token, look up in api_keys, join team for config. (2) <strong>Rate limit</strong> &mdash; Redis sorted set sliding window, 60s, per-team RPM. (3) <strong>Policy</strong> &mdash; fetch team + global policies, fnmatch resource against model, priority-sorted, first match wins. (4) <strong>Cache</strong> &mdash; for temp=0, SHA256 of request params, check Redis. (5) <strong>Route</strong> &mdash; find providers for model, preference-sorted, try each with failover. (6) <strong>Cost</strong> &mdash; per-model token pricing with prefix matching. (7) <strong>Audit</strong> &mdash; insert to audit_logs. (8) <strong>Usage</strong> &mdash; upsert daily summary. Response includes <code>gateway_metadata</code>: cost, latency, provider, cache_hit, request_id.
-</div>
-<div class="qa-deeper"><strong>If they go deeper:</strong> Ask about fail-open vs fail-closed decisions (Redis fail-open, auth fail-closed). Ask about latency overhead (~10ms for the full pipeline, negligible vs 500ms-5s LLM response).</div>
+<div class="qa-q">Q1: Walk me through what happens when a request hits your gateway.</div>
+<div class="qa-a"><strong>A:</strong> 8-step pipeline: (1) Auth &mdash; SHA256 hash, DB lookup. (2) Rate limit &mdash; Redis sorted set, 60s sliding window. (3) Policy &mdash; fnmatch glob matching, priority-sorted. (4) Cache &mdash; temp=0 only, SHA256 key. (5) Route &mdash; provider preference order with failover. (6) Cost &mdash; per-model pricing with prefix matching. (7) Audit &mdash; INSERT. (8) Usage &mdash; UPSERT daily summary.</div>
+<div class="qa-deeper"><strong>If deeper:</strong> Gateway overhead ~12ms. LLM takes 500ms-5s. &lt;2% latency added.</div>
 </div>
 
 <div class="qa">
 <div class="qa-q">Q2: Why FastAPI over Flask or Django?</div>
-<div class="qa-a">
-<strong>A:</strong> (1) <strong>Async native</strong> &mdash; gateway is I/O bound waiting on LLM responses; async handles hundreds of concurrent requests in one process. Flask needs gevent/threading. (2) <strong>Pydantic integration</strong> &mdash; request validation, response serialization, settings all via Pydantic. Auto-generates OpenAPI docs. (3) <strong>Performance</strong> &mdash; FastAPI + uvicorn is one of the fastest Python frameworks, critical for a proxy adding latency to every call.
-</div>
-<div class="qa-deeper"><strong>If they go deeper:</strong> "Why not Go or Rust?" &mdash; Python for rapid development and team familiarity. The gateway is I/O bound (waiting on LLM APIs), not CPU bound, so Python's GIL isn't a bottleneck. Async evloop handles concurrency fine.</div>
+<div class="qa-a"><strong>A:</strong> (1) Async native &mdash; handles 100s of concurrent LLM waits. (2) Pydantic &mdash; validation + serialization built-in. (3) Performance &mdash; one of fastest Python frameworks.</div>
+<div class="qa-deeper"><strong>"Why not Go?":</strong> I/O bound, not CPU bound. Python async is fine. Team familiarity.</div>
 </div>
 
 <div class="qa">
-<div class="qa-q">Q3: How would you scale this to 10,000 RPS?</div>
-<div class="qa-a">
-<strong>A:</strong> (1) Gateway is stateless &mdash; horizontal scale with N instances behind a load balancer. (2) Redis handles 100K+ ops/sec for rate limiting and cache. Add Redis Cluster for sharding. (3) PostgreSQL audit writes are the bottleneck at high throughput. Solution: decouple audit via Kafka, batch-insert from background workers. (4) Usage aggregation upsert needs optimistic locking or worker-based aggregation. (5) Connection pooling (PgBouncer) for DB. (6) Circuit breaker per provider to prevent cascade failures.
-</div>
-<div class="qa-deeper"><strong>If they go deeper:</strong> At 10K RPS, audit_logs grows 864M rows/day. Range partition by month. Archive old partitions to S3. Read replica for dashboard queries.</div>
+<div class="qa-q">Q3: Scale to 10,000 RPS?</div>
+<div class="qa-a"><strong>A:</strong> Stateless gateway &rarr; horizontal scale. Redis handles 100K+ ops/sec. Bottleneck: PostgreSQL audit &rarr; decouple via Kafka, batch-insert. Partition audit_logs monthly. Read replica for dashboard. PgBouncer for connections.</div>
 </div>
 
 <div class="qa">
-<div class="qa-q">Q4: Explain your rate limiting. Why sliding window over token bucket?</div>
-<div class="qa-a">
-<strong>A:</strong> <strong>Fixed window:</strong> boundary burst problem (118 requests in 2 seconds across window boundary). <strong>Token bucket:</strong> allows controlled bursts, but LLM providers have strict rate limits &mdash; our bursts become their rate limit errors. <strong>Sliding window:</strong> exact count in any 60-second span, no bursts. Redis sorted set with timestamps as scores, ZREMRANGEBYSCORE prunes, ZCARD counts. All operations in pipeline (single round-trip). O(log N) per operation, at most 60 entries per team.
-</div>
-<div class="qa-deeper"><strong>If they go deeper:</strong> "What about distributed rate limiting?" &mdash; Redis is already shared across instances. All instances write to the same sorted set. Atomic pipeline ensures consistency. For multi-region, use Redis Cluster with cross-region replication.</div>
+<div class="qa-q">Q4: Why sliding window over token bucket?</div>
+<div class="qa-a"><strong>A:</strong> Token bucket allows bursts. LLM providers reject bursts with 429s. Sliding window enforces even distribution. Redis sorted set, O(log N), max 60 entries per team.</div>
 </div>
 
 <div class="qa">
-<div class="qa-q">Q5: Why SHA256 for API keys instead of bcrypt?</div>
-<div class="qa-a">
-<strong>A:</strong> Different threat model. Passwords: short, human-chosen, low entropy &mdash; bcrypt's intentional 100ms slowness protects against dictionary attacks. API keys: 64+ random chars, high entropy &mdash; brute force is computationally infeasible. SHA256 gives fast lookup (0.001ms vs bcrypt's 100ms) while being irreversible. Same approach as Stripe, GitHub, AWS. The key prefix (<code>gw-</code>) enables secret scanning in Git repos.
-</div>
+<div class="qa-q">Q5: Why SHA256 instead of bcrypt?</div>
+<div class="qa-a"><strong>A:</strong> API keys are 64+ random chars (high entropy) &mdash; brute force impossible. SHA256: 0.001ms. bcrypt: 100ms. Same approach as Stripe, GitHub, AWS.</div>
 </div>
 
 <div class="qa">
 <div class="qa-q">Q6: How does the policy engine handle conflicts?</div>
-<div class="qa-a">
-<strong>A:</strong> Priority-based resolution. Policies have an integer <code>priority</code> field. Fetch all active policies (team + global), filter by resource glob match, sort by priority DESC, first match wins. "Block gpt-4*" at priority 100 beats "allow *" at priority 50. No match = default ALLOW (principle of least surprise).
-</div>
-<div class="qa-deeper"><strong>If they go deeper:</strong> "What if two policies have the same priority?" &mdash; Undefined order within same priority. Best practice: use distinct priorities. Could add a tiebreaker (deny wins) as a safety measure.</div>
+<div class="qa-a"><strong>A:</strong> Priority-based. Sort DESC, first match wins. No match = default ALLOW.</div>
+<div class="qa-deeper"><strong>Same priority?</strong> Undefined order. Use distinct priorities. Could add deny-wins tiebreaker.</div>
 </div>
 
 <div class="qa">
-<div class="qa-q">Q7: What happens if Redis goes down?</div>
-<div class="qa-a">
-<strong>A:</strong> Fail-open for rate limiting (allowed=True) and caching (cache miss). This is deliberate: the gateway's primary job is routing LLM requests. Rate limiting and caching are enhancements. Blocking all traffic because Redis is down is worse than allowing some extra traffic. The cost tracking and audit logging (PostgreSQL) still work. To improve: add in-memory fallback rate limiter per instance, and Redis Sentinel for automatic failover.
-</div>
+<div class="qa-q">Q7: What if Redis goes down?</div>
+<div class="qa-a"><strong>A:</strong> Fail-open. Rate limit allows all, cache always misses. Blocking traffic is worse. Auth/audit (PostgreSQL) still work.</div>
 </div>
 
 <div class="qa">
-<div class="qa-q">Q8: Why pre-aggregate usage instead of querying audit_logs?</div>
-<div class="qa-a">
-<strong>A:</strong> At 1K requests/day, 3 months = 90K audit rows. "Cost by team for March" scans 30K rows. <code>usage_summaries</code> has ~50 rows for the same query (teams &times; models &times; 30 days). Aggregation happens on write (upsert per request) so reads are instant. Tradeoff: write amplification (extra upsert per request) but it's a simple counter increment.
-</div>
+<div class="qa-q">Q8: Why pre-aggregate usage?</div>
+<div class="qa-a"><strong>A:</strong> "Cost by team for March" &mdash; audit_logs scans 30K rows. usage_summaries reads ~50 rows. Fast dashboards.</div>
 </div>
 
-<h3>Implementation &amp; Code</h3>
+<h3>Implementation</h3>
 
 <div class="qa">
-<div class="qa-q">Q9: Why async SQLAlchemy instead of sync?</div>
-<div class="qa-a">
-<strong>A:</strong> Gateway is async end-to-end (FastAPI + uvicorn + httpx + redis.asyncio). Sync SQLAlchemy would block the event loop on every DB query, negating async benefits. <code>create_async_engine</code> with asyncpg driver gives non-blocking DB access. asyncpg is purpose-built for async PostgreSQL and significantly faster than psycopg2 in async contexts.
-</div>
+<div class="qa-q">Q9: Bedrock adapter vs OpenAI?</div>
+<div class="qa-a"><strong>A:</strong> (1) Auth: IAM SigV4 vs Bearer. (2) Format: Converse API translation. (3) Async: boto3 sync &rarr; asyncio.to_thread().</div>
 </div>
 
 <div class="qa">
-<div class="qa-q">Q10: How does the Bedrock adapter differ from OpenAI?</div>
-<div class="qa-a">
-<strong>A:</strong> Three differences: (1) <strong>Auth:</strong> IAM SigV4 vs Bearer token. (2) <strong>Format:</strong> Bedrock uses "Converse" API, different message structure. Adapter translates OpenAI format to Bedrock format. (3) <strong>Async:</strong> boto3 is sync, so we run it in <code>asyncio.to_thread()</code> to avoid blocking the event loop. Model mapping converts our names (<code>claude-3-5-sonnet</code>) to Bedrock IDs (<code>anthropic.claude-3-5-sonnet-20241022-v2:0</code>).
-</div>
+<div class="qa-q">Q10: Adding streaming?</div>
+<div class="qa-a"><strong>A:</strong> StreamingResponse (SSE) when stream=true. Forward chunks immediately. Token counts in final chunk for audit. Cache harder &mdash; buffer full response first.</div>
 </div>
 
 <div class="qa">
-<div class="qa-q">Q11: How would you add streaming support?</div>
-<div class="qa-a">
-<strong>A:</strong> Three changes: (1) Gateway returns <code>StreamingResponse</code> (SSE) when <code>stream=true</code>. (2) Provider adapters request streaming and yield chunks. (3) Tricky part: cost tracking &mdash; token counts come in the final SSE chunk. Buffer the stream, forward each chunk immediately, extract usage from final chunk for audit. Cache becomes harder &mdash; need to buffer full response before caching.
-</div>
+<div class="qa-q">Q11: Crash after LLM, before audit?</div>
+<div class="qa-a"><strong>A:</strong> Write "pending" before LLM call, update to "completed" after. Stuck &gt;60s = lost. Monthly reconciliation.</div>
 </div>
 
 <div class="qa">
-<div class="qa-q">Q12: What if the gateway crashes after calling LLM but before audit write?</div>
-<div class="qa-a">
-<strong>A:</strong> Client got the response (already sent). But we miss the audit entry &mdash; cost shows in provider invoice but not our tracking. Fix: write "pending" entry before calling provider, update to "completed" after. Entries stuck as "pending" beyond timeout = lost requests. Reconcile with provider billing API monthly.
+<div class="qa-q">Q12: Why async SQLAlchemy?</div>
+<div class="qa-a"><strong>A:</strong> Sync blocks the event loop. asyncpg = non-blocking, purpose-built for async PostgreSQL.</div>
 </div>
+
+<h3>Database &amp; Security</h3>
+
+<div class="qa">
+<div class="qa-q">Q13: Partition audit_logs?</div>
+<div class="qa-a"><strong>A:</strong> Range partition by created_at, monthly. Old partitions: detach, dump to S3, drop. Create ahead via cron.</div>
 </div>
 
 <div class="qa">
-<div class="qa-q">Q13: How would you implement token budget enforcement?</div>
-<div class="qa-a">
-<strong>A:</strong> Add check between auth and rate limiting. Query <code>usage_summaries</code> for current month, sum total_cost for team. Cache result in Redis with 60s TTL. If spent &ge; budget, return 429. Tradeoff: team can exceed budget by up to 60s of requests during cache window. For tighter control, reduce TTL (but more DB queries).
-</div>
-</div>
-
-<h3>Database &amp; Performance</h3>
-
-<div class="qa">
-<div class="qa-q">Q14: How would you partition audit_logs?</div>
-<div class="qa-a">
-<strong>A:</strong> PostgreSQL range partitioning by <code>created_at</code>, monthly. Each partition is an independent table. Date-filtered queries only scan relevant partitions. Old partitions: detach, pg_dump, upload to S3, drop. Create future partitions ahead of time via cron. This is standard for append-heavy tables with time-based access.
-</div>
+<div class="qa-q">Q14: Why UUIDs?</div>
+<div class="qa-a"><strong>A:</strong> Don't reveal counts. Client-side generation. Safe for distributed writes.</div>
 </div>
 
 <div class="qa">
-<div class="qa-q">Q15: Why UUIDs instead of auto-increment IDs?</div>
-<div class="qa-a">
-<strong>A:</strong> (1) Don't reveal record counts or creation order to API consumers. (2) Generated client-side (no DB round-trip for ID). (3) Safe for distributed writes (no sequence conflicts across instances). Tradeoff: 16 bytes vs 4 bytes, slightly worse index locality. For our scale (not billions of rows), this is negligible.
-</div>
+<div class="qa-q">Q15: PostgreSQL vs MongoDB?</div>
+<div class="qa-a"><strong>A:</strong> Relational data, JOINs, upserts, JSONB for flexibility, asyncpg speed, range partitioning.</div>
 </div>
 
 <div class="qa">
-<div class="qa-q">Q16: Why PostgreSQL over MySQL or DynamoDB?</div>
-<div class="qa-a">
-<strong>A:</strong> (1) JSONB for flexible policy conditions with native querying. (2) asyncpg is the fastest Python async driver. (3) Native UUID type. (4) Upsert with ON CONFLICT for usage aggregation. (5) Range partitioning for audit logs. DynamoDB would work for audit (append-heavy, partition by team_id + sort by timestamp) but relational queries (join team → usage → policies) are painful.
-</div>
-</div>
-
-<h3>Security</h3>
-
-<div class="qa">
-<div class="qa-q">Q17: What security measures are in place?</div>
-<div class="qa-a">
-<strong>A:</strong> (1) SHA256 key hashing (shown once). (2) Admin isolation (separate key). (3) Team isolation (no cross-team access). (4) Body truncation (500 chars, reduces PII). (5) Env-based secrets. (6) Docker network isolation. (7) <code>gw-</code> prefix enables secret scanning. For production: add key rotation, per-key rate limits, PII redaction, and admin IP allowlist.
-</div>
+<div class="qa-q">Q16: Security measures?</div>
+<div class="qa-a"><strong>A:</strong> SHA256 hashing, admin isolation, team isolation, body truncation, env secrets, Docker network isolation, gw- prefix scanning.</div>
 </div>
 
 <div class="qa">
-<div class="qa-q">Q18: How would you handle prompt injection?</div>
-<div class="qa-a">
-<strong>A:</strong> Gateway is a routing layer, not a content layer. Prompt injection prevention belongs in the application. However, the gateway can add value: (1) Content filter service in pipeline scanning for known patterns. (2) Policy conditions with content rules (deny requests containing "ignore previous instructions"). (3) Flag suspicious requests in audit logs. This would be a separate service call, similar to the policy engine.
+<div class="qa-q">Q17: Key rotation?</div>
+<div class="qa-a"><strong>A:</strong> Multiple active keys per team. Create new, deploy, verify old unused via last_used_at, revoke old. Zero downtime.</div>
 </div>
+
+<h3>Tradeoffs &amp; Philosophy</h3>
+
+<div class="qa">
+<div class="qa-q">Q18: What tradeoffs?</div>
+<div class="qa-a"><strong>A:</strong> (1) Fail-open rate limiting &mdash; availability. (2) Sync audit &mdash; simpler, +10ms. (3) No streaming &mdash; simpler cost tracking. (4) temp=0 cache &mdash; safe, lower hits. (5) Pre-aggregated usage &mdash; fast reads, write amplification.</div>
 </div>
 
 <div class="qa">
-<div class="qa-q">Q19: How do you handle key rotation with zero downtime?</div>
-<div class="qa-a">
-<strong>A:</strong> Teams can have multiple active keys simultaneously. Flow: create new key, deploy to clients, verify traffic on new key (via last_used_at), revoke old key. This is the standard approach used by AWS, Stripe, and GitHub.
-</div>
-</div>
-
-<h3>Tradeoffs &amp; Design</h3>
-
-<div class="qa">
-<div class="qa-q">Q20: What tradeoffs did you make?</div>
-<div class="qa-a">
-<strong>A:</strong> (1) <strong>Fail-open rate limiting</strong> &mdash; chose availability over strictness. (2) <strong>Synchronous audit</strong> &mdash; simpler but adds ~10ms to request path; at scale, would decouple via queue. (3) <strong>No streaming support</strong> &mdash; simplifies cost tracking but limits real-time UX. (4) <strong>Temperature=0 caching only</strong> &mdash; safe but limits cache hit rate. (5) <strong>Pre-aggregated usage</strong> &mdash; fast reads but write amplification.
-</div>
+<div class="qa-q">Q19: Improvements with more time?</div>
+<div class="qa-a"><strong>A:</strong> Streaming (SSE), circuit breakers, Kafka audit, hard budgets, webhooks, smart routing, multi-region.</div>
 </div>
 
 <div class="qa">
-<div class="qa-q">Q21: What would you improve with more time?</div>
-<div class="qa-a">
-<strong>A:</strong> (1) <strong>Streaming support</strong> (SSE). (2) <strong>Circuit breaker</strong> per provider. (3) <strong>Async audit</strong> via Kafka/Redis queue. (4) <strong>Hard budget enforcement</strong>. (5) <strong>Webhook alerts</strong> for budget thresholds and error spikes. (6) <strong>Smart model routing</strong> based on prompt complexity. (7) <strong>Multi-region</strong> with Redis Cluster.
-</div>
+<div class="qa-q">Q20: Why OpenAI-compatible?</div>
+<div class="qa-a"><strong>A:</strong> One config change. Every LLM tool (LangChain, LlamaIndex) supports custom base_url. Industry standard.</div>
 </div>
 
 <div class="qa">
-<div class="qa-q">Q22: Why did you choose an OpenAI-compatible API?</div>
-<div class="qa-a">
-<strong>A:</strong> Teams can switch by changing one config (base_url + api_key). No code changes. The <code>openai</code> Python library, LangChain, LlamaIndex, and every LLM tool supports custom base URLs. This is the industry standard for LLM proxies (LiteLLM, Portkey, etc. all do this).
-</div>
+<div class="qa-q">Q21: vs LiteLLM / Portkey?</div>
+<div class="qa-a"><strong>A:</strong> SaaS gateways = your traffic through their servers (privacy). LiteLLM = routing only. Ours = self-hosted, policy engine, budget management, enterprise governance.</div>
 </div>
 
 <div class="qa">
-<div class="qa-q">Q23: How does this project demonstrate your engineering skills?</div>
-<div class="qa-a">
-<strong>A:</strong> (1) <strong>System design</strong> &mdash; multi-service architecture, clear separation. (2) <strong>API design</strong> &mdash; OpenAI-compatible, RESTful admin, proper error codes. (3) <strong>Data modeling</strong> &mdash; normalized schema, pre-aggregation, indexes. (4) <strong>Distributed systems</strong> &mdash; Redis shared state, fail-open, idempotent upserts. (5) <strong>Security</strong> &mdash; hashed keys, team isolation. (6) <strong>Testing</strong> &mdash; unit + integration, dependency injection. (7) <strong>DevOps</strong> &mdash; Docker Compose, Alembic, env-based config. (8) <strong>Full-stack</strong> &mdash; React dashboard.
-</div>
+<div class="qa-q">Q22: Observability?</div>
+<div class="qa-a"><strong>A:</strong> Three pillars: structured JSON logs with request_id, Prometheus metrics, OpenTelemetry traces. Alerts on cost, errors, latency.</div>
 </div>
 
 <div class="qa">
-<div class="qa-q">Q24: How do you handle observability?</div>
-<div class="qa-a">
-<strong>A:</strong> Three pillars: (1) <strong>Logs</strong> &mdash; structured JSON with request_id correlation via contextvars middleware. (2) <strong>Metrics</strong> &mdash; Prometheus counters/histograms for requests, latency, tokens, cost, cache hits, rate limit rejections. (3) <strong>Traces</strong> &mdash; OpenTelemetry auto-instruments FastAPI, httpx, SQLAlchemy. Each pipeline step is a span. Alerts on cost spikes (&gt;2x 7-day average), high error rate (&gt;5%), latency degradation (p95 &gt; 10s).
-</div>
+<div class="qa-q">Q23: Budget enforcement?</div>
+<div class="qa-a"><strong>A:</strong> Check usage_summaries for month. Cache in Redis (60s TTL). Over budget &rarr; 429. Can overshoot by up to 60s.</div>
 </div>
 
 <div class="qa">
-<div class="qa-q">Q25: Compare this to existing solutions like LiteLLM or Portkey.</div>
-<div class="qa-a">
-<strong>A:</strong> Commercial gateways (Portkey, Helicone) are SaaS &mdash; you send your LLM traffic through their servers, raising data privacy concerns. LiteLLM is open-source but primarily a routing library, not a full governance platform. This gateway is self-hosted (all traffic stays in your network), includes policy engine and budget management (enterprise governance), and is purpose-built for organizations that need cost visibility across teams.
-</div>
+<div class="qa-q">Q24: Skills demonstrated?</div>
+<div class="qa-a"><strong>A:</strong> System design, API design, data modeling, distributed systems, security, testing, DevOps, full-stack.</div>
 </div>
 
-<h3>Common Mistakes to Avoid</h3>
+<div class="qa">
+<div class="qa-q">Q25: Prompt injection?</div>
+<div class="qa-a"><strong>A:</strong> Gateway is routing layer, not content. Could add content filter service, policy conditions with content rules, suspicious request flagging.</div>
+</div>
+
+<h3>Interview Tips</h3>
 <div class="card-warn">
-<h4>Don't say:</h4>
 <ul>
-<li>"I just used Redis because it's fast" &mdash; explain WHY Redis vs alternatives for THIS specific use case</li>
-<li>"I chose FastAPI because it's popular" &mdash; explain async I/O, Pydantic integration, performance for a proxy</li>
-<li>"I cached everything" &mdash; explain temperature=0 constraint and why</li>
-<li>"Security wasn't a priority" &mdash; always mention key hashing, team isolation, admin separation</li>
-<li>Vague answers about scale &mdash; give specific numbers (audit rows, partition sizes, Redis ops/sec)</li>
+<li><strong>Don't:</strong> "Redis because it's fast" &rarr; <strong>Do:</strong> "Redis because multiple instances need shared state"</li>
+<li><strong>Don't:</strong> "I cached everything" &rarr; <strong>Do:</strong> "Only temp=0, because deterministic"</li>
+<li><strong>Don't:</strong> vague scale &rarr; <strong>Do:</strong> "At 10K RPS, 864M rows/day, partition monthly"</li>
 </ul>
 </div>
 
 <div class="card-success">
-<h4>Do say:</h4>
+<h3>Power Phrases</h3>
 <ul>
-<li>"I chose X over Y because..." with specific tradeoffs</li>
-<li>"At 10K RPS, the bottleneck would be..." with concrete numbers</li>
-<li>"The fail-open design was deliberate because..." with reasoning</li>
-<li>"If I had more time, I would..." showing you see the gaps</li>
-<li>"In production, I would add..." showing production awareness</li>
+<li>"I chose X over Y because..."</li>
+<li>"At 10K RPS, the bottleneck would be..."</li>
+<li>"The fail-open design was deliberate because..."</li>
+<li>"Same approach as Stripe/GitHub/AWS..."</li>
 </ul>
 </div>
 
 <hr>
 <p style="text-align: center; color: var(--muted); margin-top: 2rem; font-size: 0.9rem;">
 AI Gateway Platform &mdash; Learning Guide &amp; Interview Prep<br>
-Built by Rajasekhar Narapareddy
+Built by Rajasekhar Narapareddy<br>
+<em>37 diagrams &bull; 25+ interview questions &bull; Real code examples &bull; Beginner-friendly analogies</em>
 </p>
 
 </body>
